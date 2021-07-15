@@ -1,14 +1,21 @@
 <template>
     <Loading v-if="loading"></Loading>
-    <div v-else>
-        <p>aa</p>
+    <div class="view" v-else>
+        <div class="sidebar">
+            <Sidebar></Sidebar>
+        </div>
+        <div class="content">
+            <router-view @loadRequest="loadEarlierActivities"></router-view>
+        </div>
     </div>
 </template>
 
 <script lang="ts">
 import { compareDates, fetchActivity, fetchUserData } from '@/store/api';
 import store from '@/store/store';
+
 import Loading from '@/components/User/Loading.vue';
+import Sidebar from '@/components/User/Sidebar.vue';
 
 import { ActivityDate, ActivityDay, ActivityMedia } from '@/interfaces/activity';
 
@@ -16,13 +23,18 @@ import { Options, Vue } from "vue-class-component";
 
 const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 @Options({
-    components: { Loading }
+    components: { Loading, Sidebar }
 })
 export default class User extends Vue {
     loading: boolean = true;
+    lock: boolean = false;
+    currentPage: number = 1;
+    lastPage: number = 0;
     state = store.state;
 
-    created(): void {
+    preloadedActivities: ActivityDay[] = [];
+
+    mounted(): void {
         // Checking if this page is visited directly (no userData in state)
         // or from the main page (userData set.)
         // If there is no userData, the component has to fetch and set it on its own.
@@ -40,14 +52,72 @@ export default class User extends Vue {
         }
     }
 
+    unmounted(): void {
+        // Destroy the state
+        store.destroy();
+        console.log("State destroyed");
+    }
+
+    // Load and parse user's activities (only used for the first time)
     loadActivites(): void {
-        console.log(this.state.userData.id)
-        fetchActivity(this.state.userData.id, 1)
+        fetchActivity(this.state.userData.id, this.currentPage)
         .then(resp => {
+            this.lastPage = resp.data.Page.pageInfo.lastPage;
             const activities = this.parseActivities(resp.data.Page.activities);
+
             // Preload next page of user's activites.
             // It's because next page may contain activity from the last day on the first page, and it's better to display it together. Also for better user experience.
+            this.preloadActivites(activities)
+            .then(preloaded => {
+                this.preloadedActivities = preloaded;
+
+                store.appendActivities(activities);
+                this.loading = false;
+            })
+            
         })
+    }
+
+    loadEarlierActivities(): void {
+        // Lock so the user can't smash the button and break it.
+        if(this.lock) return;
+        this.lock = true;
+        this.currentPage++;
+
+        const activities = store.appendActivities(this.preloadedActivities);
+        this.preloadActivites(activities)
+        .then(preloaded => {
+            this.preloadedActivities = preloaded;
+
+            this.lock = false;
+        })
+    }
+
+    // Load the next page of user's activities and save for later use.
+    async preloadActivites(activities: ActivityDay[]): Promise<ActivityDay[]> {
+        if(this.currentPage == this.lastPage) return []; // Reached the end, nothing to preload.
+
+        const nextPage = await fetchActivity(this.state.userData.id, this.currentPage + 1);
+        const preloadedActivities = this.parseActivities(nextPage.data.Page.activities);
+
+        // Looking for duplicates
+        // We want to give user a complete summary of a particular day, but sometimes it's continued on the second page.
+        // That's why, to complete a particular day, we have to look if it's mentioned on the preloaded page and move (remove from preloaded, add to current) it to currently displayed activities (activities)
+        const duplicates = preloadedActivities.filter(x => compareDates(x.day, activities[activities.length - 1].day));
+        duplicates.forEach(dup => {
+            // Remove from preloaded
+            const indexToRemove = preloadedActivities.indexOf(dup);
+            preloadedActivities.splice(indexToRemove, 1);
+
+            // Add to current
+            // Find the last element (last day present on current page) and "merge" it with dup
+            const old = activities[activities.length - 1];
+            old.media = old.media.concat(dup.media);
+            old.episodes += dup.episodes;
+            old.chapters += dup.chapters;
+        });
+
+        return preloadedActivities;
     }
 
     parseActivities(activities: any): ActivityDay[] {
@@ -145,5 +215,8 @@ export default class User extends Vue {
 </script>
 
 <style lang="scss" scoped>
-
+.view {
+    display: grid;
+    grid-template-columns: 20% 80%;
+}
 </style>

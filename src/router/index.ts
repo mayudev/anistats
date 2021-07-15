@@ -5,6 +5,7 @@ import User from '../views/User.vue';
 
 import Help from '../components/Special/Help.vue';
 import About from '../components/Special/About.vue';
+import Main from '../components/User/Main.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -30,7 +31,13 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/:user',
     name: 'User',
-    component: User
+    component: User,
+    children: [
+      {
+        path: '',
+        component: Main
+      }
+    ]
   }
 ]
 
