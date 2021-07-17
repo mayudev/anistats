@@ -3,7 +3,7 @@
         <div class="header">
             <div class="header-title">Calendar</div>
             <span style="flex: 1;"></span>
-            <span class="header-month">{{ m }}.{{ y }}</span>
+            <span class="header-month">{{ displayMonth }} {{ y }}</span>
             <div class="header-control" @click="update(-1)">
                 <font-awesome-icon icon="chevron-left"></font-awesome-icon>
             </div>
@@ -22,9 +22,13 @@
                 <div class="weekday">Sat</div>
             </div>
             <div class="days">
-                <div class="day" v-for="(day, i) in days" :key="i" :style="(day.n == 1 ? { gridColumn: firstWeekday+1 } : '')" :title="day.episodes">
+                <div class="day" 
+                    v-for="(day, i) in days" :key="i" 
+                    :style="(day.n == 1 ? { gridColumn: firstWeekday+1 } : '')" 
+                    @click="handleClick(day)"
+                    :title="day.episodes">
                     <div class="day-bg" :style="{ opacity: getOpacity(day.episodes) }"></div>
-                    <div class="day-label">{{ day.n }}</div>
+                    <div class="day-label" :style="{ opacity: (day.empty ? '0.5' : '' ) }">{{ day.n }}</div>
                 </div>
             </div>
         </div>
@@ -33,13 +37,170 @@
 </template>
 
 <script lang="ts">
+// MESS WARNING
+// using normal syntax because I'm dumb or 'vue-class-component' sucks and doesn't work with vue 3
+// (as much as I'm tempted to assume the former, it turns out that it's the latter)
+
+import { defineComponent } from 'vue';
 import store from '@/store/store';
+import { ActivityDay } from '@/interfaces/activity';
 
-import { Options, Vue } from 'vue-class-component';
+export default defineComponent({
+    data() {
+        return {
+            state: store.state,
+            days: [] as any,
 
-@Options({
+            y: 2021,
+            m: 0 as number,
+
+            displayMonth!: "",
+            firstWeekday!: 0,
+            max: 0
+        }
+    },
+
+    mounted: function(): void {
+        const now = new Date();
+
+        this.m = now.getMonth();
+        this.y = now.getFullYear();
+
+        this.loadMonth(this.m, this.y);
+    },
+
+    computed: {
+        activities(): ActivityDay[] {
+            return this.state.activities
+        }
+    },
+
+    watch: {
+        activities() {
+            this.loadMonth(this.m - 1, this.y)
+        }
+    },
+    
+    methods: {
+        loadMonth(m: number, y: number): void { // m is NOT human-readable (Jan = 0) as opposed to this.m
+            // Clear current display
+            this.days.length = 0;
+
+            // Load the first day of the month
+            let firstDay = new Date(y, m, 1);
+
+            // Get day of the week of the first day
+            this.firstWeekday = firstDay.getDay();
+
+            // Figure out how many days there are in this month
+            const count = this.daysInMonth(m, y);
+
+            // Figure out on which day the user has watched most episodes (used for colors)
+            this.max = Math.max.apply(Math, this.state.activities.map(x => x.episodes + x.chapters)); // TODO episode/chapter distinction
+
+            const firstActivity = this.state.activities[this.state.activities.length - 1];
+            const lastActivity = this.state.activities[0]; // first element from activities array
+            let lastDay: number = 32; // last day number currently present in activities array
+            let firstLoadedDay: number = 0;
+
+            if(lastActivity.day.m == m+1 && lastActivity.day.y == y) { // the last element is displayed on the calendar
+                lastDay = lastActivity.day.d;
+            } else if (m+1 < lastActivity.day.m && lastActivity.day.y == y) {
+                lastDay = 32;
+            } else if (y < lastActivity.day.y) {
+                lastDay = 32;
+            }
+
+            if(firstActivity.day.m == m+1 && firstActivity.day.y == y) {
+                firstLoadedDay = firstActivity.day.d;
+            }
+
+            console.log(lastDay);
+
+            for (let i = 1; i <= count; i++) {
+                const activities = this.state.activities.find(x => x.day.d == i && x.day.m == m+1 && x.day.y == y);
+                this.days.push({
+                    n: i,
+                    activities,
+                    empty: !activities && (i > lastDay || i < firstLoadedDay),
+                    episodes: (activities ? activities.episodes + activities.chapters : 0)
+                })
+            }
+
+            // Change displayed date
+            this.m = m+1;
+            this.y = y;
+            this.displayMonth = new Intl.DateTimeFormat('default', { month: 'long' }).format(firstDay);
+        },
+
+        // handleClick: show popup containing activities on a specific day
+        handleClick(day: any) { // TODO get rid of any
+            if(day.activities) { // the day has activities loaded
+            } else if (!day.activities && !day.empty) { // the day has no activities, but is within loaded range
+                // TODO: show error
+            } else { // the day is not within loaded range
+            }
+        },
+
+        update(change: number): void {
+            if(change > 0) {
+                if (this.m + 1 > 12) {
+                    this.y++;
+                    this.loadMonth(0, this.y)
+                } else {
+                    this.loadMonth(this.m, this.y);
+                }
+            } else {
+                if (this.m - 1 < 1) {
+                    this.y--;
+                    this.loadMonth(11, this.y);
+                } else {
+                    this.loadMonth(this.m-2, this.y);
+                }
+            }
+        },
+
+        daysInMonth(m: number, y: number): number {
+            switch (m) {
+                case 1 :
+                    return (y % 4 == 0 && y % 100) || y % 400 == 0 ? 29 : 28;
+                case 8 : case 3 : case 5 : case 10 :
+                    return 30;
+                default :
+                    return 31
+            }
+        },
+
+        getOpacity(count: number): number {
+            const ratio = count / this.max;
+
+            if (ratio == 0) return 0;
+            else if (ratio < 0.15) return 0.15;
+            else return ratio;
+        }
+    }
 })
-export default class Calendar extends Vue {
+
+/*const a = {
+    data: function() {
+        return {
+            state: store.state,
+            days: [] as any,
+
+            y: 2021,
+            m: 0 as number,
+
+            displayMonth!: "",
+            firstWeekday!: 0,
+            max: 0
+        }
+    },
+
+    
+    }
+}
+
+/*class Calendar extends mixins(Vue, CalendarStd) {
     state = store.state;
     days: any = []; // TODO
 
@@ -47,99 +208,27 @@ export default class Calendar extends Vue {
     y: number = 2021;
     m: number = 0;
 
+    displayMonth!: string;
     firstWeekday!: number;
     max: number = 0;
 
-    mounted(): void {
-        const now = new Date();
-        this.m = now.getMonth();
-        this.y = now.getFullYear();
-
-        this.loadMonth(this.m, this.y);
-    }
+    
 
     // Display particular month on calendar
-    loadMonth(m: number, y: number): void { // m is NOT human-readable (Jan = 0) as opposed to this.m
-        // Clear current display
-        this.days.length = 0;
-
-        // Load the first day of the month
-        let firstDay = new Date(y, m, 1);
-
-        // Get day of the week of the first day
-        this.firstWeekday = firstDay.getDay();
-
-        // Figure out how many days there are in this month
-        const count = this.daysInMonth(m, y);
-
-        // Figure out on which day the user has watched most episodes (used for colors)
-        this.max = Math.max.apply(Math, this.state.activities.map(x => x.episodes + x.chapters)); // TODO episode/chapter distinction
-
-
-        const lastActivity = this.state.activities[this.state.activities.length - 1]; // last element from activities array
-        let lastDay: number; // last day number currently present in activities array
-
-        if(lastActivity.day.m == m+1 && lastActivity.day.y == y) { // the last element is displayed on the calendar
-            lastDay = lastActivity.day.d;
-        }
-
-        for (let i = 1; i <= count; i++) {
-            const activities = this.state.activities.find(x => x.day.d == i && x.day.m == m+1 && x.day.y == y);
-            this.days.push({
-                n: i,
-                activities,
-                episodes: (activities ? activities.episodes + activities.chapters : 0)
-            })
-        }
-
-        // Change displayed date
-        this.m = m+1;
-        this.y = y;
-    }
+    
 
     // Arrow click handler
-    update(change: number): void {
-        if(change > 0) {
-            if (this.m + 1 > 12) {
-                this.y++;
-                this.loadMonth(0, this.y)
-            } else {
-                this.loadMonth(this.m, this.y);
-            }
-        } else {
-            if (this.m - 1 < 1) {
-                this.y--;
-                this.loadMonth(11, this.y);
-            } else {
-                this.loadMonth(this.m-2, this.y);
-            }
-        }
-    }
-
-    daysInMonth(m: number, y: number): number {
-        switch (m) {
-            case 1 :
-                return (y % 4 == 0 && y % 100) || y % 400 == 0 ? 29 : 28;
-            case 8 : case 3 : case 5 : case 10 :
-                return 30;
-            default :
-                return 31
-        }
-    }
-
-    getOpacity(count: number): number {
-        const ratio = count / this.max;
-
-        if (ratio == 0) return 0;
-        else if (ratio < 0.15) return 0.15;
-        else return ratio;
-    }
-}
+    
+}*/
 </script>
 
 <style lang="scss" scoped>
 .calendar {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    margin-right: 5px;
+
+    border-radius: var(--radius);
+    padding-bottom: 4px;
 }
 
 .header {
