@@ -1,7 +1,7 @@
 <template>
     <div class="main">
         <div>
-            <Calendar></Calendar>
+            <Calendar @popup="showPopup" @error="showError" @dynamicPopup="fetchPopup"></Calendar>
         </div>
         <DetailsContainer @loadRequest="load"></DetailsContainer>
         <!--<span v-for="(day, i) in state.activities" :key="i">
@@ -16,6 +16,7 @@ import store from '@/store/store';
 import { Options, Vue } from 'vue-class-component';
 import DetailsContainer from '@/components/User/Details/DetailsContainer.vue';
 import Calendar from '@/components/User/Calendar.vue';
+import { ActivityDay } from '@/interfaces/activity';
 
 @Options({
     components: { DetailsContainer, Calendar }
@@ -25,6 +26,18 @@ export default class Main extends Vue {
 
     load(): void {
         this.$emit('loadRequest');
+    }
+
+    showPopup(e: ActivityDay[]): void {
+        console.log(e)
+    }
+
+    fetchPopup(e: any): void {
+        console.log(e);
+    }
+
+    showError(e: any): void {
+        console.log(e);
     }
 }
 </script>

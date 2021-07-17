@@ -98,31 +98,34 @@ export default defineComponent({
             // Figure out on which day the user has watched most episodes (used for colors)
             this.max = Math.max.apply(Math, this.state.activities.map(x => x.episodes + x.chapters)); // TODO episode/chapter distinction
 
-            const firstActivity = this.state.activities[this.state.activities.length - 1];
-            const lastActivity = this.state.activities[0]; // first element from activities array
-            let lastDay: number = 32; // last day number currently present in activities array
-            let firstLoadedDay: number = 0;
+            const latestActivity = this.state.activities[0];
+            let latestDay: number = 32;
 
-            if(lastActivity.day.m == m+1 && lastActivity.day.y == y) { // the last element is displayed on the calendar
+            const lastActivity = this.state.activities[this.state.activities.length - 1]; 
+            let lastDay: number = 0; // last day number currently present in activities array
+            
+            if(lastActivity.day.m == m+1 && lastActivity.day.y == y) {
                 lastDay = lastActivity.day.d;
-            } else if (m+1 < lastActivity.day.m && lastActivity.day.y == y) {
+            } else if (lastActivity.day.m > m+1 && lastActivity.day.y == y) {
                 lastDay = 32;
-            } else if (y < lastActivity.day.y) {
+            } else if (lastActivity.day.y > y) {
                 lastDay = 32;
             }
 
-            if(firstActivity.day.m == m+1 && firstActivity.day.y == y) {
-                firstLoadedDay = firstActivity.day.d;
+            if(latestActivity.day.m == m+1 && latestActivity.day.y == y) {
+                latestDay = latestActivity.day.d;
+            } else if (latestActivity.day.m < m+1 && latestActivity.day.y == y) {
+                latestDay = 0;
+            } else if (latestActivity.day.y < y) {
+                latestDay = 0;
             }
-
-            console.log(lastDay);
 
             for (let i = 1; i <= count; i++) {
                 const activities = this.state.activities.find(x => x.day.d == i && x.day.m == m+1 && x.day.y == y);
                 this.days.push({
                     n: i,
                     activities,
-                    empty: !activities && (i > lastDay || i < firstLoadedDay),
+                    empty: !activities && (i < lastDay || i > latestDay),
                     episodes: (activities ? activities.episodes + activities.chapters : 0)
                 })
             }
@@ -136,9 +139,15 @@ export default defineComponent({
         // handleClick: show popup containing activities on a specific day
         handleClick(day: any) { // TODO get rid of any
             if(day.activities) { // the day has activities loaded
+                this.$emit('popup', day.activities)
             } else if (!day.activities && !day.empty) { // the day has no activities, but is within loaded range
-                // TODO: show error
+                this.$emit('error', "There are no activities present on this day.")
             } else { // the day is not within loaded range
+                this.$emit('dynamicPopup', {
+                    d: day.n,
+                    m: this.m,
+                    y: this.y
+                })
             }
         },
 
