@@ -43,9 +43,13 @@ export default class DetailsContainer extends Vue {
 </script>
 
 <style lang="scss" scoped>
+.details {
+    margin-left: 5px;
+}
 .group {
     box-shadow: 0 4px 10px rgba(0,0,0,.25);
     border-radius: var(--radius);
+    margin-bottom: 12.944px;
 }
 
 .group-header {

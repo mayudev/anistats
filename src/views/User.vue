@@ -225,6 +225,5 @@ export default class User extends Vue {
 
 .content {
     margin: 12.944px 10px;
-    //margin: 0 10px;
 }
 </style>
