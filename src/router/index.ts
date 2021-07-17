@@ -6,6 +6,7 @@ import User from '../views/User.vue';
 import Help from '../components/Special/Help.vue';
 import About from '../components/Special/About.vue';
 import Main from '../components/User/Main.vue';
+import List from '../components/List/List.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -36,6 +37,14 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: '',
         component: Main
+      },
+      {
+        path: 'list/anime',
+        component: List
+      },
+      {
+        path: 'list/manga',
+        component: List
       }
     ]
   }

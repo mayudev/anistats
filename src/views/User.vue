@@ -218,5 +218,13 @@ export default class User extends Vue {
 .view {
     display: grid;
     grid-template-columns: 20% 80%;
+
+    max-width: 1280px;
+    margin: auto;
+}
+
+.content {
+    margin: 12.944px 10px;
+    //margin: 0 10px;
 }
 </style>

@@ -7,16 +7,21 @@
 
 :root {// DARK MODE (default) COLORS
   --color-background: #272c38;
+  --color-background-secondary: #1f232d;
   --color-background-border: #343946;
   --color-background-darker: #2d3340;
-  --color-background-light: #3a404f;
+
+  --color-background-selected: #3391c0;
+  --color-background-hover: #236688;
 
   --color-text: white;
+  --color-text-secondary: #cbd3e3;
   --color-text-blue: #49a5f2;
   --color-text-gray: #d3d3d3;
   --color-text-red: #b33737;
 
-  --shadow-default: 0px 0px 4px rgba(30, 30, 30, 0.7);
+  --shadow-default: 0 0 10px rgba(0,0,0,.25);
+  --radius: 6px;
 }
 
 * {
@@ -65,6 +70,22 @@ footer {
 
   display: flex;
   justify-content: center;
+}
+
+.prop {
+    display: flex;
+    align-items: center;
+    margin: 0 10px;
+}
+
+.prop-value {
+    margin-right: 6.47px;
+    font-size: 1.4em;
+}
+
+.prop-desc {
+    font-size: .76em;
+    color: var(--color-text-secondary);
 }
 
 // MEDIA

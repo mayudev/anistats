@@ -31,7 +31,7 @@ export default class Panel extends Vue {
 
 <style lang="scss" scoped>
 .panel {
-    background: #3391c0;
+    background: var(--color-background-darker);
     box-shadow: var(--shadow-default);
     border-radius: 6px;
 }

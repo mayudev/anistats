@@ -1,5 +1,5 @@
 export interface ActivityDay {
-    day: ActivityDate,
+    day: ActivityDate, // HUMAN-READABLE FORMAT (Jan = 1)
     episodes: number,
     chapters: number,
     media: ActivityMedia[]
