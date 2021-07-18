@@ -6,11 +6,14 @@
         
         <div>
             <Calendar @popup="showPopup" @error="showError" @dynamicPopup="fetchPopup"></Calendar>
-            <transition name="easein">
-                <div v-if="showTooltip" class="tooltip" :style="{ top: tooltipY+'px', left: tooltipX+'px' }">
-                    <Tooltip :day="tooltipActivities" @close="popupHide"></Tooltip>
-                </div>
+            <div class="tooltipct">
+                <transition name="easein" mode="in-out">
+                    <div v-if="showTooltip" class="tooltip">
+                        <Tooltip :day="tooltipActivities" @close="popupHide"></Tooltip>
+                    </div>
             </transition>
+            </div>
+            
         </div>
         <DetailsContainer @loadRequest="load"></DetailsContainer>
         <!--<span v-for="(day, i) in state.activities" :key="i">
@@ -47,8 +50,8 @@ export default class Main extends Vue {
     showPopup(e: { activities: ActivityDay, event: MouseEvent }): void {
         this.showTooltip = false;
         
-        this.tooltipX = e.event.pageX - 200;
-        this.tooltipY = e.event.pageY + 20;
+        //this.tooltipX = e.event.pageX - 200;
+        //this.tooltipY = e.event.pageY + 20;
         this.tooltipActivities = e.activities;
         
         this.showTooltip = true;
@@ -69,13 +72,13 @@ export default class Main extends Vue {
 </script>
 
 <style lang="scss" scoped>
-.main {
-    display: grid;
-    grid-template-columns: 50% 50%;
+.tooltip {
+    z-index: 2;
+    flex-grow: 1;
+    max-width: 100%;
 }
 
-.tooltip {
-    position: absolute;
+.tooltipct {
     z-index: 2;
 }
 
@@ -84,56 +87,58 @@ button {
 }
 
 .popup {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     top: 0;
     left: 0;
     right: 0;
 }
 
-// transition
+// POPUP
 
+.popup {
+    z-index: 2;
+    background: rgba(0,0,0,.7);
+}
+
+.popup-enter-from, .popup-leave-to {
+    opacity: 0;
+}
+
+.popup-enter-active, .popup-leave-active {
+    transition: .1s ease-in-out;
+}
+
+// transitions
+
+.easein-enter-from, .easein-leave-to {
+    opacity: 0;
+    transform: scale(0.9);
+}
+
+.easein-enter-active, .easein-leave-active {
+    transition: .2s ease;
+}
 
 @media screen and (max-width: 900px) {
-    .tooltip { 
-        left: 0 !important;
-        right: 0;
-        top: auto !important;
-        bottom: 0;
-
-        margin: 5px;
-    }
-
-    .popup {
-        z-index: 2;
-        background: rgba(0,0,0,.7);
-    }
-
-    .easein-enter-from, .easein-leave-to {
-        transform: translateY(50vw);
-        opacity: 0;
-    }
-
-    .easein-enter-active, .easein-leave-active {
-        transition: .3s ease;
-    }
-
-    .popup-enter-from, .popup-leave-to {
-        opacity: 0;
-    }
-
-    .popup-enter-active, .popup-leave-active {
-        transition: .3s ease-in-out;
+    .tooltipct {
+        position: fixed;
+        bottom: 10px;
+        left: 10px;
+        right: 10px;
     }
 }
 
 @media screen and (min-width: 901px) {
-    .easein-enter-from {
-        transform: translateX(-20px);
+    .main {
+        display: grid;
+        grid-template-columns: 50% 50%;
     }
 
-    .easein-enter-active {
-        transition: .2s;
+    .tooltipct {
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }
 </style>

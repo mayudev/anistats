@@ -238,10 +238,17 @@ export default defineComponent({
 <style lang="scss" scoped>
 .calendar {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-    margin-right: 5px;
 
     border-radius: var(--radius);
     padding-bottom: 4px;
+
+    margin-bottom: 12.944px;
+}
+
+@media screen and (min-width: 901px) {
+    .calendar {
+        margin-right: 5px;
+    }
 }
 
 .header {

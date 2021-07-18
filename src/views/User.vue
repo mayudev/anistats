@@ -3,9 +3,6 @@
     <div class="view" v-else>
         <div class="sidebar">
             <Sidebar></Sidebar>
-            <div class="tooltip">
-                
-            </div>
         </div>
         <div class="content">
             <router-view @loadRequest="loadEarlierActivities"></router-view>
@@ -219,14 +216,20 @@ export default class User extends Vue {
 
 <style lang="scss" scoped>
 .view {
-    display: grid;
-    grid-template-columns: 20% 80%;
-
-    max-width: 1280px;
-    margin: auto;
+    
 }
 
 .content {
     margin: 12.944px 10px;
+}
+
+@media screen and (min-width: 1021px) {
+    .view {
+        display: grid;
+        grid-template-columns: 20% 80%;
+
+        max-width: 1280px;
+        margin: auto;
+    }
 }
 </style>
