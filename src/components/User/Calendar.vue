@@ -25,8 +25,8 @@
                 <div class="day" 
                     v-for="(day, i) in days" :key="i" 
                     :style="(day.n == 1 ? { gridColumn: firstWeekday+1 } : '')" 
-                    @click="handleClick(day)"
-                    :title="day.episodes">
+                    @click="handleClick($event, day)"
+                    :title="`${displayMonth} ${day.n}, ${y}\nClick to see activities on this day.${day.empty ? '\nIf you want to have colored background here, click Load more button below until it appears.' : ''}`">
                     <div class="day-bg" :style="{ opacity: getOpacity(day.episodes) }"></div>
                     <div class="day-label" :style="{ opacity: (day.empty ? '0.5' : '' ) }">{{ day.n }}</div>
                 </div>
@@ -137,13 +137,17 @@ export default defineComponent({
         },
 
         // handleClick: show popup containing activities on a specific day
-        handleClick(day: any) { // TODO get rid of any
+        handleClick(event: MouseEvent, day: any) { // TODO get rid of any
             if(day.activities) { // the day has activities loaded
-                this.$emit('popup', day.activities)
+                this.$emit('popup', {
+                    event,
+                    activities: day.activities
+                })
             } else if (!day.activities && !day.empty) { // the day has no activities, but is within loaded range
                 this.$emit('error', "There are no activities present on this day.")
             } else { // the day is not within loaded range
                 this.$emit('dynamicPopup', {
+                    event,
                     d: day.n,
                     m: this.m,
                     y: this.y
@@ -278,7 +282,11 @@ export default defineComponent({
     cursor: pointer;
 
     &:hover {
-        background: var(--color-background-darker);
+        background: var(--color-background-hover);
+    }
+
+    &:active {
+        opacity: 0.7;
     }
 }
 

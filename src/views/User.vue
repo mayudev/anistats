@@ -3,6 +3,9 @@
     <div class="view" v-else>
         <div class="sidebar">
             <Sidebar></Sidebar>
+            <div class="tooltip">
+                
+            </div>
         </div>
         <div class="content">
             <router-view @loadRequest="loadEarlierActivities"></router-view>
