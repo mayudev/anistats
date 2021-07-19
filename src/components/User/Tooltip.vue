@@ -91,6 +91,12 @@ export default class Tooltip extends Vue {
     }
 }
 
+@media screen and (min-width: 901px) {
+    .tooltip {
+        margin-bottom: 12.944px;
+    }
+}
+
 @media screen and (max-width: 900px) {
     .content {
         max-height: 60vh;
