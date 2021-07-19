@@ -18,7 +18,7 @@ import { Options, Vue } from 'vue-class-component';
         icon: String
     }
 })
-export default class Name extends Vue {
+export default class MenuItem extends Vue {
     to!: string;
     icon!: string;
 }
