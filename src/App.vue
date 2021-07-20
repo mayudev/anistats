@@ -87,7 +87,6 @@ footer {
     font-size: .76em;
     color: var(--color-text-secondary);
 }
-
 // MEDIA
 @media screen and (max-width: 800px) {
   .container {

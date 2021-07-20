@@ -6,11 +6,15 @@
     </transition>
     <input class="username" :class="{ usernameError: error.length > 0, pulse: loading }" placeholder="Enter username" type="text" v-model="username" @keyup.enter="send" />
     <div class="buttons">
-      <Button icon="cog" color="var(--color-text-gray)">Settings</Button>
-      <Button @click="send" icon="chevron-right" color="var(--color-text-blue)">Continue</Button>
+      <div class="button-wrapper">
+        <Button icon="cog" color="var(--color-text-gray)">Settings</Button>
+      </div>
+      <div class="button-wrapper">
+        <Button @click="send" icon="chevron-right" color="var(--color-text-blue)">Continue</Button>
+      </div>
+      
     </div>
     <footer>
-      <Panel></Panel>
     </footer>
   </div>
 </template>
@@ -18,14 +22,13 @@
 <script lang="ts">
 import Logo from '@/components/Home/Logo.vue';
 import Button from '@/components/Button.vue';
-import Panel from '@/components/Home/Panel.vue';
 
 import store from '@/store/store';
 import { fetchUserData } from '@/store/api';
 
 import { Options, Vue } from 'vue-class-component';
 @Options({
-  components: { Logo, Button, Panel }
+  components: { Logo, Button }
 })
 export default class Home extends Vue {
   show: boolean = true;
@@ -108,11 +111,20 @@ export default class Home extends Vue {
 }
 
 .buttons {
-  padding: 10px;
   justify-content: space-around;
   display: flex;
 }
-
+ 
+.button-wrapper {
+  padding: 10px;
+  flex-grow: 1;
+  text-align: center;
+  border-radius: var(--radius);
+  
+  &:hover {
+    background: var(--color-background-border);
+  }
+}
 // TRANSITIONS
 .errorfade-enter-active, .errorfade-leave-active {
   transition: opacity 0.5s ease;

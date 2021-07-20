@@ -23,6 +23,7 @@ export default class Button extends Vue {
 <style lang="scss" scoped>
 .btn {
     display: inline-flex;
+    width: 100%;
     align-items: center;
     justify-content: center;
 
@@ -39,7 +40,7 @@ export default class Button extends Vue {
     span {
         margin-left: 5px;
         font-size: 1.2em;
-        font-weight: 500;
+        //font-weight: 500;
     }
 }
 </style>
