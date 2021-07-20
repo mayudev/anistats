@@ -12,8 +12,7 @@ export default {
         },
         activities: [] as ActivityDay[],
         updateHour: 3,
-        animeOnly: false,
-        mangaOnly: false
+        mediaType: 'both'
     }),
 
     setUserdata(obj: any): void {

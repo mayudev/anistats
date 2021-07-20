@@ -16,9 +16,6 @@
             
         </div>
         <DetailsContainer @loadRequest="load"></DetailsContainer>
-        <!--<span v-for="(day, i) in state.activities" :key="i">
-            {{ day.day.d }}
-        </span>-->
     </div>
 </template>
 

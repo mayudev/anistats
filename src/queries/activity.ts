@@ -1,5 +1,5 @@
 // activityQuery: returns user's activities
-export const activityQuery: string = `query ($userId: Int, $page: Int, $perPage: Int) {
+export const activityQuery: string = `query ($userId: Int, $page: Int, $perPage: Int, $type: ActivityType) {
     Page(page: $page, perPage: $perPage) {
       pageInfo {
         total
@@ -8,7 +8,7 @@ export const activityQuery: string = `query ($userId: Int, $page: Int, $perPage:
         hasNextPage
         perPage
       }
-      activities(userId: $userId, sort: ID_DESC) {
+      activities(userId: $userId, sort: ID_DESC, type: $type) {
         __typename
         ... on ListActivity {
           id

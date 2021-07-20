@@ -3,11 +3,11 @@
         <div class="header">
             <div class="header-title">{{ prettyDate(day.day) }}</div>
             <span style="flex: 1"></span>
-            <div class="prop" v-if="!state.animeOnly && day.chapters > 0">
+            <div class="prop" v-if="day.chapters > 0">
                 <div class="prop-value">{{ day.chapters }}</div>
                 <div class="prop-desc" title="chapters">chapters</div>
             </div>
-            <div class="prop" v-if="!state.mangaOnly && day.episodes > 0">
+            <div class="prop" v-if="day.episodes > 0">
                 <div class="prop-value">{{ day.episodes }}</div>
                 <div class="prop-desc" title="episodes">episodes</div>
             </div>

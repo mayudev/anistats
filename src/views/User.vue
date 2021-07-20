@@ -60,7 +60,7 @@ export default class User extends Vue {
 
     // Load and parse user's activities (only used for the first time)
     loadActivites(): void {
-        fetchActivity(this.state.userData.id, this.currentPage)
+        fetchActivity(this.state.userData.id, this.currentPage, this.state.mediaType)
         .then(resp => {
             this.lastPage = resp.data.Page.pageInfo.lastPage;
             const activities = this.parseActivities(resp.data.Page.activities);
@@ -97,7 +97,7 @@ export default class User extends Vue {
     async preloadActivites(activities: ActivityDay[]): Promise<ActivityDay[]> {
         if(this.currentPage == this.lastPage) return []; // Reached the end, nothing to preload.
 
-        const nextPage = await fetchActivity(this.state.userData.id, this.currentPage + 1);
+        const nextPage = await fetchActivity(this.state.userData.id, this.currentPage + 1, this.state.mediaType);
         const preloadedActivities = this.parseActivities(nextPage.data.Page.activities);
 
         // Looking for duplicates

@@ -2,8 +2,10 @@
     <div class="sidebar">
         <router-link class="a" to="/"><Logo size="2em"></Logo></router-link>
         <MenuItem icon="user-circle" to="">Overview</MenuItem>
-        <MenuItem icon="list" to="/list/anime">Anime list</MenuItem>
-        <MenuItem icon="book-open" to="/list/manga">Manga list</MenuItem>
+        <div class="category">
+            <MenuItem icon="list" to="/list/anime" v-if="state.mediaType != 'manga'">Anime list</MenuItem>
+        </div>
+        <MenuItem icon="book-open" to="/list/manga" v-if="state.mediaType != 'anime'">Manga list</MenuItem>
         <MenuItem icon="random" to="/random">Series chooser</MenuItem>
         <span class="tiny">Toggle light mode</span>
         <router-link to="/s/about">
@@ -17,6 +19,7 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
+import store from '@/store/store';
 
 import Logo from '@/components/Home/Logo.vue';
 import MenuItem from '@/components/User/Sidebar/MenuItem.vue';
@@ -25,7 +28,7 @@ import MenuItem from '@/components/User/Sidebar/MenuItem.vue';
     components: { Logo, MenuItem }
 })
 export default class Sidebar extends Vue {
-
+    state = store.state;
 }
 </script>
 

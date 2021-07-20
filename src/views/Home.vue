@@ -7,12 +7,16 @@
     <input class="username" :class="{ usernameError: error.length > 0, pulse: loading }" placeholder="Enter username" type="text" v-model="username" @keyup.enter="send" />
     <div class="buttons">
       <div class="button-wrapper">
-        <Button icon="cog" color="var(--color-text-gray)">Settings</Button>
+        <Button icon="cog" color="var(--color-text-gray)" @click="toggleSettings">Settings</Button>
       </div>
       <div class="button-wrapper">
         <Button @click="send" icon="chevron-right" color="var(--color-text-blue)">Continue</Button>
       </div>
-      
+    </div>
+    <div class="settings">
+      <transition name="settings" mode="out-in">
+        <Settings v-if="settings"></Settings>
+      </transition>
     </div>
     <footer>
     </footer>
@@ -22,17 +26,19 @@
 <script lang="ts">
 import Logo from '@/components/Home/Logo.vue';
 import Button from '@/components/Button.vue';
+import Settings from '@/components/Home/Settings.vue';
 
 import store from '@/store/store';
 import { fetchUserData } from '@/store/api';
 
 import { Options, Vue } from 'vue-class-component';
 @Options({
-  components: { Logo, Button }
+  components: { Logo, Button, Settings }
 })
 export default class Home extends Vue {
   show: boolean = true;
   loading: boolean = false;
+  settings: boolean = false;
 
   username: string = "";
   error: string = ""; // If it's empty, there is no error.
@@ -88,6 +94,10 @@ export default class Home extends Vue {
       this.error = "";
     }, 5000);
   }
+
+  toggleSettings(): void {
+    this.settings = !this.settings;
+  }
 }
 </script>
 
@@ -136,5 +146,14 @@ export default class Home extends Vue {
 
 .pulse {
   animation: pulse 2s linear infinite;
+}
+
+.settings-enter-active, .settings-leave-active {
+  transition: all .2s ease-out;
+}
+
+.settings-enter-from, .settings-leave-to {
+  transform: translateY(-10px);
+  opacity: 0;
 }
 </style>

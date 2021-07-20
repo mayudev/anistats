@@ -8,11 +8,11 @@
                 </div>
                 
                 <span style="flex: 1"></span>
-                <div class="prop" v-if="!state.animeOnly">
+                <div class="prop" v-if="state.mediaType != 'anime'">
                     <div class="prop-value">{{ day.chapters }}</div>
                     <div class="prop-desc">chapters</div>
                 </div>
-                <div class="prop" v-if="!state.mangaOnly">
+                <div class="prop" v-if="state.mediaType != 'manga'">
                     <div class="prop-value">{{ day.episodes }}</div>
                     <div class="prop-desc">episodes</div>
                 </div>
