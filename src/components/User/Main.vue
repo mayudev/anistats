@@ -28,6 +28,7 @@ import Calendar from '@/components/User/Calendar.vue';
 import Tooltip from '@/components/User/Tooltip.vue';
 
 import { ActivityDay } from '@/interfaces/activity';
+import { fetchActivity } from '@/store/api';
 
 @Options({
     components: { DetailsContainer, Calendar, Tooltip }
@@ -44,18 +45,30 @@ export default class Main extends Vue {
         this.$emit('loadRequest');
     }
 
+    // Show popup using already loaded data
     showPopup(e: { activities: ActivityDay, event: MouseEvent }): void {
         this.showTooltip = false;
-        
-        //this.tooltipX = e.event.pageX - 200;
-        //this.tooltipY = e.event.pageY + 20;
         this.tooltipActivities = e.activities;
         
         this.showTooltip = true;
     }
 
-    fetchPopup(e: any): void {
-        //console.log(e);
+    // Show popup having loaded data
+    fetchPopup(e: { event: MouseEvent, d: number, m: number, y: number}): void {
+        this.showTooltip = false;
+        let date = new Date(e.y, e.m-1, e.d);
+
+        // Get timestamp of the beginning and the end of this day.
+        // Converting to AniList time and adding hours according to user's preferences.
+        const begin = (date.getTime()/1000)+this.state.updateHour*3600;
+        const end = begin+86400; // add 24 hours to the beginning timestamp
+        
+        fetchActivity(this.state.userData.id, 1, this.state.mediaType, begin, end)
+        .then(resp => {
+            const activities = store.parseActivities(resp.data.Page.activities);
+            this.tooltipActivities = activities[0];
+            this.showTooltip = true;
+        })
     }
 
     showError(e: any): void {

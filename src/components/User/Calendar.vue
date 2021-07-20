@@ -26,9 +26,9 @@
                     v-for="(day, i) in days" :key="i" 
                     :style="(day.n == 1 ? { gridColumn: firstWeekday+1 } : '')" 
                     @click="handleClick($event, day)"
-                    :title="`${displayMonth} ${day.n}, ${y}\nClick to see activities on this day.${day.empty ? '\nIf you want to have colored background here, click Load more button below until it appears.' : ''}`">
+                    :title="`${displayMonth} ${day.n}, ${y}\nClick to see activities on this day.${day.notLoaded || day.notYetHappened ? '\nIf you want to have colored background here, click Load more button below until it appears.' : ''}`">
                     <div class="day-bg" :style="{ opacity: getOpacity(day.episodes) }"></div>
-                    <div class="day-label" :style="{ opacity: (day.empty ? '0.5' : '' ) }">{{ day.n }}</div>
+                    <div class="day-label" :style="{ opacity: (day.notLoaded || day.notYetHappened ? '0.5' : '' ) }">{{ day.n }}</div>
                 </div>
             </div>
         </div>
@@ -125,7 +125,9 @@ export default defineComponent({
                 this.days.push({
                     n: i,
                     activities,
-                    empty: !activities && (i < lastDay || i > latestDay),
+                    notLoaded: !activities && i < lastDay,
+                    notYetHappened: i > latestDay,
+                    //empty: !activities && (i < lastDay || i > latestDay),
                     episodes: (activities ? activities.episodes + activities.chapters : 0)
                 })
             }
@@ -138,14 +140,15 @@ export default defineComponent({
 
         // handleClick: show popup containing activities on a specific day
         handleClick(event: MouseEvent, day: any) { // TODO get rid of any
+            console.dir(day);
             if(day.activities) { // the day has activities loaded
                 this.$emit('popup', {
                     event,
                     activities: day.activities
                 })
-            } else if (!day.activities && !day.empty) { // the day has no activities, but is within loaded range
+            } else if (!day.activities && !day.notLoaded) { // the day has no activities, but is within loaded range
                 this.$emit('error', "There are no activities present on this day.")
-            } else { // the day is not within loaded range
+            } else if (!day.notYetHappened) { // the day is not within loaded range
                 this.$emit('dynamicPopup', {
                     event,
                     d: day.n,

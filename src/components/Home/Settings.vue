@@ -29,7 +29,7 @@ export default class Settings extends Vue {
     settings: any[] = [
         {
             name: "Stats type",
-            desc: "Choose which type of media you want to be displayed",
+            desc: "Choose which type of media you want to be displayed.",
             options: ["Both", "Anime", "Manga"],
             default: this.state.mediaType
         },
@@ -45,7 +45,7 @@ export default class Settings extends Vue {
         this.settings[0].default = this.state.mediaType[0].toUpperCase()+this.state.mediaType.slice(1);
     }
     
-    handleSelect(e: string, i: number) {
+    handleSelect(e: string, i: number): void {
         let val = e.toLowerCase();
         if(i == 0) {
             this.state.mediaType = val;
@@ -58,15 +58,20 @@ export default class Settings extends Vue {
 </script>
 
 <style lang="scss" scoped>
+@media screen and (max-width: 600px) {
+    .setting {
+        flex-direction: column;
+    }
+
+    .setting-switch {
+        margin-top: 10px;
+    }
+}
 .setting {
     display: flex;
     justify-content: space-between;
 
     margin: 10px;
-}
-
-.setting-header {
-
 }
 
 .setting-name {

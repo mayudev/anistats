@@ -100,7 +100,7 @@ export default class Tooltip extends Vue {
 @media screen and (max-width: 900px) {
     .content {
         max-height: 60vh;
-        overflow-y: scroll;
+        overflow-y: auto;
     }
 }
 </style>

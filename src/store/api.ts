@@ -19,7 +19,7 @@ export async function fetchUserData(username: string): Promise<any> {
     return anilistRequest(userQuery, { username });
 }
 
-export async function fetchActivity(id: number, page: number, mediaType: string): Promise<any> {
+export async function fetchActivity(id: number, page: number, mediaType: string, from?: number, to?: number): Promise<any> {
     let type = undefined;
     
     if (mediaType == 'anime') {
@@ -32,7 +32,9 @@ export async function fetchActivity(id: number, page: number, mediaType: string)
         page,
         perPage: 50, // max
         userId: id,
-        type
+        type,
+        from,
+        to
     }
 
     return anilistRequest(activityQuery, variables);
