@@ -9,7 +9,7 @@
             <div class="tooltipct">
                 <transition name="easein" mode="in-out">
                     <div v-if="showTooltip" class="tooltip">
-                        <Tooltip :day="tooltipActivities" @close="popupHide"></Tooltip>
+                        <Tooltip :day="tooltipActivities" @close="popupHide" :loading="popupLoading"></Tooltip>
                     </div>
             </transition>
             </div>
@@ -37,9 +37,9 @@ export default class Main extends Vue {
     state = store.state;
 
     showTooltip: boolean = false;
-    tooltipX: number = 0;
-    tooltipY: number = 0;
     tooltipActivities: ActivityDay = {} as ActivityDay;
+
+    popupLoading: boolean = false;
 
     load(): void {
         this.$emit('loadRequest');
@@ -55,7 +55,8 @@ export default class Main extends Vue {
 
     // Show popup having loaded data
     fetchPopup(e: { event: MouseEvent, d: number, m: number, y: number}): void {
-        this.showTooltip = false;
+        this.popupLoading = true;
+        this.showTooltip = true;
         let date = new Date(e.y, e.m-1, e.d);
 
         // Get timestamp of the beginning and the end of this day.
@@ -67,7 +68,8 @@ export default class Main extends Vue {
         .then(resp => {
             const activities = store.parseActivities(resp.data.Page.activities);
             this.tooltipActivities = activities[0];
-            this.showTooltip = true;
+
+            this.popupLoading = false;
         })
     }
 
