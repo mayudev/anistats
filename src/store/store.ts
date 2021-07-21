@@ -15,7 +15,8 @@ export default {
         },
         activities: [] as ActivityDay[],
         updateHour: 3,
-        mediaType: 'both'
+        mediaType: 'both',
+        saveSettings: false
     }),
 
     setUserdata(obj: any): void {
@@ -31,6 +32,20 @@ export default {
 
     destroy(): void {
         this.state.activities = [];
+    },
+
+    saveSettings(e: boolean): void {
+        this.state.saveSettings = e;
+    },
+
+    setSettings(o: {
+        updateHour?: number,
+        mediaType?: string
+    }): void {
+        if (typeof o.updateHour != undefined) this.state.updateHour = o.updateHour as number;
+        if (o.mediaType) this.state.mediaType = o.mediaType;
+
+        console.dir(this.state);
     },
 
     parseActivities(activities: any): ActivityDay[] {

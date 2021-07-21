@@ -2,6 +2,33 @@
   <router-view/>
 </template>
 
+<script lang="ts">
+import store from '@/store/store';
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+    data() {
+        return {
+            state: store.state,
+        }
+    },
+
+    created(): void {
+      // Load saved settings to state
+      const updateHour = localStorage.getItem("updateHour");
+      const mediaType = localStorage.getItem("mediaType");
+
+      if (updateHour && mediaType) {
+        store.saveSettings(true);
+        store.setSettings({
+          updateHour: Number(updateHour),
+          mediaType
+        })
+      }
+    }
+})
+
+</script>
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;500&display=swap');
 

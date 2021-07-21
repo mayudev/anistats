@@ -71,6 +71,15 @@ export default class Home extends Vue {
         this.showError(e);
       }
     } else { // The user entered something different (preferably the username)
+      // Saving user settings to localStorage (if user chose to)
+      if(this.state.saveSettings) {
+        localStorage.setItem("updateHour", String(this.state.updateHour));
+        localStorage.setItem("mediaType", this.state.mediaType);
+      } else { // clear settings in case they were saved but user opted out of it
+        localStorage.removeItem("updateHour");
+        localStorage.removeItem("mediaType");
+      }
+
       this.loading = true;
       this.process(this.username);
     }
