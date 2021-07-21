@@ -140,7 +140,6 @@ export default defineComponent({
 
         // handleClick: show popup containing activities on a specific day
         handleClick(event: MouseEvent, day: any) { // TODO get rid of any
-            console.dir(day);
             if(day.activities) { // the day has activities loaded
                 this.$emit('popup', {
                     event,
