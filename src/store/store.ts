@@ -44,8 +44,6 @@ export default {
     }): void {
         if (typeof o.updateHour != undefined) this.state.updateHour = o.updateHour as number;
         if (o.mediaType) this.state.mediaType = o.mediaType;
-
-        console.dir(this.state);
     },
 
     parseActivities(activities: any): ActivityDay[] {
