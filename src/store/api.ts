@@ -1,5 +1,6 @@
 import { ActivityDate } from "@/interfaces/activity";
 import { activityQuery } from "@/queries/activity";
+import { mediaQuery } from "@/queries/media";
 import { userQuery } from "@/queries/user";
 
 export async function anilistRequest(query: string, variables: any): Promise<any> {
@@ -17,6 +18,17 @@ export async function anilistRequest(query: string, variables: any): Promise<any
 
 export async function fetchUserData(username: string): Promise<any> {
     return anilistRequest(userQuery, { username });
+}
+
+export async function fetchMedia(id: number, media: number): Promise<any> {
+    const variables = {
+        page: 1,
+        perPage: 50,
+        mediaId: media,
+        userId: id  
+    }
+    
+    return anilistRequest(mediaQuery, variables);
 }
 
 export async function fetchActivity(id: number, page: number, mediaType: string, from?: number, to?: number): Promise<any> {

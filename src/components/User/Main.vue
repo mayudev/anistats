@@ -74,7 +74,7 @@ export default class Main extends Vue {
     }
 
     showError(e: any): void {
-        //console.log(e);
+        console.log(e);
     }
 
     popupHide(): void {

@@ -9,7 +9,7 @@ export interface ActivityDate {
     d: number,
     m: number,
     y: number,
-    weekday: string,
+    weekday?: string,
     time: number
 }
 

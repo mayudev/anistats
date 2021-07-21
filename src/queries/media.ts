@@ -1,5 +1,5 @@
 // Returns information about one entry (anime/manga), along with user's activities connected with it.
-export const mediaQuery: string = `query ($id: Int, $mediaId: Int, $page: Int, $perPage: Int) {
+export const mediaQuery: string = `query ($userId: Int, $mediaId: Int, $page: Int, $perPage: Int) {
     Media(id: $mediaId) {
       id
       title {
@@ -19,12 +19,13 @@ export const mediaQuery: string = `query ($id: Int, $mediaId: Int, $page: Int, $
         hasNextPage
         perPage
       }
-      activities(sort: ID_DESC, mediaId: $mediaId, userId: $id, type: ANIME_LIST) {
+      activities(sort: ID_DESC, mediaId: $mediaId, userId: $userId) {
         __typename
         ... on ListActivity {
           id
           media {
             id
+            type
             title {
               romaji
             }

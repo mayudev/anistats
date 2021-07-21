@@ -1,27 +1,52 @@
 <template>
-    <div class="item">
-        <img class="image" :alt="'Cover image of '+media.title" :src="media.cover">
-        <span class="title" :title="media.title">{{ media.title }}</span>
-        <span style="flex: 1;"></span>
-        <div class="prop">
-            <span class="prop-value">{{ media.episodes }}</span>
-            <span class="prop-desc">{{ media.type === 'ANIME' ? 'episodes' : 'chapters' }}</span>
+    <div class="item-wrapper">
+        <div class="item" @click="toggleDisplay">
+            <img class="image" :alt="'Cover image of '+media.title" :src="media.cover">
+            <span class="title" :title="media.title">{{ media.title }}</span>
+            <span style="flex: 1;"></span>
+            <div class="prop">
+                <span class="prop-value">{{ media.episodes }}</span>
+                <span class="prop-desc">{{ media.type === 'ANIME' ? 'episodes' : 'chapters' }}</span>
+            </div>
         </div>
+        <transition name="details">
+            <SeriesDetails v-if="details && !hide" :media="media"></SeriesDetails>
+        </transition>
     </div>
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
-import { ActivityMedia } from '@/interfaces/activity';
+import { defineComponent } from 'vue';
+import SeriesDetails from './SeriesDetails.vue';
 
-@Options({
+export default defineComponent({
     props: {
-        media: {} as ActivityMedia
+        media: Object,
+        hide: Boolean
+    },
+
+    components: { SeriesDetails },
+
+    data() {
+        return {
+            details: false
+        }
+    },
+
+    watch: {
+        hide: function(val) {
+            this.details = !val;
+        }
+    },
+
+    methods: {
+        toggleDisplay(): void {
+            this.$emit('toggle');
+            this.details = !this.details;
+        }
     }
+
 })
-export default class SeriesItem extends Vue {
-    media!: ActivityMedia;
-}
 </script>
 
 <style lang="scss" scoped>
@@ -54,5 +79,13 @@ export default class SeriesItem extends Vue {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.details-enter-from, .details-leave-to {
+    transform: scale(0.9);
+    opacity: 0;
+}
+.details-enter-active, .details-leave-active {
+    transition: .2s ease;
 }
 </style>

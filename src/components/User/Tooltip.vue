@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div class="content">
-                <SeriesItem v-for="(media, i) in day.media" :key="i" :media="media"></SeriesItem>
+                <SeriesItem v-for="(media, i) in day.media" :key="i" :media="media" @toggle="handleClick(i)" :hide="selected != i"></SeriesItem>
             </div>
         </div>
     </div>
@@ -48,8 +48,15 @@ export default class Tooltip extends Vue {
     prettyDate = prettyDate;
     loading: boolean = false;
 
+    selected: number = -1;
+
     close(): void {
         this.$emit('close');
+    }
+
+    handleClick(i: number): void {
+        if(this.selected == i) this.selected = -1;
+        else this.selected = i;
     }
 }
 </script>

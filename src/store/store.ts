@@ -2,7 +2,7 @@ import { ActivityDate, ActivityDay, ActivityMedia } from "@/interfaces/activity"
 import { reactive } from "vue";
 import { compareDates } from "./api";
 
-const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+export const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 export default {
     debug: true,
