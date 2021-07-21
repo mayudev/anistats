@@ -64,6 +64,9 @@ export default class User extends Vue {
             this.lastPage = resp.data.Page.pageInfo.lastPage;
             const activities = store.parseActivities(resp.data.Page.activities);
 
+            if(activities.length == 0) {
+                return this.$router.push({ path: '/', query: { error: 1 }});
+            }
             // Preload next page of user's activites.
             // It's because next page may contain activity from the last day on the first page, and it's better to display it together. Also for better user experience.
             this.preloadActivites(activities)
