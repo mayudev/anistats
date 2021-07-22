@@ -40,11 +40,19 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         path: 'list/anime',
-        component: List
+        component: List,
+        name: "AnimeList",
+        props: {
+          type: 'anime'
+        }
       },
       {
         path: 'list/manga',
-        component: List
+        component: List,
+        name: "MangaList",
+        props: {
+          type: 'manga'
+        }
       }
     ]
   }

@@ -19,5 +19,16 @@ export interface ActivityMedia {
     title: string,
     cover: string,
     episodes: number,
-    added?: ActivityDate
+
+    // OPTIONAL FIELDS (used only on lists)
+    chapters?: number,
+    format?: string
+    added?: ActivityDate,
+    completed?: ActivityDate,
+    started?: ActivityDate,
+    seasonYear?: number,
+    averageScore?: number,
+    status?: string,
+    progress?: number,
+    length?: number
 }

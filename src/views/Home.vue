@@ -88,6 +88,7 @@ export default class Home extends Vue {
   process(username: string): void {
     fetchUserData(username)
     .then(resp => {
+      store.destroy();
       store.setUserdata(resp);
       this.$router.push('/'+username);
     })

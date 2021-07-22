@@ -1,5 +1,6 @@
 import { ActivityDate } from "@/interfaces/activity";
 import { activityQuery } from "@/queries/activity";
+import { listQuery } from "@/queries/list";
 import { mediaQuery } from "@/queries/media";
 import { userQuery } from "@/queries/user";
 
@@ -29,6 +30,15 @@ export async function fetchMedia(id: number, media: number): Promise<any> {
     }
     
     return anilistRequest(mediaQuery, variables);
+}
+
+export async function fetchList(id: number, type: string): Promise<any> {
+    const variables = {
+        userId: id,
+        type
+    }
+
+    return anilistRequest(listQuery, variables);
 }
 
 export async function fetchActivity(id: number, page: number, mediaType: string, from?: number, to?: number): Promise<any> {

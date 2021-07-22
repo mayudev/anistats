@@ -1,6 +1,6 @@
 import { ActivityDate, ActivityDay, ActivityMedia } from "@/interfaces/activity";
 import { reactive } from "vue";
-import { compareDates } from "./api";
+import { compareDates, fetchList } from "./api";
 
 export const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
@@ -16,7 +16,9 @@ export default {
         activities: [] as ActivityDay[],
         updateHour: 3,
         mediaType: 'both',
-        saveSettings: false
+        saveSettings: false,
+        animeList: [] as ActivityMedia[],
+        mangaList: [] as ActivityMedia[]
     }),
 
     setUserdata(obj: any): void {
@@ -32,6 +34,8 @@ export default {
 
     destroy(): void {
         this.state.activities = [];
+        this.state.animeList = [];
+        this.state.mangaList = [];
     },
 
     saveSettings(e: boolean): void {
@@ -44,6 +48,14 @@ export default {
     }): void {
         if (typeof o.updateHour != undefined) this.state.updateHour = o.updateHour as number;
         if (o.mediaType) this.state.mediaType = o.mediaType;
+    },
+
+    setAnimeList(list: ActivityMedia[]): void {
+        this.state.animeList = list;
+    },
+
+    setMangaList(list: ActivityMedia[]): void {
+        this.state.mangaList = list;
     },
 
     parseActivities(activities: any): ActivityDay[] {

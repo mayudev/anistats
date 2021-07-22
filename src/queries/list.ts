@@ -1,6 +1,6 @@
 // listQuery: returns all user's lists containing anime or manga.
-export const listQuery: string = `query ($id: Int, $type: MediaType, $chunk: Int) {
-    MediaListCollection (userId: $id, type: $type, chunk: $chunk) {
+export const listQuery: string = `query ($userId: Int, $type: MediaType, $chunk: Int) {
+    MediaListCollection (userId: $userId, type: $type, chunk: $chunk) {
         lists {
             name
             isCustomList
@@ -25,13 +25,13 @@ export const listQuery: string = `query ($id: Int, $type: MediaType, $chunk: Int
                   medium
                 }
                 averageScore
-                bannerImage
                 seasonYear
                 title {
                   romaji
                 }
                 format
                 episodes
+                chapters
               }
             }
           }
