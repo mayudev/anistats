@@ -27,13 +27,9 @@ export default defineComponent({
 
     computed: {
         list(): ActivityMedia[] {
-            if(this.$route.name == "AnimeList") {
-                return this.state.animeList;
-            } else if (this.$route.name == "MangaList") {
-                return this.state.mangaList;
-            } else {
-                return [];
-            }
+            const raw: ActivityMedia[] = (this.$route.name == "AnimeList" ? this.state.animeList : this.state.mangaList);
+            
+            return raw;
         }
     },
 
@@ -43,8 +39,7 @@ export default defineComponent({
                 if(this.state.animeList.length == 0) {
                     fetchMediaList("ANIME")
                     .then(list => {
-                        store.setAnimeList(list)
-                        console.dir(this.state.animeList);
+                        store.setAnimeList(list);
                     })
                 }
             } else if (this.$route.name == "MangaList") {
@@ -52,7 +47,6 @@ export default defineComponent({
                     fetchMediaList("MANGA")
                     .then(list => {
                         store.setMangaList(list);
-                        console.dir(list);
                     })
                 }
             }
