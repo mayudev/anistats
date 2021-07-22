@@ -69,7 +69,8 @@ export default class Main extends Vue {
             const activities = store.parseActivities(resp.data.Page.activities);
             this.tooltipActivities = activities[0];
 
-            this.popupLoading = false;
+            if(activities.length == 0) this.showTooltip = false;
+            else this.popupLoading = false;
         })
     }
 

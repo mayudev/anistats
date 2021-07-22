@@ -2,11 +2,17 @@
     <div class="sidebar">
         <router-link class="a" to="/"><Logo size="2em"></Logo></router-link>
         <MenuItem icon="user-circle" to="">Overview</MenuItem>
-        <div class="category">
-            <MenuItem icon="list" to="/list/anime" v-if="state.mediaType != 'manga'">Anime list</MenuItem>
-        </div>
-        <MenuItem icon="book-open" to="/list/manga" v-if="state.mediaType != 'anime'">Manga list</MenuItem>
         <MenuItem icon="random" to="/random">Series chooser</MenuItem>
+        <div class="category" v-if="state.mediaType != 'manga'">
+            <span class="category-header">Anime</span>
+            <MenuItem icon="list" to="/list/anime">List</MenuItem>
+            <MenuItem icon="history" to="/history/anime">History</MenuItem>
+        </div>
+        <div class="category" v-if="state.mediaType != 'anime'">
+            <span class="category-header">Manga</span>
+            <MenuItem icon="book-open" to="/list/manga">List</MenuItem>
+            <MenuItem icon="history" to="/history/manga">History</MenuItem>
+        </div>
         <span class="tiny">Toggle light mode</span>
         <router-link to="/s/about">
             <span class="tiny">About</span>
@@ -37,6 +43,15 @@ export default class Sidebar extends Vue {
     color: inherit;
     display: block;
     padding: 15px;
+}
+
+.category-header {
+    display: block;
+    padding: 8px 8px;
+    font-weight: 500;
+    font-size: 1.2em;
+
+    border-bottom: 1px solid var(--color-background-selected);
 }
 
 .tiny {
