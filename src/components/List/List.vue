@@ -4,6 +4,10 @@
             <div class="controls-search">
                 <input class="controls-input" type="text" v-model="query" placeholder="Search..." />
             </div>
+            <div class="controls-filterGroup" v-for="(filter, i) in filters" :key="i">
+                <span class="filter-name">{{ filter.name }}: </span>
+                <button class="filter-button" :class="{ selected: filter.checked.indexOf(value.key) > -1 }" v-for="(value, j) in filter.values" :key="j" @click="toggleFilter(i, value.key)">{{ typeof value.name === 'undefined' ? ($route.name == "AnimeList" ? value.animeName : value.mangaName) : value.name }}</button>
+            </div>
         </div>
         <table cellspacing="0">
             <thead>
@@ -51,10 +55,47 @@ export default defineComponent({
     data() {
         return {
             state: store.state,
-            loading: true,
             prettyDate: prettyDate,
+
+            loading: true,
             displayCover: -1,
-            query: ""
+
+            query: "",
+            filters: [
+                {
+                    name: "Status",
+                    key: "status",
+                    values: [
+                        {
+                            animeName: "Watching",
+                            mangaName: "Reading",
+                            key: "CURRENT"
+                        },
+                        {
+                            animeName: "Rewatching",
+                            mangaName: "Rereading",
+                            key: "REPEATING"
+                        },
+                        {
+                            name: "Completed",
+                            key: "COMPLETED"
+                        },
+                        {
+                            name: "Planning",
+                            key: "PLANNING"
+                        },
+                        {
+                            name: "Dropped",
+                            key: "DROPPED"
+                        },
+                        {
+                            name: "Paused",
+                            key: "PAUSED"
+                        }
+                    ],
+                    checked: ["COMPLETED", "CURRENT", "REPEATING"]
+                }
+            ]
         }
     },
 
@@ -70,8 +111,13 @@ export default defineComponent({
         list(): ActivityMedia[] {
             const raw: ActivityMedia[] = (this.$route.name == "AnimeList" ? this.state.animeList : this.state.mangaList);
             
-            const queryFilter: ActivityMedia[] = raw.filter(item => item.title.toLowerCase().indexOf(this.query.toLowerCase()) > -1);
-            return queryFilter;
+            let filtered: ActivityMedia[] = raw.filter(item => item.title.toLowerCase().indexOf(this.query.toLowerCase()) > -1);
+            
+            this.filters.forEach(filter => {
+                filtered = filtered.filter((x: any) => filter.checked.indexOf(x[filter.key]) > -1)
+            })
+
+            return filtered;
         }
     },
 
@@ -106,6 +152,14 @@ export default defineComponent({
                 } else {
                     this.loading = false;
                 }
+            }
+        },
+        toggleFilter(index: number, key: string) {
+            const indexof = this.filters[index].checked.indexOf(key);
+            if(indexof > -1) {
+                this.filters[index].checked.splice(indexof, 1);
+            } else {
+                this.filters[index].checked.push(key);
             }
         },
         prettyFormat(format: string) {
@@ -158,6 +212,33 @@ export default defineComponent({
 
     font-size: 2em;
     border-bottom: 3px solid var(--color-background-border);
+}
+
+.filter-name {
+    padding: 4px;
+}
+
+.filter-button {
+    appearance: none;
+    font: inherit;
+    color: inherit;
+    background: var(--color-background-secondary);
+    outline: none;
+    border: none;
+
+    transition: .2s;
+    cursor: pointer;
+
+    font-weight: 500;
+
+    padding: 4px 12px;
+    margin: 4px;
+    border-radius: var(--radius);
+}
+
+.selected {
+    text-decoration: underline;
+    background: var(--color-background-selected);
 }
 // TABLE
 .tableHeader {
