@@ -24,7 +24,7 @@
                 Loading...
             </div>
             <tbody v-else>
-                <tr v-for="(media, i) in list" :key="i" class="tableRow">
+                <tr v-for="(media) in list" :key="media.id" class="tableRow">
                     <td class="tableData tableData-title">
                         <img v-lazyload class="tableData-image" :data-src="media.cover" width="24" height="24" loading="lazy" />
                         <span>{{ media.title }}</span>
