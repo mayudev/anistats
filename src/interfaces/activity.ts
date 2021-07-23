@@ -22,7 +22,8 @@ export interface ActivityMedia {
 
     // OPTIONAL FIELDS (used only on lists)
     chapters?: number,
-    format?: string
+    format?: string,
+    banner?: string,
     added?: ActivityDate,
     completed?: ActivityDate,
     started?: ActivityDate,

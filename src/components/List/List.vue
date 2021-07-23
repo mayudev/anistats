@@ -1,12 +1,23 @@
 <template>
     <div class="list">
+        <transition name="popup-backdrop">
+            <div class="popup-backdrop" v-if="showPopup" @click="popupHide">
+                <transition appear name="popup">
+                    <Popup :media="popupMedia" @close="popupHide"></Popup>
+                </transition>
+            </div>
+        </transition>
+        <transition name="popup">
+            <div class="popup" v-if="showPopup">
+            </div>
+        </transition>
         <div class="controls">
             <div class="controls-search">
                 <input class="controls-input" type="text" v-model="query" placeholder="Search..." />
             </div>
-            <div class="controls-filterGroup" v-for="(filter, i) in filters" :key="i">
+            <div class="controls-filterGroup" v-for="(filter, i) in filteredFilters" :key="i">
                 <span class="filter-name">{{ filter.name }}: </span>
-                <button class="filter-button" :class="{ selected: filter.checked.indexOf(value.key) > -1 }" v-for="(value, j) in filter.values" :key="j" @click="toggleFilter(i, value.key)">{{ typeof value.name === 'undefined' ? ($route.name == "AnimeList" ? value.animeName : value.mangaName) : value.name }}</button>
+                <button class="filter-button" title="Click to toggle" :class="{ selected: filter.checked.indexOf(value.key) > -1 }" v-for="(value, j) in filter.values" :key="j" @click="toggleFilter(i, value.key)">{{ typeof value.name === 'undefined' ? ($route.name == "AnimeList" ? value.animeName : value.mangaName) : value.name }}</button>
             </div>
         </div>
         <table cellspacing="0">
@@ -14,9 +25,9 @@
                 <tr>
                     <th class="tableHeader tableHeader-title">Title</th>
                     <th class="tableHeader tableHeader-regular">Type</th>
-                    <th class="tableHeader tableHeader-regular">Added</th>
-                    <th class="tableHeader tableHeader-regular">Completed</th>
-                    <th class="tableHeader tableHeader-regular">Status</th>
+                    <th class="tableHeader tableHeader-regular table-responsive">Added</th>
+                    <th class="tableHeader tableHeader-regular table-responsive">Completed</th>
+                    <th class="tableHeader tableHeader-regular table-responsive2">Status</th>
                     <th class="tableHeader"></th>
                 </tr>
             </thead>
@@ -24,21 +35,24 @@
                 Loading...
             </div>
             <tbody v-else>
-                <tr v-for="(media) in list" :key="media.id" class="tableRow">
+                <tr v-for="(media) in list" :key="media.id" class="tableRow" @click="popupShow(media)">
                     <td class="tableData tableData-title">
                         <img v-lazyload class="tableData-image" :data-src="media.cover" width="24" height="24" loading="lazy" />
                         <span>{{ media.title }}</span>
                     </td>
                     <td class="tableData tableData-regular">{{ prettyFormat(media.format) }}</td>
-                    <td class="tableData tableData-regular">{{ prettyDate(media.added) }}</td>
-                    <td class="tableData tableData-regular">{{ prettyDate(media.completed) }}</td>
-                    <td class="tableData tableData-regular">{{ prettyStatus(media.status) }}</td>
+                    <td class="tableData tableData-regular table-responsive">{{ prettyDate(media.added) }}</td>
+                    <td class="tableData tableData-regular table-responsive">{{ prettyDate(media.completed) }}</td>
+                    <td class="tableData tableData-regular table-responsive2">{{ prettyStatus(media.status) }}</td>
                     <td class="tableData tableData-icon">
                         <div class="tableData-iconWrapper" :style="{ color: resolveColor(media.status) }">
                             <font-awesome-icon :icon="resolveIcon(media.status)" fixed-width />
                         </div>
                     </td>
                 </tr>
+                <div class="loading" v-if="list.length == 0">
+                    No results found. Maybe try changing the filters?
+                </div>
             </tbody>
         </table>
     </div>
@@ -46,12 +60,18 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+
 import store from '@/store/store';
 import { fetchMediaList } from "@/store/lists";
-import { ActivityMedia } from "@/interfaces/activity";
 import { prettyDate } from "@/store/helpers";
 
+import { ActivityMedia } from "@/interfaces/activity";
+import { Filter } from '@/interfaces/filters';
+
+import Popup from './Popup.vue';
+
 export default defineComponent({
+    components: { Popup },
     data() {
         return {
             state: store.state,
@@ -60,11 +80,15 @@ export default defineComponent({
             loading: true,
             displayCover: -1,
 
+            showPopup: false,
+            popupMedia: {} as ActivityMedia,
+
             query: "",
             filters: [
                 {
                     name: "Status",
                     key: "status",
+                    type: "both",
                     values: [
                         {
                             animeName: "Watching",
@@ -94,6 +118,62 @@ export default defineComponent({
                         }
                     ],
                     checked: ["COMPLETED", "CURRENT", "REPEATING"]
+                },
+                {
+                    name: "Type",
+                    key: "format",
+                    type: "anime",
+                    values: [
+                        {
+                            name: "TV",
+                            key: "TV"
+                        },
+                        {
+                            name: "TV Short",
+                            key: "TV_SHORT"
+                        },
+                        {
+                            name: "Movie",
+                            key: "MOVIE"
+                        },
+                        {
+                            name: "Special",
+                            key: "SPECIAL"
+                        },
+                        {
+                            name: "OVA",
+                            key: "OVA"
+                        },
+                        {
+                            name: "ONA",
+                            key: "ONA"
+                        },
+                        {
+                            name: "Music",
+                            key: "MUSIC"
+                        }
+                    ],
+                    checked: ["TV", "TV_SHORT", "MOVIE", "SPECIAL", "OVA", "ONA", "MUSIC"]
+                },
+                {
+                    name: "Type",
+                    key: "format",
+                    type: "manga",
+                    values: [
+                        {
+                            name: "Manga",
+                            key: "MANGA"
+                        },
+                        {
+                            name: "Light novel",
+                            key: "NOVEL"
+                        },
+                        {
+                            name: "One shot",
+                            key: "ONE_SHOT"
+                        }
+                    ],
+                    checked: ["MANGA", "NOVEL", "ONE_SHOT"]
                 }
             ]
         }
@@ -113,11 +193,18 @@ export default defineComponent({
             
             let filtered: ActivityMedia[] = raw.filter(item => item.title.toLowerCase().indexOf(this.query.toLowerCase()) > -1);
             
-            this.filters.forEach(filter => {
+            this.filteredFilters.forEach(filter => {
                 filtered = filtered.filter((x: any) => filter.checked.indexOf(x[filter.key]) > -1)
             })
 
             return filtered;
+        },
+        filteredFilters(): Filter[] {
+            return this.filters.filter(filter => {
+                if(this.$route.name == "AnimeList" && filter.type == "manga") return false;
+                else if(this.$route.name == "MangaList" && filter.type == "anime") return false;
+                else return true;
+            });
         }
     },
 
@@ -154,12 +241,28 @@ export default defineComponent({
                 }
             }
         },
+        popupShow(media: ActivityMedia) {
+            this.showPopup = true;
+            this.popupMedia = media;
+            /*fetchMedia(this.state.userData.id, media.id)
+            .then(resp => {
+                const rawActivities = resp.data.Page.activities;
+                let activities = store.parseActivities(rawActivities);
+
+                if(typeof media.added == 'undefined') {
+                    media.added = findAddedDate(rawActivities);
+                }
+            })*/
+        },
+        popupHide() {
+            this.showPopup = false;
+        },
         toggleFilter(index: number, key: string) {
-            const indexof = this.filters[index].checked.indexOf(key);
+            const indexof = this.filteredFilters[index].checked.indexOf(key);
             if(indexof > -1) {
-                this.filters[index].checked.splice(indexof, 1);
+                this.filteredFilters[index].checked.splice(indexof, 1);
             } else {
-                this.filters[index].checked.push(key);
+                this.filteredFilters[index].checked.push(key);
             }
         },
         prettyFormat(format: string) {
@@ -302,4 +405,53 @@ export default defineComponent({
     padding: 12px;
 }
 
+// TRANSITIONS
+.popup-backdrop {
+    position: fixed;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    z-index: 2;
+    background: rgba(0,0,0,.7);
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.popup-backdrop-enter-from, .popup-backdrop-leave-to {
+    opacity: 0;
+}
+
+.popup-backdrop-enter-active, .popup-backdrop-leave-active {
+    transition: .1s ease-in-out;
+}
+
+.popup-enter-from, .popup-leave-to {
+    transform: scale(0.9);
+}
+
+.popup-enter-active, .popup-leave-active {
+    transition: .2s ease;
+}
+
+@media screen and (max-width: 900px) {
+    .popup-backdrop {
+        align-items: flex-end;
+    };
+}
+
+@media screen and (max-width: 780px) {
+    .table-responsive {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 472px) {
+    .table-responsive2 {
+        display: none;
+    }
+}
 </style>

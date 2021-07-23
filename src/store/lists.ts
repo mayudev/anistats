@@ -13,8 +13,10 @@ export async function fetchMediaList(type: string): Promise<ActivityMedia[]> {
     const final: ActivityMedia[] = formatted.map((x: any): ActivityMedia[] => ({
         ...x.media,
         title: x.media.title.romaji,
+        type: x.media.type,
         status: x.status,
         cover: x.media.coverImage.medium,
+        banner: x.media.bannerImage,
         progress: x.progress,
         started: mapDates(x.startedAt),
         completed: mapDates(x.completedAt),

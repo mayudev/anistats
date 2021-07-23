@@ -32,3 +32,20 @@ export function newActivityDate(timestamp: number): ActivityDate {
         time: dateObject.getTime()
     }
 }
+
+export function findAddedDate(raws: any): string {
+    const plan = raws.find((act: any) => act.status.startsWith("plans"));
+    if(!plan) return "Unknown";
+    else {
+        const timestamp = new Date(plan.createdAt * 1000);
+
+        const activityDateObject: ActivityDate = {
+            d: timestamp.getDate(),
+            m: timestamp.getMonth() + 1, // converts to human-readable format (January as 1, not 0)
+            y: timestamp.getFullYear(),
+            weekday: weekdays[timestamp.getDay()],
+            time: timestamp.getTime()
+        }
+        return (plan ? prettyDate(activityDateObject) : 'Unknown')
+    }
+}

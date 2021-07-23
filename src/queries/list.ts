@@ -21,6 +21,8 @@ export const listQuery: string = `query ($userId: Int, $type: MediaType, $chunk:
               }
               media {
                 id
+                type
+                bannerImage
                 coverImage {
                   medium
                 }

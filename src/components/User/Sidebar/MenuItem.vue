@@ -1,11 +1,9 @@
 <template>  
-    <router-link :to="'/'+$route.params.user+to">
-        <div class="menuitem">
+    <router-link :to="'/'+$route.params.user+to" class="menuitem">
             <font-awesome-icon :icon="icon" size="lg" fixed-width />
             <span class="label">
                 <slot></slot>
             </span>
-        </div>
     </router-link>
 </template>
 

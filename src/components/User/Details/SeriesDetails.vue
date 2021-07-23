@@ -32,7 +32,7 @@ import CheapLoading from '@/components/CheapLoading.vue';
 
 import { Options, Vue } from 'vue-class-component';
 import { fetchMedia } from '@/store/api';
-import { prettyDate } from '@/store/helpers';
+import { findAddedDate, prettyDate } from '@/store/helpers';
 
 @Options({
     props: {
@@ -57,21 +57,7 @@ export default class SeriesDetails extends Vue {
             this.activities = store.parseActivities(rawActivities);
 
             if(typeof this.media.added == 'undefined') {
-                let plan = rawActivities.find((act: any) => act.status.startsWith("plans"));
-                if(!plan) this.added = "Unknown";
-                else {
-                    const timestamp = new Date(plan.createdAt * 1000);
-
-                    const activityDateObject: ActivityDate = {
-                        d: timestamp.getDate(),
-                        m: timestamp.getMonth() + 1, // converts to human-readable format (January as 1, not 0)
-                        y: timestamp.getFullYear(),
-                        weekday: weekdays[timestamp.getDay()],
-                        time: timestamp.getTime()
-                    }
-                    this.added = (plan ? prettyDate(activityDateObject) : 'Unknown')
-                }
-                
+                this.added = findAddedDate(rawActivities);   
             } else {
                 this.added = (this.media.added.time == 0 ? 'Unknown' : prettyDate(this.media.added));
             }
@@ -106,6 +92,8 @@ export default class SeriesDetails extends Vue {
 
 .entry:last-child {
     border-bottom: none;
+    border-bottom-left-radius: var(--radius);
+    border-bottom-right-radius: var(--radius);
 }
 
 .entry-date {
