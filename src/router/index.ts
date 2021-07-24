@@ -7,6 +7,7 @@ import Help from '../components/Special/Help.vue';
 import About from '../components/Special/About.vue';
 import Main from '../components/User/Main.vue';
 import List from '../components/List/List.vue';
+import History from '../components/History/History.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -53,6 +54,16 @@ const routes: Array<RouteRecordRaw> = [
         props: {
           type: 'manga'
         }
+      },
+      {
+        path: 'history/anime',
+        component: History,
+        name: "AnimeHistory"
+      },
+      {
+        path: 'history/manga',
+        component: History,
+        name: "MangaHistory"
       }
     ]
   }

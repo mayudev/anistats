@@ -218,6 +218,7 @@ export default defineComponent({
 
     methods: {
         fetchData() {
+            // TODO move into seperate function
             this.loading = true;
             if(this.$route.name == "AnimeList") {
                 if(this.state.animeList.length == 0) {
@@ -244,15 +245,6 @@ export default defineComponent({
         popupShow(media: ActivityMedia) {
             this.showPopup = true;
             this.popupMedia = media;
-            /*fetchMedia(this.state.userData.id, media.id)
-            .then(resp => {
-                const rawActivities = resp.data.Page.activities;
-                let activities = store.parseActivities(rawActivities);
-
-                if(typeof media.added == 'undefined') {
-                    media.added = findAddedDate(rawActivities);
-                }
-            })*/
         },
         popupHide() {
             this.showPopup = false;
