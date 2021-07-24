@@ -31,10 +31,6 @@ export default class Popup extends Vue {
     media!: ActivityMedia;
     state = store.state;
 
-    mounted() {
-        console.log(this.media.type);
-    }
-
     close(): void {
         this.$emit('close');
     }

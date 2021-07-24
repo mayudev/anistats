@@ -39,6 +39,11 @@ export default class Sidebar extends Vue {
 </script>
 
 <style lang="scss" scoped>
+.sidebar {
+    position: sticky;
+    top: 0;
+}
+
 .a {
     color: inherit;
     display: block;
