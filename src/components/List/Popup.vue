@@ -2,7 +2,7 @@
     <div class="popup" @click="$event.stopPropagation()">
         <div class="header" :style="{ backgroundImage: 'url('+media.banner+')' }">
             <img class="header-image" :src="media.cover">
-            <div class="header-title">{{ media.title }}</div>
+            <a :href="'https://anilist.co/'+media.type.toLowerCase()+'/'+media.id" target="_blank" rel="nofollow"><div class="header-title">{{ media.title }}</div></a>
             <span style="flex: 1"></span>
             <div class="header-control" @click="close">
                 <font-awesome-icon icon="times"></font-awesome-icon>
@@ -68,10 +68,15 @@ export default class Popup extends Vue {
     margin-right: 6px;
 }
 
+a {
+    color: inherit;
+}
+
 .header-title {
     font-weight: 500;
     font-size: 1em;
 
+    color: inherit;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
     padding: 8px;
     border-radius: var(--radius);

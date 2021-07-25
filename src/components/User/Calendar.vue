@@ -195,46 +195,6 @@ export default defineComponent({
         }
     }
 })
-
-/*const a = {
-    data: function() {
-        return {
-            state: store.state,
-            days: [] as any,
-
-            y: 2021,
-            m: 0 as number,
-
-            displayMonth!: "",
-            firstWeekday!: 0,
-            max: 0
-        }
-    },
-
-    
-    }
-}
-
-/*class Calendar extends mixins(Vue, CalendarStd) {
-    state = store.state;
-    days: any = []; // TODO
-
-    // HUMAN-READABLE FORMAT (Jan = 1)
-    y: number = 2021;
-    m: number = 0;
-
-    displayMonth!: string;
-    firstWeekday!: number;
-    max: number = 0;
-
-    
-
-    // Display particular month on calendar
-    
-
-    // Arrow click handler
-    
-}*/
 </script>
 
 <style lang="scss" scoped>
