@@ -175,6 +175,10 @@ export default class User extends Vue {
         z-index: 4;
 
         display: flex;
+
+        visibility: visible;
+        opacity: 1;
+        transition: opacity .2s ease-out, visibility .2s;
     }
 
     .sidebar-backdrop {
@@ -185,13 +189,11 @@ export default class User extends Vue {
         bottom: 0;
         background: rgba(0,0,0,.7);
         flex-grow: 2;
-
-        animation: appear .2s ease-in-out;
-
     }
 
     .sidebar-hide-mobile {
-        display: none;
+        visibility: hidden;
+        opacity: 0;
     }
 }
 @media screen and (min-width: 1021px) {

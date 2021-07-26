@@ -52,7 +52,7 @@ export default class Sidebar extends Vue {
     top: 0;
     background: var(--color-background);
 
-    animation: appear .2s cubic-bezier(0.6, 0.05, 0.28, 0.91);
+    //animation: appear .2s cubic-bezier(0.6, 0.05, 0.28, 0.91);
 }
 
 .header {
