@@ -40,6 +40,7 @@ export default class MenuItem extends Vue {
 
 .router-link-exact-active {
     background: var(--color-background-selected);
+    color: white;
 }
 
 .label {

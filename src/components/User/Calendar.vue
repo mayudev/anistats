@@ -280,7 +280,6 @@ export default defineComponent({
 
     cursor: pointer;
     user-select: none;
-    //transition: opacity 200ms;
 
     position: relative;
 
@@ -306,7 +305,7 @@ export default defineComponent({
 }
 
 .day-bg {
-    background: #236f95;
+    background: var(--color-background-day);
     position: absolute;
     border-radius: 4px;
 

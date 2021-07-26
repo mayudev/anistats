@@ -5,6 +5,7 @@
 <script lang="ts">
 import store from '@/store/store';
 import { defineComponent } from 'vue';
+import { toggleTheme } from './store/helpers';
 
 export default defineComponent({
     data() {
@@ -25,6 +26,17 @@ export default defineComponent({
           mediaType
         })
       }
+
+      const theme = localStorage.getItem("theme")
+      if(theme == "light") {
+        toggleTheme();
+      }
+    },
+
+    mounted(): void {
+      this.$nextTick().then(() => {
+        //document.body.classList.add('site-theme-light');
+      })
     }
 })
 
@@ -37,6 +49,7 @@ export default defineComponent({
   --color-background-secondary: #1f232d;
   --color-background-border: #343946;
   --color-background-darker: #2d3340;
+  --color-background-day: #236f95;
 
   --color-background-selected: #3391c0;
   --color-background-hover: #236688;
@@ -49,6 +62,24 @@ export default defineComponent({
 
   --shadow-default: 0 0 10px rgba(0,0,0,.25);
   --radius: 6px;
+}
+
+.site-theme-light {
+  --color-background: #edf1f5;
+  --color-background-secondary: #cecece;
+  --color-background-border: #c7c7c7;
+  --color-background-darker: white;
+  --color-background-day: #4a9bc4;
+
+  --color-background-selected: #3391c0;
+  --color-background-hover: #cddae0;
+
+  --color-text: #222;
+  --color-text-secondary: #333;
+  --color-text-blue: #4090d1;
+  --color-text-gray: #666;
+  --color-text-red: #b33737;
+
 }
 
 * {

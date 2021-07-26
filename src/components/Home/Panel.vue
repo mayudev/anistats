@@ -1,0 +1,36 @@
+<template>
+    <div class="footer">
+        <span class="footer-link" @click="lightMode">Toggle light mode</span>
+        <router-link class="footer-link" to="/s/about">About</router-link>
+        <router-link class="footer-link" to="/s/help">Help</router-link>
+    </div>
+</template>
+
+<script lang="ts">
+import { toggleTheme } from '@/store/helpers';
+import { Options, Vue } from 'vue-class-component';
+
+@Options({})
+export default class Panel extends Vue {
+    lightMode(): void {
+        toggleTheme()
+    }
+}
+</script>
+
+<style lang="scss" scoped>
+.footer-link {
+    display: inline-block;
+    background: var(--color-background-darker);
+    color: var(--color-text-secondary);
+    font-size: 0.85em;
+    cursor: pointer;
+    padding: 12px;
+    margin: 12px 3px;
+    border-radius: var(--radius);
+    
+    &:hover {
+        text-decoration: underline var(--color-text-secondary);
+    }
+}
+</style>

@@ -49,3 +49,16 @@ export function findAddedDate(raws: any): string {
         return (plan ? prettyDate(activityDateObject) : 'Unknown')
     }
 }
+
+// you can access DOM from here so why not?
+export function toggleTheme(): void {
+    if(document.body.classList.contains('site-theme-light')) {
+        document.body.classList.remove('site-theme-light');
+        window.localStorage.setItem('theme', 'dark');
+        // Modify localstorage
+    } else {
+        document.body.classList.add('site-theme-light')
+        // Modify localstore
+        window.localStorage.setItem('theme', 'light');
+    }
+}

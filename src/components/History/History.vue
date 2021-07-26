@@ -259,7 +259,7 @@ export default defineComponent({
 }
 
 .col-bg {
-    background: #236f95;
+    background: var(--color-background-day);
     position: absolute;
     border-radius: 4px;
 

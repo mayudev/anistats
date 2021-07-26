@@ -330,6 +330,7 @@ export default defineComponent({
 .selected {
     text-decoration: underline;
     background: var(--color-background-selected);
+    color: white;
 }
 // TABLE
 .tableHeader {

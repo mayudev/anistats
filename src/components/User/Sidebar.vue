@@ -17,7 +17,7 @@
             <MenuItem @click="emitToggle" icon="book-open" to="/list/manga">List</MenuItem>
             <MenuItem @click="emitToggle" icon="history" to="/history/manga">History</MenuItem>
         </div>
-        <span class="tiny">Toggle light mode</span>
+        <span class="tiny" @click="toggleTheme">Toggle light mode</span>
         <router-link @click="emitToggle" to="/s/about">
             <span class="tiny">About</span>
         </router-link>
@@ -33,6 +33,7 @@ import store from '@/store/store';
 
 import Logo from '@/components/Home/Logo.vue';
 import MenuItem from '@/components/User/Sidebar/MenuItem.vue';
+import { toggleTheme } from '@/store/helpers';
 
 @Options({
     components: { Logo, MenuItem }
@@ -42,6 +43,10 @@ export default class Sidebar extends Vue {
 
     emitToggle(): void {
         this.$emit('toggle');
+    }
+
+    toggleTheme(): void {
+        toggleTheme();
     }
 }
 </script>
@@ -88,10 +93,13 @@ export default class Sidebar extends Vue {
 
 .tiny {
     display: inline-block;
+    background: var(--color-background-darker);
     color: var(--color-text-secondary);
     font-size: 0.85em;
     cursor: pointer;
-    padding-right: 12px;
+    padding: 12px;
+    margin: 3px;
+    border-radius: var(--radius);
     
     &:hover {
         text-decoration: underline var(--color-text-secondary);
@@ -101,6 +109,7 @@ export default class Sidebar extends Vue {
 @media screen and (max-width: 1020px) {
     .sidebar {
         min-width: 300px;
+        padding: 10px;
     }
 
     .a {

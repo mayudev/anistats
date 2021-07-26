@@ -6,17 +6,19 @@
         </div>
         
         <footer>
+            <Panel></Panel>
         </footer>
     </div>
 </template>
 
 <script lang="ts">
 import Logo from '@/components/Home/Logo.vue';
+import Panel from '@/components/Home/Panel.vue';
 
 import { Options, Vue } from "vue-class-component";
 
 @Options({
-    components: { Logo }
+    components: { Logo, Panel }
 })
 export default class Special extends Vue { }
 </script>

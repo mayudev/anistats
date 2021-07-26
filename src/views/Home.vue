@@ -19,6 +19,7 @@
       </transition>
     </div>
     <footer>
+      <Panel></Panel>
     </footer>
   </div>
 </template>
@@ -27,13 +28,14 @@
 import Logo from '@/components/Home/Logo.vue';
 import Button from '@/components/Button.vue';
 import Settings from '@/components/Home/Settings.vue';
+import Panel from '@/components/Home/Panel.vue';
 
 import store from '@/store/store';
 import { fetchUserData } from '@/store/api';
 
 import { Options, Vue } from 'vue-class-component';
 @Options({
-  components: { Logo, Button, Settings }
+  components: { Logo, Button, Settings, Panel }
 })
 export default class Home extends Vue {
   show: boolean = true;

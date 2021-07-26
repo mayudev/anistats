@@ -76,7 +76,7 @@ a {
     font-weight: 500;
     font-size: 1em;
 
-    color: inherit;
+    color: white;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
     padding: 8px;
     border-radius: var(--radius);
