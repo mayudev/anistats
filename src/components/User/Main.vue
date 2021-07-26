@@ -1,6 +1,6 @@
 <template>
     <div class="main">
-        <transition name="popup">
+        <transition name="popup-backdrop">
             <div class="popup" v-if="showTooltip" @click="popupHide"></div>
         </transition>
         

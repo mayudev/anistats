@@ -7,10 +7,6 @@
                 </transition>
             </div>
         </transition>
-        <transition name="popup">
-            <div class="popup" v-if="showPopup">
-            </div>
-        </transition>
         <div class="controls">
             <div class="controls-search">
                 <input class="controls-input" type="text" v-model="query" placeholder="Search..." />
@@ -397,43 +393,8 @@ export default defineComponent({
     padding: 12px;
 }
 
-// TRANSITIONS
-.popup-backdrop {
-    position: fixed;
-    bottom: 0;
-    top: 0;
-    left: 0;
-    right: 0;
+// RESPONSIVITY
 
-    z-index: 2;
-    background: rgba(0,0,0,.7);
-    
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.popup-backdrop-enter-from, .popup-backdrop-leave-to {
-    opacity: 0;
-}
-
-.popup-backdrop-enter-active, .popup-backdrop-leave-active {
-    transition: .1s ease-in-out;
-}
-
-.popup-enter-from, .popup-leave-to {
-    transform: scale(0.9);
-}
-
-.popup-enter-active, .popup-leave-active {
-    transition: .2s ease;
-}
-
-@media screen and (max-width: 900px) {
-    .popup-backdrop {
-        align-items: flex-end;
-    };
-}
 
 @media screen and (max-width: 780px) {
     .table-responsive {
@@ -444,6 +405,18 @@ export default defineComponent({
 @media screen and (max-width: 472px) {
     .table-responsive2 {
         display: none;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .controls-filterGroup {
+        padding: 10px;
+        border-bottom: 3px solid var(--color-background-selected);
+    }
+
+    .filter-name {
+        display: block;
+        font-weight: 500;
     }
 }
 </style>

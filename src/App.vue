@@ -114,6 +114,45 @@ footer {
     font-size: .76em;
     color: var(--color-text-secondary);
 }
+
+// TRANSITIONS
+.popup-backdrop {
+    position: fixed;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    z-index: 2;
+    background: rgba(0,0,0,.7);
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.popup-backdrop-enter-from, .popup-backdrop-leave-to {
+    opacity: 0;
+}
+
+.popup-backdrop-enter-active, .popup-backdrop-leave-active {
+    transition: .1s ease-in-out;
+}
+
+.popup-enter-from, .popup-leave-to {
+    transform: scale(0.9);
+}
+
+.popup-enter-active, .popup-leave-active {
+    transition: .2s ease;
+}
+
+@media screen and (max-width: 900px) {
+    .popup-backdrop {
+        align-items: flex-end;
+    };
+}
+
 // MEDIA
 @media screen and (max-width: 800px) {
   .container {

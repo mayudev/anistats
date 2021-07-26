@@ -1,10 +1,18 @@
 <template>
     <Loading v-if="loading"></Loading>
     <div class="view" v-else>
-        <div class="sidebar">
-            <Sidebar></Sidebar>
+        <div class="sidebar-wrapper" :class="{ 'sidebar-hide-mobile': !showSidebar }">
+            <div class="sidebar-backdrop" @click="toggleSidebar"></div>
+            <Sidebar @toggle="toggleSidebar"></Sidebar>
+
         </div>
         <div class="content">
+            <div class="mobile-header">
+                <div class="mobile-icon" @click="toggleSidebar">
+                    <font-awesome-icon icon="bars" size="lg" />  
+                </div>
+                <router-link class="a" to="/"><Logo size="1.8em"></Logo></router-link>
+            </div>
             <router-view @loadRequest="loadEarlierActivities"></router-view>
         </div>
     </div>
@@ -16,13 +24,14 @@ import store from '@/store/store';
 
 import Loading from '@/components/User/Loading.vue';
 import Sidebar from '@/components/User/Sidebar.vue';
+import Logo from '@/components/Home/Logo.vue';
 
-import { ActivityDate, ActivityDay, ActivityMedia } from '@/interfaces/activity';
+import { ActivityDay } from '@/interfaces/activity';
 
 import { Options, Vue } from "vue-class-component";
 
 @Options({
-    components: { Loading, Sidebar }
+    components: { Loading, Sidebar, Logo }
 })
 export default class User extends Vue {
     loading: boolean = true;
@@ -30,6 +39,8 @@ export default class User extends Vue {
     currentPage: number = 1;
     lastPage: number = 0;
     state = store.state;
+
+    showSidebar: boolean = false;
 
     preloadedActivities: ActivityDay[] = [];
 
@@ -122,27 +133,96 @@ export default class User extends Vue {
         return preloadedActivities;
     }
 
+    toggleSidebar(): void {
+        this.showSidebar = !this.showSidebar
+    }
 
 }
 
 </script>
 
 <style lang="scss" scoped>
-.view {
-    
+.a {
+    color: inherit;
 }
 
-.content {
-    margin: 12.944px 10px;
+.mobile-header {
+    display: flex;
+    align-items: center;
+    padding: 8px;
 }
 
+.mobile-icon {
+    padding: 10px;
+    margin-right: 8px;
+
+    border-radius: var(--radius);
+    transition: .2s;
+
+    &:hover {
+        background: var(--color-background-darker)
+    }
+}
+
+
+@media screen and (max-width: 1020px) {
+    .sidebar-wrapper {
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: 4;
+
+        display: flex;
+    }
+
+    .sidebar-backdrop {
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        background: rgba(0,0,0,.7);
+        flex-grow: 2;
+
+        animation: appear .2s ease-in-out;
+
+    }
+
+    .sidebar-hide-mobile {
+        display: none;
+    }
+}
 @media screen and (min-width: 1021px) {
+    .mobile-header {
+        display: none;
+    }
+    
+    .content {
+        margin: 12.944px 10px;
+    }
+
     .view {
         display: grid;
         grid-template-columns: 20% 80%;
 
         max-width: 1280px;
         margin: auto;
+    }
+
+    .sidebar-backdrop {
+        display: none;
+    }
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
     }
 }
 </style>
