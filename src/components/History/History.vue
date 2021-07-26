@@ -40,7 +40,7 @@
             <div class="missing" v-if="unknownCount">There are {{ unknownCount }} titles with unknown completed date.</div>
             <div class="details">
                 <div class="details-content" v-if="selectedMonth && selectedYear">
-                    <div class="details-title">{{ $route.name == "AnimeHistory"? "Anime" : "Manga" }} completed in {{ monthNames[selectedMonth-1] }} of {{ selectedYear }} ({{ selected.length }})</div>
+                    <div class="details-title">{{ $route.name == "AnimeHistory" ? "Anime" : "Manga" }} completed in {{ monthNames[selectedMonth-1] }} of {{ selectedYear }} ({{ selected.length }})</div>
                     <div class="details-list">
                         <div class="details-entry" v-for="entry in selected" :key="entry.id" @click="popupShow(entry)">
                             <img class="entry-image" :src="entry.cover">
@@ -280,6 +280,11 @@ export default defineComponent({
     font-weight: 500;
     text-align: center;
 }
+
+.details {
+    margin: 10px;
+}
+
 .details-entry {
     display: flex;
     align-items: center;

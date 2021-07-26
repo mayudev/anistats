@@ -1,24 +1,16 @@
 # anistats2
 
-## Project setup
-```
-npm install
-```
+<b>WORK IN PROGRESS</b>
 
-### Compiles and hot-reloads for development
-```
+:jp: Extend your AniList stats with series-specific data, daily overview and weekly chart. :dango:
+
+Second revision , but it doesn't mean that it's better
+
+## Development
+* Node.js and npm
+
+### Setup
+```bash
+npm install
 npm run serve
 ```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
