@@ -31,7 +31,7 @@
                 Loading...
             </div>
             <tbody v-else>
-                <tr v-for="(media) in list" :key="media.id" class="tableRow" @click="popupShow(media)">
+                <tr v-for="media in list" :key="media.id" class="tableRow" @click="popupShow(media)">
                     <td class="tableData tableData-title">
                         <img v-lazyload class="tableData-image" :data-src="media.cover" width="24" height="24" loading="lazy" />
                         <span>{{ media.title }}</span>
@@ -214,29 +214,40 @@ export default defineComponent({
 
     methods: {
         fetchData() {
-            // TODO move into seperate function
+            // setTimeout is here, because without it, the DOM has a short lag (when the list is large, at least.). That way, the DOM has a lag as well,
+            // but it's once 'List' component is visible to the user, and "Loading..." label is displayed, which surely improves user experience.
             this.loading = true;
-            if(this.$route.name == "AnimeList") {
-                if(this.state.animeList.length == 0) {
-                    fetchMediaList("ANIME")
-                    .then(list => {
+            setTimeout(() => {
+                if(this.$route.name == "AnimeList") {
+                    if(this.state.animeList.length == 0) {
+                        fetchMediaList("ANIME")
+                        .then(list => {
+                            this.loading = false;
+                            store.setAnimeList(list);
+                            this.setList(this.state.animeList);
+                        })
+                    } else {
+                        this.setList(this.state.animeList);
                         this.loading = false;
-                        store.setAnimeList(list);
-                    })
-                } else {
-                    this.loading = false;
-                }
-            } else if (this.$route.name == "MangaList") {
-                if(this.state.mangaList.length == 0) {
-                    fetchMediaList("MANGA")
-                    .then(list => {
+                    }
+                } else if (this.$route.name == "MangaList") {
+                    if(this.state.mangaList.length == 0) {
+                        fetchMediaList("MANGA")
+                        .then(list => {
+                            this.loading = false;
+                            store.setMangaList(list);
+                            this.setList(this.state.mangaList);
+                        })
+                    } else {
+                        this.setList(this.state.mangaList);
                         this.loading = false;
-                        store.setMangaList(list);
-                    })
-                } else {
-                    this.loading = false;
+                    }
                 }
-            }
+            }, 100)
+            
+        },
+        setList(list: ActivityMedia[]) {
+            this.list = list;
         },
         popupShow(media: ActivityMedia) {
             this.showPopup = true;
