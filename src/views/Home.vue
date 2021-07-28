@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <Logo size="3em"></Logo>
+    <span class="warning">anistats 2 is still in <span style="color: var(--color-text-blue)">beta</span> and it may lack some features. For the previous version look <a href="https://pizza61.github.io/anistats">here</a>.</span>
     <transition name="errorfade">
       <span class="error" v-if="error.length > 0">{{ error }}</span>
     </transition>
