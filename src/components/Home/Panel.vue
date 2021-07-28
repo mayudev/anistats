@@ -1,8 +1,11 @@
 <template>
-    <div class="footer">
-        <span class="footer-link" @click="lightMode">Toggle light mode</span>
-        <router-link class="footer-link" to="/s/about">About</router-link>
-        <router-link class="footer-link" to="/s/help">Help</router-link>
+    <div class="footer-wrapper">
+        <div class="timestamp">Built on {{ buildTimestamp }}</div>
+        <div class="footer">
+            <span class="footer-link" @click="lightMode">Toggle light mode</span>
+            <router-link class="footer-link" to="/s/about">About</router-link>
+            <router-link class="footer-link" to="/s/help">Help</router-link>
+        </div>
     </div>
 </template>
 
@@ -12,6 +15,10 @@ import { Options, Vue } from 'vue-class-component';
 
 @Options({})
 export default class Panel extends Vue {
+    get buildTimestamp(): string {
+        return document.documentElement.dataset.buildTimestamp as string;
+    }
+
     lightMode(): void {
         toggleTheme()
     }
@@ -19,6 +26,16 @@ export default class Panel extends Vue {
 </script>
 
 <style lang="scss" scoped>
+.footer-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.timestamp {
+    color: var(--color-text-gray);
+    font-size: 0.86em;
+}
 .footer-link {
     display: inline-block;
     background: var(--color-background-darker);
