@@ -16,6 +16,7 @@
                 <button class="filter-button" title="Click to toggle" :class="{ selected: filter.checked.indexOf(value.key) > -1 }" v-for="(value, j) in filter.values" :key="j" @click="toggleFilter(i, value.key)">{{ typeof value.name === 'undefined' ? ($route.name == "AnimeList" ? value.animeName : value.mangaName) : value.name }}</button>
             </div>
         </div>
+        <Pagination v-if="listLength > 1" @set="navigate" :max="listLength" :current="currentPage"></Pagination>
         <table cellspacing="0">
             <thead>
                 <tr>
@@ -31,7 +32,7 @@
                 Loading...
             </div>
             <tbody v-else>
-                <tr v-for="media in list" :key="media.id" class="tableRow" @click="popupShow(media)">
+                <tr v-for="media in paginatedList" :key="media.id" class="tableRow" @click="popupShow(media)">
                     <td class="tableData tableData-title">
                         <img v-lazyload class="tableData-image" :data-src="media.cover" width="24" height="24" loading="lazy" />
                         <span>{{ media.title }}</span>
@@ -51,6 +52,7 @@
                 </div>
             </tbody>
         </table>
+        <Pagination v-if="listLength > 1" @set="navigate" :max="listLength" :current="currentPage"></Pagination>
     </div>
 </template>
 
@@ -65,9 +67,10 @@ import { ActivityMedia } from "@/interfaces/activity";
 import { Filter } from '@/interfaces/filters';
 
 import Popup from './Popup.vue';
+import Pagination from './Pagination.vue';
 
 export default defineComponent({
-    components: { Popup },
+    components: { Popup, Pagination },
     data() {
         return {
             state: store.state,
@@ -78,6 +81,10 @@ export default defineComponent({
 
             showPopup: false,
             popupMedia: {} as ActivityMedia,
+
+            pageSize: 100, // size of one page
+            currentPage: 0, // we're using computer-friendly numbers here
+            listLength: 0,
 
             query: "",
             filters: [
@@ -180,20 +187,31 @@ export default defineComponent({
     },
 
     watch: {
-        '$route': 'fetchData'
+        '$route': 'fetchData',
+        query() {
+            this.currentPage = 0;
+
+            // Calculate new length
+            this.listLength = Math.ceil(this.list.length / this.pageSize);
+        }
     },
 
     computed: {
         list(): ActivityMedia[] {
             const raw: ActivityMedia[] = (this.$route.name == "AnimeList" ? this.state.animeList : this.state.mangaList);
             
+            // For starters, we filter the list by user's search query (if there's none, this function will just do nothing)
+            
             let filtered: ActivityMedia[] = raw.filter(item => item.title.toLowerCase().indexOf(this.query.toLowerCase()) > -1);
             
+            // Loop through each applicable filter and apply it
             this.filteredFilters.forEach(filter => {
                 filtered = filtered.filter((x: any) => filter.checked.indexOf(x[filter.key]) > -1)
             })
-
             return filtered;
+        },
+        paginatedList(): ActivityMedia[] {
+            return this.list.slice(this.currentPage * this.pageSize, (this.currentPage + 1) * this.pageSize)
         },
         filteredFilters(): Filter[] {
             return this.filters.filter(filter => {
@@ -217,37 +235,37 @@ export default defineComponent({
             // setTimeout is here, because without it, the DOM has a short lag (when the list is large, at least.). That way, the DOM has a lag as well,
             // but it's once 'List' component is visible to the user, and "Loading..." label is displayed, which surely improves user experience.
             this.loading = true;
+            this.currentPage = 0;
+            this.listLength = 0;
             setTimeout(() => {
                 if(this.$route.name == "AnimeList") {
                     if(this.state.animeList.length == 0) {
                         fetchMediaList("ANIME")
                         .then(list => {
-                            this.loading = false;
                             store.setAnimeList(list);
-                            this.setList(this.state.animeList);
+                            this.listLength = Math.ceil(this.list.length / this.pageSize);
+                            this.loading = false;
                         })
                     } else {
-                        this.setList(this.state.animeList);
+                        this.listLength = Math.ceil(this.list.length / this.pageSize);
                         this.loading = false;
                     }
                 } else if (this.$route.name == "MangaList") {
                     if(this.state.mangaList.length == 0) {
                         fetchMediaList("MANGA")
                         .then(list => {
-                            this.loading = false;
                             store.setMangaList(list);
-                            this.setList(this.state.mangaList);
+                            this.listLength = Math.ceil(this.list.length / this.pageSize);
+                            this.loading = false;
+
                         })
                     } else {
-                        this.setList(this.state.mangaList);
+                        this.listLength = Math.ceil(this.list.length / this.pageSize);
                         this.loading = false;
                     }
                 }
             }, 100)
             
-        },
-        setList(list: ActivityMedia[]) {
-            this.list = list;
         },
         popupShow(media: ActivityMedia) {
             this.showPopup = true;
@@ -257,12 +275,23 @@ export default defineComponent({
             this.showPopup = false;
         },
         toggleFilter(index: number, key: string) {
+            // Reset view to first page
+            this.currentPage = 0;
+
             const indexof = this.filteredFilters[index].checked.indexOf(key);
             if(indexof > -1) {
                 this.filteredFilters[index].checked.splice(indexof, 1);
             } else {
                 this.filteredFilters[index].checked.push(key);
             }
+
+            // Calculate new length
+            this.listLength = Math.ceil(this.list.length / this.pageSize);
+        },
+        navigate(set: number) {
+            if(set < 0) return;
+            if(set >= this.listLength) return;
+            this.currentPage = set;
         },
         prettyFormat(format: string) {
             if(!format) return '';
