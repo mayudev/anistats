@@ -35,6 +35,7 @@ export default class MenuItem extends Vue {
 
     &:not(.router-link-exact-active):hover {
         background: var(--color-selected-background);
+        color: white;
     }
 }
 
