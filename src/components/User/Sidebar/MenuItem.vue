@@ -34,13 +34,13 @@ export default class MenuItem extends Vue {
     transition: background .1s;
 
     &:not(.router-link-exact-active):hover {
-        background: var(--color-background-hover);
+        background: var(--color-selected-background);
     }
 }
 
 .router-link-exact-active {
-    background: var(--color-background-selected);
-    color: white;
+    background: var(--color-selected-background);
+    color: var(--color-selected-text);
 }
 
 .label {

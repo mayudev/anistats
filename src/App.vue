@@ -54,6 +54,9 @@ export default defineComponent({
   --color-background-selected: #3391c0;
   --color-background-hover: #236688;
 
+  --color-selected-background: #2981ae2b;
+  --color-selected-text: #34bbff;
+
   --color-text: white;
   --color-text-secondary: #cbd3e3;
   --color-text-blue: #49a5f2;

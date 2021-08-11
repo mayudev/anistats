@@ -109,7 +109,11 @@ export default class Sidebar extends Vue {
 @media screen and (max-width: 1020px) {
     .sidebar {
         min-width: 300px;
-        padding: 10px;
+    }
+
+    .menuitem {
+        padding: 12px 10px;
+        margin: 3px;
     }
 
     .a {
