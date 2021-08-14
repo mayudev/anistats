@@ -1,6 +1,6 @@
 # anistats2
 
-<b>WORK IN PROGRESS</b>
+<b>Beta</b>
 
 :jp: Extend your AniList stats with series-specific data, daily overview and weekly chart. :dango:
 
