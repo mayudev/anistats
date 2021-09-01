@@ -368,9 +368,8 @@ export default defineComponent({
 }
 
 .selected {
-    text-decoration: underline;
-    background: var(--color-background-selected);
-    color: white;
+    background: var(--color-selected-background);
+    color: var(--color-selected-text);
 }
 // TABLE
 .tableHeader {

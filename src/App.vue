@@ -46,7 +46,7 @@ export default defineComponent({
 
 :root {// DARK MODE (default) COLORS
   --color-background: #0b1622;
-  --color-background-secondary: #1f232d;
+  --color-background-secondary: #151f2e;
   --color-background-border: #151f2e;
   --color-background-darker: #151f2e;
   --color-background-day: #236f95;
