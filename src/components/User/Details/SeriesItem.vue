@@ -60,8 +60,8 @@ export default defineComponent({
     padding: 10px 2px 10px 12px; 
 
     &:hover {
-        background: var(--color-background-darker);
-        color: var(--color-text-blue);
+        background: var(--color-selected-background);
+        color: var(--color-selected-text);
     }
 }
 
