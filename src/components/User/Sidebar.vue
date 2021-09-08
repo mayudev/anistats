@@ -24,6 +24,7 @@
         <router-link @click="emitToggle" to="/s/help">
             <span class="tiny">Help</span>
         </router-link>
+        <span class="sidebar-text">anistats is not affiliated with AniList.</span>
     </div>
 </template>
 
@@ -104,6 +105,12 @@ export default class Sidebar extends Vue {
     &:hover {
         text-decoration: underline var(--color-text-secondary);
     }
+}
+
+.sidebar-text {
+    color: var(--color-text-secondary);
+    font-size: .86em;
+    margin: 3px;
 }
 
 @media screen and (max-width: 1020px) {
