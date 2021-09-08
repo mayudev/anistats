@@ -251,7 +251,8 @@ export default defineComponent({
     cursor: pointer;
 
     &:hover {
-        background: var(--color-background-hover);
+        background: var(--color-selected-background);
+        color: var(--color-selected-text);
     }
 
     &:active {
