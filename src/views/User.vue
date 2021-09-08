@@ -2,7 +2,6 @@
     <Loading v-if="loading"></Loading>
     <div class="view" v-else>
         <div class="sidebar-wrapper" :class="{ 'sidebar-hide-mobile': !showSidebar }">
-            <div class="sidebar-backdrop" @click="toggleSidebar"></div>
             <Sidebar @toggle="toggleSidebar"></Sidebar>
 
         </div>
