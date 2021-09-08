@@ -51,8 +51,10 @@ export default class Pagination extends Vue {
 
     cursor: arrow;
 
+    transition: background .2s ease;
+
     &:not(.selected):hover {
-        background: var(--color-background-hover)
+        background: var(--color-selected-background);
     }
 }
 
@@ -63,6 +65,7 @@ export default class Pagination extends Vue {
 }
 
 .selected {
-    background: var(--color-background-selected);
+    background: var(--color-selected-background);
+    color: var(--color-selected-text)
 }
 </style>
