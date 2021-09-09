@@ -65,7 +65,7 @@ export default class Switch extends Vue {
 }
 
 .switch-input:checked + .switch-label:after {
-    background-color: var(--color-text-blue);
+    background-color: var(--color-selected-text);
     transform: translate(80%, -50%);
 }
 </style>
