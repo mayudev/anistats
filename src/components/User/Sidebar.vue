@@ -57,8 +57,6 @@ export default class Sidebar extends Vue {
     position: sticky;
     top: 0;
     background: var(--color-background);
-
-    //animation: appear .2s cubic-bezier(0.6, 0.05, 0.28, 0.91);
 }
 
 .header {
@@ -85,11 +83,9 @@ export default class Sidebar extends Vue {
 
 .category-header {
     display: block;
-    padding: 8px 8px;
+    padding: 5px;
+    margin: 0 5px;
     font-weight: 500;
-    font-size: 1.2em;
-
-    border-bottom: 1px solid var(--color-selected-text);
 }
 
 .tiny {
