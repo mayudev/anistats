@@ -1,17 +1,17 @@
 <template>
   <div class="container">
-    <Logo size="3em"></Logo>
+    <Logo size="2em"></Logo>
     <span class="warning">anistats 2 is still in <span style="color: var(--color-text-blue)">beta</span> and may lack some features. For the previous version look <a href="https://pizza61.github.io/anistats">here</a>.</span>
     <transition name="errorfade">
       <span class="error" v-if="error.length > 0">{{ error }}</span>
     </transition>
-    <input class="username" :class="{ usernameError: error.length > 0, pulse: loading }" placeholder="Enter username" type="text" v-model="username" @keyup.enter="send" />
-    <div class="buttons">
+    <div class="input">
       <div class="button-wrapper">
-        <Button icon="cog" color="var(--color-text-gray)" @click="toggleSettings">Settings</Button>
+        <Button icon="cog" @click="toggleSettings">Settings</Button>
       </div>
+      <input class="username" :class="{ usernameError: error.length > 0, pulse: loading }" placeholder="Enter username" type="text" v-model="username" @keyup.enter="send" />
       <div class="button-wrapper">
-        <Button @click="send" icon="chevron-right" color="var(--color-text-blue)">Continue</Button>
+        <Button @click="send" icon="chevron-right">Continue</Button>
       </div>
     </div>
     <div class="settings">
@@ -115,17 +115,24 @@ export default class Home extends Vue {
 </script>
 
 <style lang="scss" scoped>
+.input {
+  display: flex;
+  margin: 10px 0;
 
+}
 .username {
-  width: 100%;
   padding: 10px;
 
-  font-size: 3em;
+  font-size: 2em;
   font-weight: 500;
 
   border-bottom: 3px solid var(--color-background-border);
 
   transition: border-bottom .5s;
+
+  &::placeholder {
+    color: var(--color-text-secondary);
+  }
 }
 
 .usernameError {
@@ -138,13 +145,17 @@ export default class Home extends Vue {
 }
  
 .button-wrapper {
-  padding: 10px;
+  margin: 0 6px;
+
   flex-grow: 1;
-  text-align: center;
   border-radius: var(--radius);
+  color: var(--color-text-secondary);
+
+  transition: background .2s;
   
   &:hover {
-    background: var(--color-background-border);
+    background: var(--color-selected-background);
+    color: var(--color-selected-text);
   }
 }
 // TRANSITIONS

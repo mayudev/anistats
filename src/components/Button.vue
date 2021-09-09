@@ -1,5 +1,5 @@
 <template>
-    <button class="btn" :style="{ color }">
+    <button class="btn">
         <font-awesome-icon v-if="icon" :icon="icon" size="lg" fixed-width />
         <span><slot></slot></span>
     </button>
@@ -24,8 +24,10 @@ export default class Button extends Vue {
 .btn {
     display: inline-flex;
     width: 100%;
+    height: 100%;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 
     appearance: none;
     font: inherit;
@@ -38,9 +40,7 @@ export default class Button extends Vue {
     cursor: pointer;
 
     span {
-        margin-left: 5px;
-        font-size: 1.2em;
-        //font-weight: 500;
+        padding-top: 5px;
     }
 }
 </style>
