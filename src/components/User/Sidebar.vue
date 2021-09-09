@@ -89,7 +89,7 @@ export default class Sidebar extends Vue {
     font-weight: 500;
     font-size: 1.2em;
 
-    border-bottom: 1px solid var(--color-background-selected);
+    border-bottom: 1px solid var(--color-selected-text);
 }
 
 .tiny {

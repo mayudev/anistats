@@ -96,7 +96,8 @@ export default class DetailsContainer extends Vue {
     cursor: pointer;
 
     &:hover {
-        background: var(--color-background-selected);
+        background: var(--color-selected-background);
+        color: var(--color-selected-text);
     }
 }
 </style>

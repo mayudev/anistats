@@ -58,12 +58,13 @@ export default class SettingsSwitcher extends Vue {
     }
 
     &:not(.selected):hover {
-        background: var(--color-background-hover);
+        background: var(--color-selected-background);
     }
 }
 
 .selected {
-    background: var(--color-background-selected);
+    background: var(--color-selected-background);
+    color: var(--color-selected-text);
 }
 
 </style>

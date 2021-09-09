@@ -51,9 +51,6 @@ export default defineComponent({
   --color-background-darker: #151f2e;
   --color-background-day: #236f95;
 
-  --color-background-selected: #3f69a8; //#3391c0;
-  --color-background-hover: #236688;
-
   --color-selected-background: #2981ae2b;
   --color-selected-text: #34bbff;
 
@@ -73,9 +70,6 @@ export default defineComponent({
   --color-background-border: #c7c7c7;
   --color-background-darker: white;
   --color-background-day: #4a9bc4;
-
-  --color-background-selected: #3391c0;
-  --color-background-hover: #cddae0;
 
   --color-selected-background: #3391c0;
   --color-selected-text: white;

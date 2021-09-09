@@ -72,7 +72,7 @@ export default class SeriesDetails extends Vue {
 .header {
     display: flex;
     padding: 8px;
-    border-bottom: 1px solid var(--color-background-selected);
+    border-bottom: 1px solid var(--color-selected-text);
 
     font-weight: 500;
 }

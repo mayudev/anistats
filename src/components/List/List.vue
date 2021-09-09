@@ -451,7 +451,7 @@ export default defineComponent({
 @media screen and (max-width: 650px) {
     .controls-filterGroup {
         padding: 10px;
-        border-bottom: 3px solid var(--color-background-selected);
+        border-bottom: 3px solid var(--color-selected-background);
     }
 
     .filter-name {

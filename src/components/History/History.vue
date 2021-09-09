@@ -255,7 +255,7 @@ export default defineComponent({
 }
 
 .col:hover {
-    border: 1px solid var(--color-background-selected);
+    border: 1px solid var(--color-selected-text);
 }
 
 .col-bg {
