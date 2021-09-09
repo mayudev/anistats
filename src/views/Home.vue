@@ -6,10 +6,18 @@
       <span class="error" v-if="error.length > 0">{{ error }}</span>
     </transition>
     <div class="input">
-      <div class="button-wrapper">
+      <div class="button-wrapper desktop">
         <Button icon="cog" @click="toggleSettings">Settings</Button>
       </div>
       <input class="username" :class="{ usernameError: error.length > 0, pulse: loading }" placeholder="Enter username" type="text" v-model="username" @keyup.enter="send" />
+      <div class="button-wrapper desktop">
+        <Button @click="send" icon="chevron-right">Continue</Button>
+      </div>
+    </div>
+    <div class="buttons mobile">
+      <div class="button-wrapper">
+        <Button icon="cog" @click="toggleSettings">Settings</Button>
+      </div>
       <div class="button-wrapper">
         <Button @click="send" icon="chevron-right">Continue</Button>
       </div>
@@ -156,6 +164,22 @@ export default class Home extends Vue {
   &:hover {
     background: var(--color-selected-background);
     color: var(--color-selected-text);
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .desktop {
+    display: none;
+  }
+
+  .username {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 621px) {
+  .mobile {
+    display: none;
   }
 }
 // TRANSITIONS

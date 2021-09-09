@@ -114,10 +114,15 @@ input {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 100vh;
 
   max-width: 800px;
   margin: auto;
+
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 footer {
