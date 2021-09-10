@@ -17,14 +17,6 @@
             <MenuItem @click="emitToggle" icon="book-open" to="/list/manga">List</MenuItem>
             <MenuItem @click="emitToggle" icon="history" to="/history/manga">History</MenuItem>
         </div>
-        <span class="tiny" @click="toggleTheme">Toggle light mode</span>
-        <router-link @click="emitToggle" to="/s/about">
-            <span class="tiny">About</span>
-        </router-link>
-        <router-link @click="emitToggle" to="/s/help">
-            <span class="tiny">Help</span>
-        </router-link>
-        <span class="sidebar-text">anistats is not affiliated with AniList.</span>
     </div>
 </template>
 
@@ -86,27 +78,6 @@ export default class Sidebar extends Vue {
     padding: 5px;
     margin: 0 5px;
     font-weight: 500;
-}
-
-.tiny {
-    display: inline-block;
-    background: var(--color-background-darker);
-    color: var(--color-text-secondary);
-    font-size: 0.85em;
-    cursor: pointer;
-    padding: 12px;
-    margin: 3px;
-    border-radius: var(--radius);
-    
-    &:hover {
-        text-decoration: underline var(--color-text-secondary);
-    }
-}
-
-.sidebar-text {
-    color: var(--color-text-secondary);
-    font-size: .86em;
-    margin: 3px;
 }
 
 @media screen and (max-width: 1020px) {
