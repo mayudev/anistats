@@ -49,7 +49,7 @@ export default defineComponent({
   --color-background-secondary: #1f232d;
   --color-background-border: #343946;
   --color-background-darker: #2d3340;
-  --color-background-day: #236f95;
+  --color-background-day: #188cc6;
   
   --color-selected-background: #2d3340;
   --color-selected-text: #34bbff;
