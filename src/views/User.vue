@@ -198,10 +198,6 @@ export default class User extends Vue {
     .mobile-header {
         display: none;
     }
-    
-    .content {
-        margin: 12.944px 10px;
-    }
 
     .view {
         display: grid;

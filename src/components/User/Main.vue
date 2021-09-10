@@ -4,7 +4,7 @@
             <div class="popup" v-if="showTooltip" @click="popupHide"></div>
         </transition>
         
-        <div>
+        <div class="left">
             <Calendar @popup="showPopup" @error="showError" @dynamicPopup="fetchPopup"></Calendar>
             <div class="tooltipct">
                 <transition name="easein" mode="in-out">
@@ -85,6 +85,9 @@ export default class Main extends Vue {
 </script>
 
 <style lang="scss" scoped>
+.left {
+    margin: 12.944px 10px;
+}
 .tooltip {
     z-index: 2;
     flex-grow: 1;
@@ -145,7 +148,7 @@ button {
 @media screen and (min-width: 901px) {
     .main {
         display: grid;
-        grid-template-columns: 50% 50%;
+        grid-template-columns: 55% 45%;
     }
 
     .tooltipct {

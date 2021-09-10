@@ -1,5 +1,8 @@
 <template>
     <div class="details">
+        <div class="title">
+            Timeline
+        </div>
         <div class="group" v-for="(day, i) in state.activities" :key="i">
             <div class="group-header">
                 <div class="date-group">
@@ -45,15 +48,25 @@ export default class DetailsContainer extends Vue {
 <style lang="scss" scoped>
 @media screen and (min-width: 901px) {
     .details {
-        margin-left: 5px;
+        padding: 12.944px;
+        background: var(--color-selected-background);
+        border-left: 1px solid var(--color-background-border);
     }
+}
+
+.title {
+    margin-bottom: 12.944px;
+    font-weight: 500;
+    font-size: 1.2em;
 }
 
 .group {
     box-shadow: 0 4px 10px rgba(0,0,0,.25);
+    background: var(--color-background);
     border-radius: var(--radius);
-    margin-bottom: 12.944px;
     overflow: hidden;
+
+    margin-bottom: 12.944px;
 }
 
 .group-header {
