@@ -270,7 +270,8 @@ export default defineComponent({
 
 .day {
     padding: 12px 12px 8px 12px;
-    margin: 3px;
+    margin: 2px;
+    border: 1px solid transparent;
 
     border-radius: 4px;
     text-align: center;
@@ -283,17 +284,15 @@ export default defineComponent({
     user-select: none;
 
     position: relative;
+    transition: border .2s, opacity .2s;
+
 
     &:hover {
-        .day-bg {
-            filter: brightness(90%);
-        }
+        border: 1px solid var(--color-background-day);
     }
 
     &:active {
-        .day-bg {
-            filter: brightness(70%);
-        }
+        opacity: 0.8;
     }
 }
 
