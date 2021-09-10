@@ -45,13 +45,13 @@ export default defineComponent({
 @import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;500&display=swap');
 
 :root {// DARK MODE (default) COLORS
-  --color-background: #0b1622;
-  --color-background-secondary: #151f2e;
-  --color-background-border: #151f2e;
-  --color-background-darker: #151f2e;
+  --color-background: #272c38;
+  --color-background-secondary: #1f232d;
+  --color-background-border: #343946;
+  --color-background-darker: #2d3340;
   --color-background-day: #236f95;
-
-  --color-selected-background: #2981ae2b;
+  
+  --color-selected-background: #2d3340;
   --color-selected-text: #34bbff;
 
   --color-text: white;
