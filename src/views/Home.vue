@@ -153,11 +153,10 @@ export default class Home extends Vue {
 }
  
 .button-wrapper {
-  margin: 0 6px;
-
   flex-grow: 1;
   border-radius: var(--radius);
   color: var(--color-text-secondary);
+  padding: 6px;
 
   transition: background .2s;
   
@@ -180,6 +179,10 @@ export default class Home extends Vue {
 @media screen and (min-width: 621px) {
   .mobile {
     display: none;
+  }
+
+  .button-wrapper {
+    margin: 0 6px;
   }
 }
 // TRANSITIONS
