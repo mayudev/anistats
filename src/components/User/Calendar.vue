@@ -3,13 +3,20 @@
         <div class="header">
             <div class="header-title">Calendar</div>
             <span style="flex: 1;"></span>
-            <span class="header-month">{{ displayMonth }} {{ y }}</span>
+            <div class="header-month">
+                <span class="header-monthName">{{ displayMonth }}</span>
+                <span>{{ " " }}</span>
+                <span class="header-year" @click="toggleYearPicker()" title="Click to open year picker">{{ y }}</span>
+            </div>
             <div class="header-control" @click="update(-1)">
                 <font-awesome-icon icon="chevron-left"></font-awesome-icon>
             </div>
             <div class="header-control" @click="update(1)">
                 <font-awesome-icon icon="chevron-right"></font-awesome-icon>
             </div>
+        </div>
+        <div class="picker" v-if="showYearPicker">
+            <div class="pick-item" v-for="year in pickerYears" :key="year" :class="{ selected: year == y }" @click="loadMonth(m-1, year)">{{ year }}</div>
         </div>
         <div class="display">
             <div class="weekdays">
@@ -56,7 +63,10 @@ export default defineComponent({
 
             displayMonth!: "",
             firstWeekday!: 0,
-            max: 0
+            max: 0,
+
+            showYearPicker: false,
+            pickerYears: [] as number[]
         }
     },
 
@@ -66,6 +76,7 @@ export default defineComponent({
         this.m = now.getMonth();
         this.y = now.getFullYear();
 
+        this.preparePickers();
         this.loadMonth(this.m, this.y);
     },
 
@@ -175,6 +186,15 @@ export default defineComponent({
             }
         },
 
+        toggleYearPicker() {
+            this.showYearPicker = !this.showYearPicker;
+        },
+
+        preparePickers() {
+            // Prepare year picker
+            this.pickerYears = [this.y-3, this.y-2, this.y-1, this.y]
+        },
+
         daysInMonth(m: number, y: number): number {
             switch (m) {
                 case 1 :
@@ -236,6 +256,15 @@ export default defineComponent({
     border-radius: 3px;
 }
 
+.header-year {
+    cursor: pointer;
+    
+    &:hover {
+        color: var(--color-selected-text);
+        text-decoration: underline;
+    }
+}
+
 .header-control {
     display: flex;
     align-items: center;
@@ -258,6 +287,27 @@ export default defineComponent({
     &:active {
         opacity: 0.7;
     }
+}
+
+.picker {
+    display: flex;
+}
+
+.pick-item {
+    padding: 8px;
+    margin: 4px;
+    border-radius: var(--radius);
+    font-weight: 500;
+
+    flex-grow: 1;
+    text-align: center;
+
+    cursor: pointer;
+}
+
+.selected {
+    background: var(--color-selected-background);
+    color: var(--color-selected-text);
 }
 
 .days, .weekdays {
@@ -315,8 +365,6 @@ export default defineComponent({
     right: 0;
 
     z-index: 0;
-
-    //transition: all .2s ease;
 }
 
 .day-label {
