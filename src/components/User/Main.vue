@@ -5,6 +5,7 @@
         </transition>
         
         <div class="left">
+            <DataRange></DataRange>
             <Calendar @popup="showPopup" @error="showError" @dynamicPopup="fetchPopup"></Calendar>
             <div class="tooltipct">
                 <transition name="easein" mode="in-out">
@@ -24,14 +25,15 @@ import store from '@/store/store';
 
 import { Options, Vue } from 'vue-class-component';
 import DetailsContainer from '@/components/User/Details/DetailsContainer.vue';
-import Calendar from '@/components/User/Calendar.vue';
-import Tooltip from '@/components/User/Tooltip.vue';
+import Calendar from './Calendar.vue';
+import DataRange from './DataRange.vue'
+import Tooltip from './Tooltip.vue';
 
 import { ActivityDay } from '@/interfaces/activity';
 import { fetchActivity } from '@/store/api';
 
 @Options({
-    components: { DetailsContainer, Calendar, Tooltip }
+    components: { DetailsContainer, Calendar, Tooltip, DataRange }
 })
 export default class Main extends Vue {
     state = store.state;
