@@ -5,7 +5,7 @@
         </transition>
         
         <div class="left">
-            <DataRange></DataRange>
+            <DataRange @loadRequest="load"></DataRange>
             <Calendar @popup="showPopup" @error="showError" @dynamicPopup="fetchPopup"></Calendar>
             <div class="tooltipct">
                 <transition name="easein" mode="in-out">
@@ -90,6 +90,13 @@ export default class Main extends Vue {
 .left {
     margin: 12.944px 10px;
 }
+
+@media screen and (min-width: 901px) {
+    .left {
+        margin-right: 15px;
+    }
+}
+
 .tooltip {
     z-index: 2;
     flex-grow: 1;
@@ -111,6 +118,7 @@ button {
     left: 0;
     right: 0;
 }
+
 
 // POPUP
 

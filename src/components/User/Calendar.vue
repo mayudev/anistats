@@ -227,12 +227,6 @@ export default defineComponent({
     margin-bottom: 12.944px;
 }
 
-@media screen and (min-width: 901px) {
-    .calendar {
-        margin-right: 5px;
-    }
-}
-
 .header {
     display: flex;
     align-items: center;
