@@ -15,6 +15,8 @@ export default {
             avatar: ""
         },
         activities: [] as ActivityDay[],
+        preloadedActivities: [] as ActivityDay[],
+        currentPage: 1,
         updateHour: 3,
         mediaType: 'both',
         saveSettings: false,
@@ -28,13 +30,19 @@ export default {
         this.state.userData.avatar = obj.data.User.avatar.medium;
     },
 
+    incrementCurrentPage(): void {
+        this.state.currentPage++;
+    },
+
     appendActivities(activities: ActivityDay[]): ActivityDay[] {
         this.state.activities = this.state.activities.concat(activities);
         return this.state.activities;
     },
 
     destroy(): void {
+        this.state.currentPage = 1;
         this.state.activities = [];
+        this.state.preloadedActivities = [];
         this.state.animeList = [];
         this.state.mangaList = [];
     },
@@ -47,8 +55,14 @@ export default {
         updateHour?: number,
         mediaType?: string
     }): void {
-        if (typeof o.updateHour != undefined) this.state.updateHour = o.updateHour as number;
-        if (o.mediaType) this.state.mediaType = o.mediaType;
+        // Destroy current state, because in case the user loads their page again without refreshing the site, inconsistencies may appear.
+        this.destroy();
+        if ('updateHour' in o) this.state.updateHour = o.updateHour as number;
+        if ('mediaType' in o && o.mediaType) this.state.mediaType = o.mediaType;
+    },
+
+    setPreloadedActivities(activities: ActivityDay[]): void {
+        this.state.preloadedActivities = activities;
     },
 
     setAnimeList(list: ActivityMedia[]): void {

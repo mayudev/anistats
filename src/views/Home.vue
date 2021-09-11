@@ -97,15 +97,21 @@ export default class Home extends Vue {
   }
 
   process(username: string): void {
-    fetchUserData(username)
-    .then(resp => {
-      store.destroy();
-      store.setUserdata(resp);
+    // Checking if the user data is already loaded. If it is, it means that the user is revisitng the page so there's no need to fetch anything again
+    if(this.state.userData.username == username && this.state.activities.length > 0) {
+      console.log("directly")
       this.$router.push('/'+username);
-    })
-    .catch(() => {
-      this.showError("Invalid username (or profile is private)");
-    })
+    } else {
+      fetchUserData(username)
+      .then(resp => {
+        store.destroy();
+        store.setUserdata(resp);
+        this.$router.push('/'+username);
+      })
+      .catch(() => {
+        this.showError("Invalid username (or profile is private)");
+      })
+    }
   }
 
   showError(e: string): void {

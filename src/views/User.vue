@@ -35,7 +35,6 @@ import { Options, Vue } from "vue-class-component";
 export default class User extends Vue {
     loading: boolean = true;
     lock: boolean = false;
-    currentPage: number = 1;
     lastPage: number = 0;
     state = store.state;
 
@@ -56,20 +55,16 @@ export default class User extends Vue {
             .catch(() => {
                 this.$router.push({ path: '/', query: { error: 1 }});
             })
-        } else {
+        } else if (this.state.activities.length == 0) {
             this.loadActivites();
+        } else {
+            this.loading = false;
         }
-    }
-
-    unmounted(): void {
-        // Destroy the state
-        store.destroy();
-        console.log("State destroyed");
     }
 
     // Load and parse user's activities (only used for the first time)
     loadActivites(): void {
-        fetchActivity(this.state.userData.id, this.currentPage, this.state.mediaType)
+        fetchActivity(this.state.userData.id, this.state.currentPage, this.state.mediaType)
         .then(resp => {
             this.lastPage = resp.data.Page.pageInfo.lastPage;
             const activities = store.parseActivities(resp.data.Page.activities);
@@ -81,7 +76,7 @@ export default class User extends Vue {
             // It's because next page may contain activity from the last day on the first page, and it's better to display it together. Also for better user experience.
             this.preloadActivites(activities)
             .then(preloaded => {
-                this.preloadedActivities = preloaded;
+                store.setPreloadedActivities(preloaded);
 
                 store.appendActivities(activities);
                 this.loading = false;
@@ -94,12 +89,12 @@ export default class User extends Vue {
         // Lock so the user can't smash the button and break it.
         if(this.lock) return;
         this.lock = true;
-        this.currentPage++;
+        store.incrementCurrentPage();
 
-        const activities = store.appendActivities(this.preloadedActivities);
+        const activities = store.appendActivities(this.state.preloadedActivities);
         this.preloadActivites(activities)
         .then(preloaded => {
-            this.preloadedActivities = preloaded;
+            store.setPreloadedActivities(preloaded);
 
             this.lock = false;
         })
@@ -107,9 +102,9 @@ export default class User extends Vue {
 
     // Load the next page of user's activities and save for later use.
     async preloadActivites(activities: ActivityDay[]): Promise<ActivityDay[]> {
-        if(this.currentPage == this.lastPage) return []; // Reached the end, nothing to preload.
+        if(this.state.currentPage == this.lastPage) return []; // Reached the end, nothing to preload.
 
-        const nextPage = await fetchActivity(this.state.userData.id, this.currentPage + 1, this.state.mediaType);
+        const nextPage = await fetchActivity(this.state.userData.id, this.state.currentPage + 1, this.state.mediaType);
         const preloadedActivities = store.parseActivities(nextPage.data.Page.activities);
 
         // Looking for duplicates

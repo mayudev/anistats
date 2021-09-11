@@ -53,7 +53,7 @@ export default class Settings extends Vue {
     handleSelect(e: string, i: number): void {
         let val = e.toLowerCase();
         if(i == 0) {
-            this.state.mediaType = val;
+            store.setSettings({ mediaType: val })
         } else if (i == 1) {
             if (e == '12am') store.setSettings({ updateHour: 0 });
             else store.setSettings({ updateHour: Number(e.slice(0, -2)) });
