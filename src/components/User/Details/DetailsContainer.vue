@@ -54,6 +54,12 @@ export default class DetailsContainer extends Vue {
     }
 }
 
+@media screen and (max-width: 900px) {
+    .details {
+        margin: 12.944px 10px;
+    }
+}
+
 .title {
     margin-bottom: 12.944px;
     font-weight: 500;
