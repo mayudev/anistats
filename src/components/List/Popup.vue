@@ -15,26 +15,30 @@
 </template>
 
 <script lang="ts">
-import { ActivityMedia } from '@/interfaces/activity';
 import store from '@/store/store';
-import { Options, Vue } from 'vue-class-component';
+import { defineComponent } from 'vue';
 
 import SeriesDetails from '@/components/User/Details/SeriesDetails.vue';
 
-@Options({
+export default defineComponent({
     props: {
-        media: {} as ActivityMedia
+        media: {}
     },
-    components: { SeriesDetails }
-})
-export default class Popup extends Vue {
-    media!: ActivityMedia;
-    state = store.state;
 
-    close(): void {
-        this.$emit('close');
+    components: { SeriesDetails },
+    
+    data() {
+        return {
+            state: store.state
+        }
+    },
+
+    methods: {
+        close(): void {
+            this.$emit('close');
+        }
     }
-}
+})
 </script>
 
 <style lang="scss" scoped>

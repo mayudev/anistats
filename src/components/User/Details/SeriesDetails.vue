@@ -25,30 +25,33 @@
 </template>
 
 <script lang="ts">
-import store, { weekdays } from '@/store/store';
+import { defineComponent } from 'vue';
+import store from '@/store/store';
 
-import { ActivityDate, ActivityDay, ActivityMedia } from '@/interfaces/activity';
+import { ActivityDay } from '@/interfaces/activity';
 import CheapLoading from '@/components/CheapLoading.vue';
 
-import { Options, Vue } from 'vue-class-component';
 import { fetchMedia } from '@/store/api';
 import { findAddedDate, prettyDate } from '@/store/helpers';
 
-@Options({
+export default defineComponent({
     props: {
-        media: {} as ActivityMedia
+        media: {} as any
     },
-    components: { CheapLoading }
-})
-export default class SeriesDetails extends Vue {
-    media!: ActivityMedia;
-    state = store.state;
-    prettyDate = prettyDate;
 
-    activities: ActivityDay[] = [];
-    added: string = "Unknown";
+    components: { CheapLoading },
 
-    loading: boolean = true;
+    data() {
+        return {
+            state: store.state,
+            prettyDate,
+
+            activities: [] as ActivityDay[],
+            added: "Unknown",
+
+            loading: true
+        }
+    },
 
     mounted(): void {
         fetchMedia(this.state.userData.id, this.media.id)
@@ -65,7 +68,7 @@ export default class SeriesDetails extends Vue {
             this.loading = false;
         })
     }
-}
+})
 </script>
 
 <style lang="scss" scoped>

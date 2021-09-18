@@ -27,38 +27,39 @@
 </template>
 
 <script lang="ts">
-import { ActivityDay } from '@/interfaces/activity';
 import { prettyDate } from '@/store/helpers';
 import SeriesItem from '@/components/User/Details/SeriesItem.vue';
 import CheapLoading from '@/components/CheapLoading.vue';
 
-import { Options, Vue } from 'vue-class-component';
-import store from '@/store/store';
+import { defineComponent } from 'vue';
 
-@Options({
+export default defineComponent({
     props: {
-        day: {} as ActivityDay,
+        day: {} as any,
         loading: Boolean
     },
-    components: { SeriesItem, CheapLoading }
+
+    components: { SeriesItem, CheapLoading },
+
+    data() {
+        return {
+            prettyDate,
+
+            selected: -1
+        }
+    },
+
+    methods: {
+        close(): void {
+            this.$emit('close');
+        },
+
+        handleClick(i: number): void {
+            if(this.selected == i) this.selected = -1;
+            else this.selected = i;
+        }
+    }
 })
-export default class Tooltip extends Vue {
-    state = store.state;
-    day!: ActivityDay;
-    prettyDate = prettyDate;
-    loading: boolean = false;
-
-    selected: number = -1;
-
-    close(): void {
-        this.$emit('close');
-    }
-
-    handleClick(i: number): void {
-        if(this.selected == i) this.selected = -1;
-        else this.selected = i;
-    }
-}
 </script>
 
 <style lang="scss" scoped>

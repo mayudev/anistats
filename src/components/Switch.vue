@@ -8,19 +8,16 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
+import { defineComponent } from 'vue';
 
-@Options({
+export default defineComponent({
     props: {
         modelValue: Boolean,
         name: String
     },
-    emits: ['update:modelValue']
+    emits: ['update:modelValue'],
+
 })
-export default class Switch extends Vue {
-    modelValue!: boolean;
-    name!: string;
-}
 </script>
 
 <style lang="scss" scoped>

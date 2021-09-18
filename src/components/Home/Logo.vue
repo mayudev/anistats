@@ -6,16 +6,13 @@
 </template>
 
 <script lang="ts">
-import { Vue, Options } from 'vue-class-component';
+import { defineComponent } from 'vue';
 
-@Options({
+export default defineComponent({
     props: {
         size: String
     }
 })
-export default class Logo extends Vue {
-    size!: string
-}
 </script>
 
 <style lang="scss" scoped>

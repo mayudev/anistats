@@ -8,18 +8,14 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
+import { defineComponent } from 'vue';
 
-@Options({
+export default defineComponent({
     props: {
         to: String,
         icon: String
     }
 })
-export default class MenuItem extends Vue {
-    to!: string;
-    icon!: string;
-}
 </script>
 
 <style lang="scss" scoped>

@@ -21,27 +21,32 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
+import { defineComponent } from 'vue';
 import store from '@/store/store';
 
 import Logo from '@/components/Home/Logo.vue';
 import MenuItem from '@/components/User/Sidebar/MenuItem.vue';
 import { toggleTheme } from '@/store/helpers';
 
-@Options({
-    components: { Logo, MenuItem }
+export default defineComponent({
+    components: { Logo, MenuItem },
+
+    data() {
+        return {
+            state: store.state
+        }
+    },
+
+    methods: {
+        emitToggle(): void {
+            this.$emit('toggle');
+        },
+
+        toggleTheme(): void {
+            toggleTheme();
+        }
+    }
 })
-export default class Sidebar extends Vue {
-    state = store.state;
-
-    emitToggle(): void {
-        this.$emit('toggle');
-    }
-
-    toggleTheme(): void {
-        toggleTheme();
-    }
-}
 </script>
 
 <style lang="scss" scoped>

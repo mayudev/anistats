@@ -5,33 +5,36 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
+import { defineComponent } from 'vue';
 
-@Options({
+export default defineComponent({
     props: {
         options: Array,
         default: String
-    }
-    
-})
-export default class SettingsSwitcher extends Vue {
-    cho: [] = [];
-    default!: string;
-    chosen: string = "";
+    },
 
-    capitalize(option: string): string {
-        return option[0].toUpperCase() + option.slice(1);
-    }
+    data() {
+        return {
+            cho: [],
+            chosen: ""
+        }
+    },
 
     mounted(): void {
-        this.chosen = this.default;
+        this.chosen = this.default as string;
+    },
+
+    methods: {
+        capitalize(option: string): string {
+            return option[0].toUpperCase() + option.slice(1);
+        },
+
+        select(option: string): void {
+            this.chosen = option;
+            this.$emit('selection', option);
+        }
     }
-    
-    select(option: string): void {
-        this.chosen = option;
-        this.$emit('selection', option);
-    }
-}
+})
 </script>
 
 <style lang="scss" scoped>

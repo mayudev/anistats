@@ -6,18 +6,14 @@
 </template>
 
 <script lang="ts">
-import { Vue, Options } from 'vue-class-component';
+import { defineComponent } from 'vue';
 
-@Options({
+export default defineComponent({
     props: {
         icon: String,
         color: String
     }
 })
-export default class Button extends Vue {
-    icon!: string;
-    color!: string;
-}
 </script>
 
 <style lang="scss" scoped>

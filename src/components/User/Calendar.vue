@@ -44,10 +44,6 @@
 </template>
 
 <script lang="ts">
-// MESS WARNING
-// using normal syntax because I'm dumb or 'vue-class-component' sucks and doesn't work with vue 3
-// (as much as I'm tempted to assume the former, it turns out that it's the latter)
-
 import { defineComponent } from 'vue';
 import store from '@/store/store';
 import { ActivityDay } from '@/interfaces/activity';

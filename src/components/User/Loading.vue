@@ -7,15 +7,11 @@
 
 <script lang="ts">
 import Logo from '@/components/Home/Logo.vue';
+import { defineComponent } from 'vue';
 
-import { Options, Vue } from "vue-class-component";
-
-@Options({
+export default defineComponent({
     components: { Logo }
 })
-export default class Loading extends Vue {
-
-}
 </script>
 
 <style lang="scss" scoped>

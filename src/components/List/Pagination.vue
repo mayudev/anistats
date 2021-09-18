@@ -13,18 +13,14 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
+import { defineComponent } from 'vue';
 
-@Options({
+export default defineComponent({
     props: {
         current: Number,
         max: Number
     }
 })
-export default class Pagination extends Vue {
-    current!: number;
-    max!: number;
-}
 </script>
 
 <style lang="scss" scoped>

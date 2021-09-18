@@ -14,13 +14,11 @@
 <script lang="ts">
 import Logo from '@/components/Home/Logo.vue';
 import Panel from '@/components/Home/Panel.vue';
+import { defineComponent } from 'vue';
 
-import { Options, Vue } from "vue-class-component";
-
-@Options({
+export default defineComponent({
     components: { Logo, Panel }
 })
-export default class Special extends Vue { }
 </script>
 
 <style lang="scss" scoped>

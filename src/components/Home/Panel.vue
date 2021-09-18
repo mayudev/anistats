@@ -11,18 +11,21 @@
 
 <script lang="ts">
 import { toggleTheme } from '@/store/helpers';
-import { Options, Vue } from 'vue-class-component';
+import { defineComponent } from 'vue';
 
-@Options({})
-export default class Panel extends Vue {
-    get buildTimestamp(): string {
-        return document.documentElement.dataset.buildTimestamp as string;
-    }
+export default defineComponent({
+    computed: {
+        buildTimestamp(): string {
+            return document.documentElement.dataset.buildTimestamp as string;
+        }
+    },
 
-    lightMode(): void {
-        toggleTheme()
+    methods: {
+        lightMode(): void {
+            toggleTheme();
+        }
     }
-}
+})
 </script>
 
 <style lang="scss" scoped>

@@ -34,15 +34,18 @@ import { prettyDate } from '@/store/helpers';
 
 import SeriesItem from './SeriesItem.vue';
 
-import { Options, Vue } from 'vue-class-component';
+import { defineComponent } from 'vue';
 
-@Options({
-    components: { SeriesItem }
+export default defineComponent({
+    components: { SeriesItem },
+
+    data() {
+        return {
+            state: store.state,
+            prettyDate
+        }
+    }
 })
-export default class DetailsContainer extends Vue {
-    state = store.state;
-    prettyDate = prettyDate 
-}
 </script>
 
 <style lang="scss" scoped>

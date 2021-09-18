@@ -23,7 +23,8 @@
 <script lang="ts">
 import store from '@/store/store';
 
-import { Options, Vue } from 'vue-class-component';
+import { defineComponent } from 'vue';
+
 import DetailsContainer from '@/components/User/Details/DetailsContainer.vue';
 import Calendar from './Calendar.vue';
 import DataRange from './DataRange.vue'
@@ -32,58 +33,63 @@ import Tooltip from './Tooltip.vue';
 import { ActivityDay } from '@/interfaces/activity';
 import { fetchActivity } from '@/store/api';
 
-@Options({
-    components: { DetailsContainer, Calendar, Tooltip, DataRange }
+export default defineComponent({
+    components: { DetailsContainer, Calendar, Tooltip, DataRange },
+
+    data() {
+        return {
+            state: store.state,
+
+            showTooltip: false,
+            tooltipActivities: {} as ActivityDay,
+            
+            popupLoading: false
+        }
+    },
+
+    methods: {
+        load(): void {
+            this.$emit('loadRequest');
+        },
+
+        // Show popup using already loaded data
+        showPopup(e: { activities: ActivityDay, event: MouseEvent }): void {
+            this.showTooltip = false;
+            this.tooltipActivities = e.activities;
+        
+            this.showTooltip = true;
+        },
+
+        // Show popup having loaded data
+        fetchPopup(e: { event: MouseEvent, d: number, m: number, y: number}): void {
+            this.popupLoading = true;
+            this.showTooltip = true;
+            let date = new Date(e.y, e.m-1, e.d);
+
+            // Get timestamp of the beginning and the end of this day.
+            // Converting to AniList time and adding hours according to user's preferences.
+            const begin = (date.getTime()/1000)+this.state.updateHour*3600;
+            const end = begin+86400; // add 24 hours to the beginning timestamp
+            
+            fetchActivity(this.state.userData.id, 1, this.state.mediaType, begin, end)
+            .then(resp => {
+                const activities = store.parseActivities(resp.data.Page.activities);
+                this.tooltipActivities = activities[0];
+
+                if(activities.length == 0) this.showTooltip = false;
+                else this.popupLoading = false;
+            })
+        },
+
+        showError(e: any): void {
+            console.log(e);
+        },
+
+        popupHide(): void {
+            this.showTooltip = false;
+        }
+    }
 })
-export default class Main extends Vue {
-    state = store.state;
-
-    showTooltip: boolean = false;
-    tooltipActivities: ActivityDay = {} as ActivityDay;
-
-    popupLoading: boolean = false;
-
-    load(): void {
-        this.$emit('loadRequest');
-    }
-
-    // Show popup using already loaded data
-    showPopup(e: { activities: ActivityDay, event: MouseEvent }): void {
-        this.showTooltip = false;
-        this.tooltipActivities = e.activities;
-        
-        this.showTooltip = true;
-    }
-
-    // Show popup having loaded data
-    fetchPopup(e: { event: MouseEvent, d: number, m: number, y: number}): void {
-        this.popupLoading = true;
-        this.showTooltip = true;
-        let date = new Date(e.y, e.m-1, e.d);
-
-        // Get timestamp of the beginning and the end of this day.
-        // Converting to AniList time and adding hours according to user's preferences.
-        const begin = (date.getTime()/1000)+this.state.updateHour*3600;
-        const end = begin+86400; // add 24 hours to the beginning timestamp
-        
-        fetchActivity(this.state.userData.id, 1, this.state.mediaType, begin, end)
-        .then(resp => {
-            const activities = store.parseActivities(resp.data.Page.activities);
-            this.tooltipActivities = activities[0];
-
-            if(activities.length == 0) this.showTooltip = false;
-            else this.popupLoading = false;
-        })
-    }
-
-    showError(e: any): void {
-        console.log(e);
-    }
-
-    popupHide(): void {
-        this.showTooltip = false;
-    }
-}
 </script>
 
 <style lang="scss" scoped>
