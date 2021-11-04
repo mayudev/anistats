@@ -12,9 +12,10 @@
                     <div v-if="showTooltip" class="tooltip">
                         <Tooltip :day="tooltipActivities" @close="popupHide" :loading="popupLoading"></Tooltip>
                     </div>
-            </transition>
+                </transition>
             </div>
-            
+            <Chart :height="150" id="episodes" row="episodes" v-if="state.mediaType != 'manga'">Episodes watched</Chart>
+            <Chart :height="150" id="chapters" row="chapters" v-if="state.mediaType != 'anime'">Chapters read</Chart>
         </div>
         <DetailsContainer @loadRequest="load"></DetailsContainer>
     </div>
@@ -29,12 +30,13 @@ import DetailsContainer from '@/components/User/Details/DetailsContainer.vue';
 import Calendar from './Calendar.vue';
 import DataRange from './DataRange.vue'
 import Tooltip from './Tooltip.vue';
+import Chart from './Chart.vue';
 
 import { ActivityDay } from '@/interfaces/activity';
 import { fetchActivity } from '@/store/api';
 
 export default defineComponent({
-    components: { DetailsContainer, Calendar, Tooltip, DataRange },
+    components: { DetailsContainer, Calendar, Tooltip, DataRange, Chart },
 
     data() {
         return {

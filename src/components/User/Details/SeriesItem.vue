@@ -10,7 +10,7 @@
             </div>
         </div>
         <transition name="details">
-            <SeriesDetails v-if="details && !hide" :media="media"></SeriesDetails>
+            <SeriesDetails v-if="details && !hide" :stamp="stamp" :media="media"></SeriesDetails>
         </transition>
     </div>
 </template>
@@ -22,7 +22,8 @@ import SeriesDetails from './SeriesDetails.vue';
 export default defineComponent({
     props: {
         media: Object,
-        hide: Boolean
+        hide: Boolean,
+        stamp: String
     },
 
     components: { SeriesDetails },

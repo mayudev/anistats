@@ -11,7 +11,8 @@
                 Added
             </div>
         </div>
-        <div class="entry" v-for="(day, i) in activities" :key="i">
+        <ActivityChart :height="100" :id="media.id+''+stamp" :row="media.type == 'ANIME' ? 'episodes' : 'chapters'" :activities="activities"></ActivityChart>
+        <!--<div class="entry" v-for="(day, i) in activities" :key="i">
             <div class="entry-date">
                 {{ prettyDate(day.day)}}
             </div>
@@ -19,7 +20,7 @@
                 <span class="entry-value">{{ media.type == 'ANIME' ? day.episodes : day.chapters }}</span>
                 <span class="entry-desc">{{ media.type == 'ANIME' ? ' episodes' : ' chapters' }}</span>
             </div>
-        </div>
+        </div>-->
         
     </div>
 </template>
@@ -30,16 +31,19 @@ import store from '@/store/store';
 
 import { ActivityDay } from '@/interfaces/activity';
 import CheapLoading from '@/components/CheapLoading.vue';
+import ActivityChart from '@/components/User/ActivityChart.vue';
+
 
 import { fetchMedia } from '@/store/api';
 import { findAddedDate, prettyDate } from '@/store/helpers';
 
 export default defineComponent({
     props: {
-        media: {} as any
+        media: {} as any,
+        stamp: String
     },
 
-    components: { CheapLoading },
+    components: { CheapLoading, ActivityChart },
 
     data() {
         return {
@@ -57,7 +61,7 @@ export default defineComponent({
         fetchMedia(this.state.userData.id, this.media.id)
         .then(resp => {
             const rawActivities = resp.data.Page.activities;
-            this.activities = store.parseActivities(rawActivities);
+            this.activities = store.parseActivities(rawActivities).reverse();
 
             if(typeof this.media.added == 'undefined') {
                 this.added = findAddedDate(rawActivities);   
