@@ -1,6 +1,6 @@
 <template>
         <div class="chart" ref="chart" @mousedown="mouseDown" @mouseup="mouseUp" @mousemove="mouseMove" @mouseleave="mouseLeave">
-            <div :id="'area-'+id"></div>
+            <div :id="'area-'+id" ref="area"></div>
             <div class="axis">
                 <div class="label" v-for="(day, i) in activities" :key="i">
                     <span class="label-top">{{ prettyDate(day.day) }}</span>
@@ -50,69 +50,87 @@ export default defineComponent({
         }
     },
 
-    mounted(): void {
-        console.dir(this.activities);
-
-        const columnWidth = 100;
-        const width = this.activities.length * columnWidth;
-
-        const svg = d3.select('#area-'+this.id)
-        .append("svg")
-        .attr("width", width)
-        .attr("height", this.height + this.margin.top + this.margin.bottom)
-        .append("g")
-        .attr("transform", `translate(0, ${this.margin.top})`);
-
-        // x axis (human-readable day names)
-        const x = d3.scaleBand()
-        .domain(this.activities.map(x => prettyDate(x.day)))
-        .range([0, width])
-
-        const countArray = this.activities.map((x: any) => x[this.row]);
-        // y axis (episode/chapter count)
-        const y = d3.scaleLinear()
-        .domain([d3.min(countArray), d3.max(countArray) as number])
-        .range([this.height, 0])
-
-        const line = d3.line<ActivityDay>()
-        .x((d: ActivityDay) => {
-            return x(prettyDate(d.day)) as number + columnWidth/2;
-        })
-        .y((d: any) => y(d[this.row]))
-        .curve(d3.curveMonotoneX)
-
-        // AREA
-        svg.append("path")
-        .datum(this.activities)
-        .attr("fill", "none")
-        .attr("stroke", "#188cc6") // TODO move to CSS
-        .attr("stroke-width", 4)
-        .attr("d", line)
-
-        // EPISODE COUNT LABELS
-        svg.selectAll("labels")
-        .data(this.activities)
-        .join("text")
-        .text((d: any) => d[this.row])
-        .attr("class", "chart-label")
-        .attr("text-anchor", "middle")
-        .attr("font-weight", "500")
-        .attr("x", d => x(prettyDate(d.day)) as number + columnWidth/2)
-        .attr("y", (d: any) => y(d[this.row]) - 15);
-
-        // POINTS
-        svg.selectAll("circles")
-        .data(this.activities)
-        .join("circle")
-        .attr("fill", "#34bbff") // TODO move to CSS
-        .attr("stroke", "none")
-        .attr("fill-opacity", "0.7")
-        .attr("r", 5)
-        .attr("cx", d => x(prettyDate(d.day)) as number + columnWidth/2)
-        .attr("cy", (d: any) => y(d[this.row]));
+    watch: {
+        activities: function() {
+            this.clean();
+            this.render();
+        }
     },
 
+    mounted(): void {
+        this.render();
+    },
+    
+
     methods: {
+        clean(): void {
+            const node = (this.$refs.area as HTMLDivElement)
+            while(node.lastChild) {
+                node.removeChild(node.lastChild);
+            }
+        },
+        render(): void {
+            console.dir(this.activities);
+
+            const columnWidth = 100;
+            const width = this.activities.length * columnWidth;
+
+            const svg = d3.select('#area-'+this.id)
+            .append("svg")
+            .attr("width", width)
+            .attr("height", this.height + this.margin.top + this.margin.bottom)
+            .append("g")
+            .attr("transform", `translate(0, ${this.margin.top})`);
+
+            // x axis (human-readable day names)
+            const x = d3.scaleBand()
+            .domain(this.activities.map(x => prettyDate(x.day)))
+            .range([0, width])
+
+            const countArray = this.activities.map((x: any) => x[this.row]);
+            // y axis (episode/chapter count)
+            const y = d3.scaleLinear()
+            .domain([d3.min(countArray), d3.max(countArray) as number])
+            .range([this.height, 0])
+
+            const line = d3.line<ActivityDay>()
+            .x((d: ActivityDay) => {
+                return x(prettyDate(d.day)) as number + columnWidth/2;
+            })
+            .y((d: any) => y(d[this.row]))
+            .curve(d3.curveMonotoneX)
+
+            // AREA
+            svg.append("path")
+            .datum(this.activities)
+            .attr("fill", "none")
+            .attr("stroke", "#188cc6") // TODO move to CSS
+            .attr("stroke-width", 4)
+            .attr("d", line)
+
+            // EPISODE COUNT LABELS
+            svg.selectAll("labels")
+            .data(this.activities)
+            .join("text")
+            .text((d: any) => d[this.row])
+            .attr("class", "chart-label")
+            .attr("text-anchor", "middle")
+            .attr("font-weight", "500")
+            .attr("x", d => x(prettyDate(d.day)) as number + columnWidth/2)
+            .attr("y", (d: any) => y(d[this.row]) - 15);
+
+            // POINTS
+            svg.selectAll("circles")
+            .data(this.activities)
+            .join("circle")
+            .attr("fill", "#34bbff") // TODO move to CSS
+            .attr("stroke", "none")
+            .attr("fill-opacity", "0.7")
+            .attr("r", 5)
+            .attr("cx", d => x(prettyDate(d.day)) as number + columnWidth/2)
+            .attr("cy", (d: any) => y(d[this.row]));
+        },
+
         // Chart scrolling event handlers
         mouseDown(e: MouseEvent) {
             this.dragging = true;
