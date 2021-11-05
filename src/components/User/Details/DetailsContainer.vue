@@ -20,7 +20,7 @@
                     <div class="prop-desc">episodes</div>
                 </div>
             </div>
-            <SeriesItem v-for="(media, i) in day.media" :key="i" :stamp="day.day.d+'a'+day.day.m" :media="media"></SeriesItem>
+            <SeriesItem v-for="(media, i) in day.media" :key="i" :stamp="day.day.d+'a'+day.day.m+i" :media="media"></SeriesItem>
         </div>
         <button class="button group" @click="$emit('loadRequest')">
             More...
