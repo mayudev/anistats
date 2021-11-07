@@ -2,7 +2,7 @@
     <div class="footer-wrapper">
         <div class="timestamp">Built on {{ buildTimestamp }}</div>
         <div class="footer">
-            <span class="footer-link" @click="lightMode">Toggle light mode</span>
+            <span class="footer-link" @click="lightMode">Toggle theme</span>
             <router-link class="footer-link" to="/s/about">About</router-link>
             <router-link class="footer-link" to="/s/help">Help</router-link>
         </div>

@@ -17,6 +17,11 @@
             <MenuItem @click="emitToggle" icon="book-open" to="/list/manga">List</MenuItem>
             <MenuItem @click="emitToggle" icon="history" to="/history/manga">History</MenuItem>
         </div>
+        <div class="category category-small">
+            <span @click="toggleTheme" class="item-small">Toggle theme</span>
+            <router-link to="/s/help" class="item-small">Help</router-link>
+            <router-link to="/s/about" class="item-small">About</router-link>
+        </div>
     </div>
 </template>
 
@@ -85,6 +90,24 @@ export default defineComponent({
     font-weight: 500;
 }
 
+.category-small {
+    margin: 5px;
+    padding: 10px;
+}
+
+.item-small {
+    display: block;
+    
+    font-size: .86em;
+    margin-bottom: 5px;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
 @media screen and (max-width: 1020px) {
     .sidebar {
         width: 100%;
@@ -98,6 +121,11 @@ export default defineComponent({
 
     .a {
         display: none;
+    }
+
+    .category-small {
+        display: flex;
+        justify-content: space-around;
     }
 }
 

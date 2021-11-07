@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="help">
         <h3>How does it work?</h3>
         AniList has a small feature called "Activity". Each time you watch an episode, add something to your planning list, an activity is created. anistats takes adventage of that to count how many episodes you've seen on a specific day.
         <h3>Why it doesn't work?</h3>
@@ -26,6 +26,10 @@ export default defineComponent({})
 </script>
 
 <style lang="scss" scoped>
+.help {
+    max-height: 60vh;
+    overflow-y: auto;
+}
 h3, h4, b {
     font-weight: 500;
 }
