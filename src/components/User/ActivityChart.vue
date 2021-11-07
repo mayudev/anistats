@@ -161,11 +161,16 @@ export default defineComponent({
     overflow-x: scroll;
     white-space: nowrap;
     user-select: none;
+    scrollbar-width: none;
 
     cursor: grab;
 
     &:active {
         cursor: grabbing;
+    }
+
+    *::-webkit-scrollbar {
+        display: none;
     }
 }
 

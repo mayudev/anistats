@@ -3,12 +3,12 @@
         <CheapLoading></CheapLoading>
     </div>
     <div class="entries" v-else>
-        <div class="entry header">
-            <div class="entry-date">
-                {{ added }}
+        <div class="header">
+            <div class="tip-name">
+                Planned since
             </div>
-            <div class="entry-value">
-                Added
+            <div class="tip-value">
+                {{ added }}
             </div>
         </div>
         <ActivityChart :height="100" :id="media.id+''+stamp" :row="media.type == 'ANIME' ? 'episodes' : 'chapters'" :activities="activities"></ActivityChart>
@@ -80,42 +80,20 @@ export default defineComponent({
     display: flex;
     padding: 8px;
     border-bottom: 1px solid var(--color-selected-text);
-
-    font-weight: 500;
 }
 
-.entry {
+.header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    //border-bottom: 1px solid var(--color-background-border);
-    padding: 8px;
 }
 
-.entry:nth-child(even) {
-    background: var(--color-background-darker);
+.tip-value {
+    font-size: .95em;
+    font-weight: 500;
 }
 
-.entry:last-child {
-    border-bottom: none;
-    border-bottom-left-radius: var(--radius);
-    border-bottom-right-radius: var(--radius);
-}
-
-.entry-date {
-    font-size: .86em;
-}
-
-.entry-prop {
-    display: flex;
-}
-
-.entry-value {
-    margin-right: 3.24px;
-}
-
-.entry-desc {
+.tip-name {
     color: var(--color-text-secondary);
     font-size: .86em;
 }

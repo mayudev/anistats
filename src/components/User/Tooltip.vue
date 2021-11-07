@@ -66,6 +66,7 @@ export default defineComponent({
 .tooltip {
     background: var(--color-background);
     border-radius: var(--radius);
+    overflow: hidden;
 }
 
 .header {

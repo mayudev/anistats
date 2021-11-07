@@ -26,6 +26,10 @@ export default defineComponent({})
 </script>
 
 <style lang="scss" scoped>
+h3, h4, b {
+    font-weight: 500;
+}
+
 img {
     max-width: 100%;
 }

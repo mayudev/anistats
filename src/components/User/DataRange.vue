@@ -8,10 +8,10 @@
         </div>
         <span class="breaker"></span>
         <span class="header-range">{{ lastLoadedDay }} - today</span>
-        <span class="spacer"></span>
+        <!--<span class="spacer"></span>
         <div class="header-button">
             <font-awesome-icon icon="question-circle"></font-awesome-icon>
-        </div>
+        </div>-->
   </div>
 </template>
 

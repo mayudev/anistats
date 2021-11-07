@@ -374,6 +374,7 @@ export default defineComponent({
 // TABLE
 .tableHeader {
     text-align: left;
+    font-weight: 500;
 }
 
 .tableRow {
