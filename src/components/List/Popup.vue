@@ -47,6 +47,7 @@ export default defineComponent({
     border-radius: var(--radius);
 
     z-index: 2;
+    overflow: hidden;
 }
 
 .header {
@@ -131,6 +132,7 @@ a {
 @media screen and (min-width: 901px) {
     .popup {
         min-width: 500px;
+        max-width: 960px;
     }
 }
 </style>
