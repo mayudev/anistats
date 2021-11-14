@@ -1,19 +1,20 @@
 <template>
     <div class="special" @click="popupHide">
-        <div class="dialog" @click="popupClick">
-            <div class="header">
-                <div class="header-title">{{ view[0].toUpperCase()+view.slice(1) }}</div>
-                <span style="flex: 1"></span>
-                <div class="header-control" @click="popupHide">
-                    <font-awesome-icon icon="times"></font-awesome-icon>
+        <transition appear name="popup">
+            <div class="dialog" @click="popupClick">
+                <div class="header">
+                    <div class="header-title">{{ view[0].toUpperCase()+view.slice(1) }}</div>
+                    <span style="flex: 1"></span>
+                    <div class="header-control" @click="popupHide">
+                        <font-awesome-icon icon="times"></font-awesome-icon>
+                    </div>
                 </div>
-            </div>
-            <div class="content">
-                <component :is="view"></component>
-            </div>
-        </div>  
+                <div class="content">
+                    <component :is="view"></component>
+                </div>
+            </div>  
+        </transition>
     </div>
-
 </template>
 
 <script lang="ts">
