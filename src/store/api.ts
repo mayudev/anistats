@@ -1,8 +1,15 @@
-import { ActivityDate } from "@/interfaces/activity";
+import { ActivityDate, ActivityMedia } from "@/interfaces/activity";
 import { activityQuery } from "@/queries/activity";
 import { listQuery } from "@/queries/list";
 import { mediaQuery } from "@/queries/media";
 import { userQuery } from "@/queries/user";
+
+import useSWRV, { IConfig } from 'swrv';
+
+const swrvConfig: IConfig = {
+    revalidateOnFocus: false,
+    dedupingInterval: 3600000
+}
 
 export async function anilistRequest(query: string, variables: any): Promise<any> {
     const response = await fetch("https://graphql.anilist.co", {
@@ -29,7 +36,11 @@ export async function fetchMedia(id: number, media: number): Promise<any> {
         userId: id  
     }
     
-    return anilistRequest(mediaQuery, variables);
+    const { data, mutate } = useSWRV('/user/'+id+'/media/'+media, () => anilistRequest(mediaQuery, variables), swrvConfig);
+    
+    if(typeof data.value === 'undefined') await mutate();
+    
+    return data.value;
 }
 
 export async function fetchList(id: number, type: string): Promise<any> {
