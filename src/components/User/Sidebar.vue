@@ -19,8 +19,8 @@
         </div>
         <div class="category category-small">
             <span @click="toggleTheme" class="item-small">Toggle theme</span>
-            <router-link to="/s/help" class="item-small">Help</router-link>
-            <router-link to="/s/about" class="item-small">About</router-link>
+            <span @click="toggleSpecial('help')" class="item-small">Help</span>
+            <span @click="toggleSpecial('about')" class="item-small">About</span>
         </div>
     </div>
 </template>
@@ -49,6 +49,10 @@ export default defineComponent({
 
         toggleTheme(): void {
             toggleTheme();
+        },
+
+        toggleSpecial(e: string): void {
+            this.$emit('special', e)
         }
     }
 })

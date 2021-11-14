@@ -2,7 +2,7 @@
     <Loading v-if="loading"></Loading>
     <div class="view" v-else>
         <div class="sidebar-wrapper" :class="{ 'sidebar-hide-mobile': !showSidebar }">
-            <Sidebar @toggle="toggleSidebar"></Sidebar>
+            <Sidebar @special="toggleSpecial($event)" @toggle="toggleSidebar"></Sidebar>
 
         </div>
         <div class="content">
@@ -14,6 +14,10 @@
             </div>
             <router-view @loadRequest="loadEarlierActivities"></router-view>
         </div>
+
+        <transition name="popup-backdrop">
+            <Special v-if="showSpecial" :view="specialView" @hide="showSpecial = false"></Special>
+        </transition>
     </div>
 </template>
 
@@ -24,12 +28,13 @@ import store from '@/store/store';
 import Loading from '@/components/User/Loading.vue';
 import Sidebar from '@/components/User/Sidebar.vue';
 import Logo from '@/components/Home/Logo.vue';
+import Special from '@/views/Special.vue';
 
 import { ActivityDay } from '@/interfaces/activity';
 import { defineComponent } from '@vue/runtime-core';
 
 export default defineComponent({
-    components: { Loading, Sidebar, Logo },
+    components: { Loading, Sidebar, Logo, Special },
 
     data() {
         return {
@@ -39,6 +44,8 @@ export default defineComponent({
             state: store.state,
 
             showSidebar: false,
+            showSpecial: false,
+            specialView: '',
             
             preloadedActivities: [] as ActivityDay[],
         }
@@ -132,6 +139,11 @@ export default defineComponent({
 
         toggleSidebar(): void {
             this.showSidebar = !this.showSidebar
+        },
+
+        toggleSpecial(name: string): void {
+            this.specialView = name;
+            this.showSpecial = true;
         }
     }
 })

@@ -28,8 +28,11 @@
       </transition>
     </div>
     <footer>
-      <Panel></Panel>
+      <Panel @special="toggleSpecial($event)"></Panel>
     </footer>
+    <transition name="popup-backdrop">
+      <Special v-if="showSpecial" :view="specialView" @hide="showSpecial = false"></Special>
+    </transition>
   </div>
 </template>
 
@@ -40,18 +43,22 @@ import Logo from '@/components/Home/Logo.vue';
 import Button from '@/components/Button.vue';
 import Settings from '@/components/Home/Settings.vue';
 import Panel from '@/components/Home/Panel.vue';
+import Special from '@/views/Special.vue';
 
 import store from '@/store/store';
 import { fetchUserData } from '@/store/api';
 
 export default defineComponent({
-  components: { Logo, Button, Settings, Panel },
+  components: { Logo, Button, Settings, Panel, Special },
 
   data() {
     return {
       show: true,
       loading: false,
       settings: false,
+
+      showSpecial: false,
+      specialView: '',
 
       username: "",
       error: "",
@@ -129,6 +136,11 @@ export default defineComponent({
 
     toggleSettings(): void {
       this.settings = !this.settings;
+    },
+
+    toggleSpecial(name: string): void {
+      this.specialView = name;
+      this.showSpecial = true;
     }
   }
 
