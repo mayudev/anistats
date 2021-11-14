@@ -105,7 +105,6 @@ export default defineComponent({
     process(username: string): void {
       // Checking if the user data is already loaded. If it is, it means that the user is revisitng the page so there's no need to fetch anything again
       if(this.state.userData.username == username && this.state.activities.length > 0) {
-        console.log("directly")
         this.$router.push('/'+username);
       } else {
         fetchUserData(username)

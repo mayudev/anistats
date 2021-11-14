@@ -70,8 +70,6 @@ export default defineComponent({
             }
         },
         render(): void {
-            console.dir(this.activities);
-
             const columnWidth = 100;
             const width = this.activities.length * columnWidth;
 
