@@ -1,6 +1,5 @@
 <template>
     <div class="footer-wrapper">
-        <div class="timestamp">Built on {{ buildTimestamp }}</div>
         <div class="footer">
             <span class="footer-link" @click="lightMode">Toggle theme</span>
             <span class="footer-link" @click="toggleSpecial('about')">About</span>
@@ -14,12 +13,6 @@ import { toggleTheme } from '@/store/helpers';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-    computed: {
-        buildTimestamp(): string {
-            return document.documentElement.dataset.buildTimestamp as string;
-        }
-    },
-
     methods: {
         lightMode(): void {
             toggleTheme();
