@@ -115,6 +115,7 @@ export default {
                     else chapters = 1;
                     break;
                 case 'completed':
+                case 'rewatched':
                     if(a.media.type == 'ANIME') episodes = 1;
                     else chapters = 1;
                     break;
