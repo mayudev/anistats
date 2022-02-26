@@ -1,4 +1,4 @@
-# anistats2
+# anistats
 
 <b>Beta</b>
 
