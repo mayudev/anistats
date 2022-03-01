@@ -1,6 +1,6 @@
 <template>
     <div>
-        <p>anistats is an extension for AniList that lets you check how much time you spend/waste on watching anime and reading manga based on your activity.</p>
+        <p>anistats lets you check how much time you spend/waste on watching anime and reading manga based on your activity on AniList.</p>
         <p>Source code of this site is available <a target="_blank" href="https://github.com/mayudev/anistats">here</a>.</p>
     </div>
 </template>
