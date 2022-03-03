@@ -31,7 +31,6 @@
 
 <script lang="ts">
 import store from "@/store/store";
-import { prettyDate } from "@/store/helpers";
 
 import SeriesItem from "./SeriesItem.vue";
 
@@ -43,7 +42,7 @@ export default defineComponent({
   data() {
     return {
       state: store.state,
-      prettyDate,
+      prettyDate: store.prettyDate,
     };
   },
 });

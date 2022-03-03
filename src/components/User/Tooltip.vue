@@ -33,7 +33,7 @@
 </template>
 
 <script lang="ts">
-import { prettyDate } from "@/store/helpers";
+import store from "@/store/store";
 import SeriesItem from "@/components/User/Details/SeriesItem.vue";
 import CheapLoading from "@/components/CheapLoading.vue";
 
@@ -49,7 +49,7 @@ export default defineComponent({
 
   data() {
     return {
-      prettyDate,
+      prettyDate: store.prettyDate,
 
       selected: -1,
     };

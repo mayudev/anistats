@@ -125,7 +125,6 @@ import { defineComponent } from "vue";
 
 import store from "@/store/store";
 import { fetchMediaList } from "@/store/lists";
-import { prettyDate } from "@/store/helpers";
 
 import { ActivityMedia } from "@/interfaces/activity";
 import { Filter } from "@/interfaces/filters";
@@ -138,7 +137,7 @@ export default defineComponent({
   data() {
     return {
       state: store.state,
-      prettyDate: prettyDate,
+      prettyDate: store.prettyDate,
 
       loading: true,
       displayCover: -1,

@@ -18,7 +18,6 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import store from "@/store/store";
-import { prettyDate } from "@/store/helpers";
 
 export default defineComponent({
   data() {
@@ -29,7 +28,7 @@ export default defineComponent({
 
   computed: {
     lastLoadedDay(): string {
-      return prettyDate(
+      return store.prettyDate(
         this.state.activities[this.state.activities.length - 1].day
       );
     },

@@ -27,7 +27,7 @@ import CheapLoading from "@/components/CheapLoading.vue";
 import ActivityChart from "@/components/User/ActivityChart.vue";
 
 import { fetchMedia } from "@/store/api";
-import { findAddedDate, prettyDate } from "@/store/helpers";
+import { findAddedDate } from "@/store/helpers";
 
 export default defineComponent({
   props: {
@@ -40,7 +40,7 @@ export default defineComponent({
   data() {
     return {
       state: store.state,
-      prettyDate,
+      prettyDate: store.prettyDate,
 
       activities: [] as ActivityDay[],
       added: "Unknown",
@@ -58,7 +58,9 @@ export default defineComponent({
         this.added = findAddedDate(rawActivities);
       } else {
         this.added =
-          this.media.added.time == 0 ? "Unknown" : prettyDate(this.media.added);
+          this.media.added.time == 0
+            ? "Unknown"
+            : this.prettyDate(this.media.added);
       }
 
       this.loading = false;

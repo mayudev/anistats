@@ -23,7 +23,6 @@ import * as d3 from "d3";
 
 import { ActivityDay } from "@/interfaces/activity";
 import store from "@/store/store";
-import { prettyDate } from "@/store/helpers";
 
 export default defineComponent({
   props: {
@@ -45,7 +44,7 @@ export default defineComponent({
   data() {
     return {
       state: store.state,
-      prettyDate,
+      prettyDate: store.prettyDate,
 
       margin: { top: 50, bottom: 10 },
 
@@ -88,7 +87,7 @@ export default defineComponent({
       // x axis (human-readable day names)
       const x = d3
         .scaleBand()
-        .domain(this.activities.map((x) => prettyDate(x.day)))
+        .domain(this.activities.map((x) => this.prettyDate(x.day)))
         .range([0, width]);
 
       const countArray = this.activities.map((x: any) => x[this.row]);
@@ -101,7 +100,7 @@ export default defineComponent({
       const line = d3
         .line<ActivityDay>()
         .x((d: ActivityDay) => {
-          return (x(prettyDate(d.day)) as number) + columnWidth / 2;
+          return (x(this.prettyDate(d.day)) as number) + columnWidth / 2;
         })
         .y((d: any) => y(d[this.row]))
         .curve(d3.curveMonotoneX);
@@ -124,7 +123,10 @@ export default defineComponent({
         .attr("class", "chart-label")
         .attr("text-anchor", "middle")
         .attr("font-weight", "500")
-        .attr("x", (d) => (x(prettyDate(d.day)) as number) + columnWidth / 2)
+        .attr(
+          "x",
+          (d) => (x(this.prettyDate(d.day)) as number) + columnWidth / 2
+        )
         .attr("y", (d: any) => y(d[this.row]) - 15);
 
       // POINTS
@@ -136,7 +138,10 @@ export default defineComponent({
         .attr("stroke", "none")
         .attr("fill-opacity", "0.7")
         .attr("r", 5)
-        .attr("cx", (d) => (x(prettyDate(d.day)) as number) + columnWidth / 2)
+        .attr(
+          "cx",
+          (d) => (x(this.prettyDate(d.day)) as number) + columnWidth / 2
+        )
         .attr("cy", (d: any) => y(d[this.row]));
     },
 
