@@ -4,7 +4,23 @@ import {
   ActivityMedia,
 } from "@/interfaces/activity";
 import { reactive } from "vue";
-import { compareDates, fetchList } from "./api";
+import { compareDates } from "./api";
+
+const defaultDateFormatString = new Intl.DateTimeFormat()
+  .formatToParts(new Date())
+  .map((obj) => {
+    switch (obj.type) {
+      case "day":
+        return "DD";
+      case "month":
+        return "MM";
+      case "year":
+        return "YYYY";
+      default:
+        return obj.value;
+    }
+  })
+  .join("");
 
 export const weekdays = [
   "Sunday",
@@ -44,6 +60,7 @@ export default {
     currentPage: 1,
     updateHour: 3,
     mediaType: "both",
+    dateFormat: "default",
     saveSettings: false,
     animeList: [] as ActivityMedia[],
     mangaList: [] as ActivityMedia[],
@@ -76,11 +93,16 @@ export default {
     this.state.saveSettings = e;
   },
 
-  setSettings(o: { updateHour?: number; mediaType?: string }): void {
+  setSettings(o: {
+    updateHour?: number;
+    mediaType?: string;
+    dateFormat?: string;
+  }): void {
     // Destroy current state, because in case the user loads their page again without refreshing the site, inconsistencies may appear.
     this.destroy();
     if ("updateHour" in o) this.state.updateHour = o.updateHour as number;
     if ("mediaType" in o && o.mediaType) this.state.mediaType = o.mediaType;
+    if ("dateFormat" in o && o.dateFormat) this.state.dateFormat = o.dateFormat;
   },
 
   setPreloadedActivities(activities: ActivityDay[]): void {
@@ -93,6 +115,24 @@ export default {
 
   setMangaList(list: ActivityMedia[]): void {
     this.state.mangaList = list;
+  },
+
+  /** prettyDate parses an ActivityDate according to user preferences */
+  prettyDate(date: ActivityDate): string {
+    if (date.time == 0) return "Unknown";
+
+    let formatter;
+
+    if (this.state.dateFormat == "universal") {
+      formatter = "YYYY-MM-DD";
+    } else {
+      formatter = defaultDateFormatString;
+    }
+
+    return formatter
+      .replace("DD", String(date.d))
+      .replace("MM", date.m >= 10 ? String(date.m) : "0" + String(date.m))
+      .replace("YYYY", String(date.y));
   },
 
   parseActivities(activities: any): ActivityDay[] {
