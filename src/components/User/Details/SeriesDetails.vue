@@ -15,15 +15,6 @@
       :row="media.type == 'ANIME' ? 'episodes' : 'chapters'"
       :activities="activities"
     ></ActivityChart>
-    <!--<div class="entry" v-for="(day, i) in activities" :key="i">
-            <div class="entry-date">
-                {{ prettyDate(day.day)}}
-            </div>
-            <div class="entry-prop">
-                <span class="entry-value">{{ media.type == 'ANIME' ? day.episodes : day.chapters }}</span>
-                <span class="entry-desc">{{ media.type == 'ANIME' ? ' episodes' : ' chapters' }}</span>
-            </div>
-        </div>-->
   </div>
 </template>
 
