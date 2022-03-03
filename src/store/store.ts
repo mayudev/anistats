@@ -130,7 +130,7 @@ export default {
     }
 
     return formatter
-      .replace("DD", String(date.d))
+      .replace("DD", date.d >= 10 ? String(date.d) : "0" + String(date.d))
       .replace("MM", date.m >= 10 ? String(date.m) : "0" + String(date.m))
       .replace("YYYY", String(date.y));
   },
