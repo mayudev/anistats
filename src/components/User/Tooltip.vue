@@ -49,6 +49,7 @@ export default defineComponent({
 
   data() {
     return {
+      state: store.state,
       prettyDate: store.prettyDate,
 
       selected: -1,
