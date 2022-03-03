@@ -89,7 +89,7 @@ export default defineComponent({
             throw 'Invalid URL';
           }
         }
-        catch (e)
+        catch (e: any)
         {
           this.showError(e);
         }
