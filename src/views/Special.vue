@@ -1,117 +1,119 @@
 <template>
-    <div class="special" @click="popupHide">
-        <transition appear name="popup">
-            <div class="dialog" @click="popupClick">
-                <div class="header">
-                    <div class="header-title">{{ view[0].toUpperCase()+view.slice(1) }}</div>
-                    <span style="flex: 1"></span>
-                    <div class="header-control" @click="popupHide">
-                        <font-awesome-icon icon="times"></font-awesome-icon>
-                    </div>
-                </div>
-                <div class="content">
-                    <component :is="view"></component>
-                </div>
-            </div>  
-        </transition>
-    </div>
+  <div class="special" @click="popupHide">
+    <transition appear name="popup">
+      <div class="dialog" @click="popupClick">
+        <div class="header">
+          <div class="header-title">
+            {{ view[0].toUpperCase() + view.slice(1) }}
+          </div>
+          <span style="flex: 1"></span>
+          <div class="header-control" @click="popupHide">
+            <font-awesome-icon icon="times"></font-awesome-icon>
+          </div>
+        </div>
+        <div class="content">
+          <component :is="view"></component>
+        </div>
+      </div>
+    </transition>
+  </div>
 </template>
 
 <script lang="ts">
-import About from '@/components/Special/About.vue';
-import Help from '@/components/Special/Help.vue';
+import About from "@/components/Special/About.vue";
+import Help from "@/components/Special/Help.vue";
 
-import { defineComponent } from 'vue';
+import { defineComponent } from "vue";
 
 export default defineComponent({
-    props: {
-        view: String
+  props: {
+    view: String,
+  },
+  components: { About, Help },
+
+  methods: {
+    popupHide() {
+      this.$emit("hide");
     },
-    components: { About, Help },
 
-    methods: {
-        popupHide() {
-            this.$emit('hide');
-        },
-
-        popupClick(e: MouseEvent) {
-            e.stopPropagation();
-        }
-    }
-})
+    popupClick(e: MouseEvent) {
+      e.stopPropagation();
+    },
+  },
+});
 </script>
 
 <style lang="scss" scoped>
 .special {
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 
-    position: fixed;
-    z-index: 10;
+  position: fixed;
+  z-index: 10;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0,0,0,.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .dialog {
-    max-width: 1080px;
+  max-width: 1080px;
 
-    background: var(--color-background);
-    border-radius: var(--radius);
-    overflow: hidden;
+  background: var(--color-background);
+  border-radius: var(--radius);
+  overflow: hidden;
 }
 
-// HEADER 
+// HEADER
 .header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
 
-    background: var(--color-background-darker);
-    border-radius: var(--radius);
+  background: var(--color-background-darker);
+  border-radius: var(--radius);
 }
 
 .header-title {
-    font-weight: 500;
-    font-size: 1em;
+  font-weight: 500;
+  font-size: 1em;
 }
 
 .header-control {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-    width: 36px;
-    height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    text-align: center;
-    border-radius: 3px;
+  width: 36px;
+  height: 36px;
 
-    user-select: none;
-    transition: .2s;
-    cursor: pointer;
+  text-align: center;
+  border-radius: 3px;
 
-    &:hover {
-        background: var(--color-background-secondary);
-    }
+  user-select: none;
+  transition: 0.2s;
+  cursor: pointer;
 
-    &:active {
-        opacity: 0.7;
-    }
+  &:hover {
+    background: var(--color-background-secondary);
+  }
+
+  &:active {
+    opacity: 0.7;
+  }
 }
 
 a {
-    color: inherit;
+  color: inherit;
 }
 
 .content {
-    max-height: 80vh;
-    overflow-y: auto;
-    padding: 0 16px 16px 16px;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 0 16px 16px 16px;
 }
 </style>

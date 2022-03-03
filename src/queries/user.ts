@@ -9,4 +9,4 @@ export const userQuery: string = `query ($username: String) {
         medium
       }
     }
-  }`
+  }`;

@@ -1,14 +1,14 @@
 interface FilterValue {
-    name?: string;
-    animeName?: string;
-    mangaName?: string;
-    key: string;
+  name?: string;
+  animeName?: string;
+  mangaName?: string;
+  key: string;
 }
 
 export interface Filter {
-    name: string;
-    key: string;
-    type: string;
-    values: FilterValue[];
-    checked: string[];
+  name: string;
+  key: string;
+  type: string;
+  values: FilterValue[];
+  checked: string[];
 }

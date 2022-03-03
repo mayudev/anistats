@@ -1,56 +1,56 @@
 <template>
-  <router-view/>
+  <router-view />
 </template>
 
 <script lang="ts">
-import store from '@/store/store';
-import { defineComponent } from 'vue';
-import { toggleTheme } from './store/helpers';
+import store from "@/store/store";
+import { defineComponent } from "vue";
+import { toggleTheme } from "./store/helpers";
 
 export default defineComponent({
-    data() {
-        return {
-            state: store.state,
-        }
-    },
+  data() {
+    return {
+      state: store.state,
+    };
+  },
 
-    created(): void {
-      // Load saved settings to state
-      const updateHour = localStorage.getItem("updateHour");
-      const mediaType = localStorage.getItem("mediaType");
+  created(): void {
+    // Load saved settings to state
+    const updateHour = localStorage.getItem("updateHour");
+    const mediaType = localStorage.getItem("mediaType");
 
-      if (updateHour && mediaType) {
-        store.saveSettings(true);
-        store.setSettings({
-          updateHour: Number(updateHour),
-          mediaType
-        })
-      }
-
-      const theme = localStorage.getItem("theme")
-      if(theme == "light") {
-        toggleTheme();
-      }
-    },
-
-    mounted(): void {
-      this.$nextTick().then(() => {
-        //document.body.classList.add('site-theme-light');
-      })
+    if (updateHour && mediaType) {
+      store.saveSettings(true);
+      store.setSettings({
+        updateHour: Number(updateHour),
+        mediaType,
+      });
     }
-})
 
+    const theme = localStorage.getItem("theme");
+    if (theme == "light") {
+      toggleTheme();
+    }
+  },
+
+  mounted(): void {
+    this.$nextTick().then(() => {
+      //document.body.classList.add('site-theme-light');
+    });
+  },
+});
 </script>
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@400;500&display=swap");
 
-:root {// DARK MODE (default) COLORS
+:root {
+  // DARK MODE (default) COLORS
   --color-background: #272c38;
   --color-background-secondary: #1f232d;
   --color-background-border: #343946;
   --color-background-darker: #2d3340;
   --color-background-day: #188cc6;
-  
+
   --color-selected-background: #2d3340;
   --color-selected-text: #34bbff;
 
@@ -60,7 +60,7 @@ export default defineComponent({
   --color-text-gray: #d3d3d3;
   --color-text-red: #b33737;
 
-  --shadow-default: 0 0 10px rgba(0,0,0,.25);
+  --shadow-default: 0 0 10px rgba(0, 0, 0, 0.25);
   --radius: 6px;
 }
 
@@ -79,7 +79,6 @@ export default defineComponent({
   --color-text-blue: #4090d1;
   --color-text-gray: #666;
   --color-text-red: #b33737;
-
 }
 
 * {
@@ -87,7 +86,7 @@ export default defineComponent({
 }
 
 body {
-  font-family: 'Jost', sans-serif;
+  font-family: "Jost", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
@@ -97,8 +96,8 @@ body {
 }
 
 a {
-    text-decoration: none;
-    color: #65a9c4;
+  text-decoration: none;
+  color: #65a9c4;
 }
 
 input {
@@ -136,57 +135,61 @@ footer {
 }
 
 .prop {
-    display: flex;
-    align-items: center;
-    margin: 0 10px;
+  display: flex;
+  align-items: center;
+  margin: 0 10px;
 }
 
 .prop-value {
-    margin-right: 6.47px;
-    font-size: 1.4em;
+  margin-right: 6.47px;
+  font-size: 1.4em;
 }
 
 .prop-desc {
-    font-size: .76em;
-    color: var(--color-text-secondary);
+  font-size: 0.76em;
+  color: var(--color-text-secondary);
 }
 
 // TRANSITIONS
 .popup-backdrop {
-    position: fixed;
-    bottom: 0;
-    top: 0;
-    left: 0;
-    right: 0;
+  position: fixed;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
 
-    z-index: 2;
-    background: rgba(0,0,0,.7);
-    
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.7);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.popup-backdrop-enter-from, .popup-backdrop-leave-to {
-    opacity: 0;
+.popup-backdrop-enter-from,
+.popup-backdrop-leave-to {
+  opacity: 0;
 }
 
-.popup-backdrop-enter-active, .popup-backdrop-leave-active {
-    transition: .1s ease-in-out;
+.popup-backdrop-enter-active,
+.popup-backdrop-leave-active {
+  transition: 0.1s ease-in-out;
 }
 
-.popup-enter-from, .popup-leave-to {
-    transform: scale(0.9);
+.popup-enter-from,
+.popup-leave-to {
+  transform: scale(0.9);
 }
 
-.popup-enter-active, .popup-leave-active {
-    transition: .2s ease;
+.popup-enter-active,
+.popup-leave-active {
+  transition: 0.2s ease;
 }
 
 @media screen and (max-width: 900px) {
-    .popup-backdrop {
-        align-items: flex-end;
-    };
+  .popup-backdrop {
+    align-items: flex-end;
+  }
 }
 
 // MEDIA
@@ -197,8 +200,9 @@ footer {
 }
 
 @keyframes pulse {
-  0%, 100% {
-     border-bottom-color: var(--color-background-border);
+  0%,
+  100% {
+    border-bottom-color: var(--color-background-border);
   }
 
   50% {

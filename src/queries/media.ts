@@ -41,4 +41,4 @@ export const mediaQuery: string = `query ($userId: Int, $mediaId: Int, $page: In
       }
     }
   }
-  `
+  `;

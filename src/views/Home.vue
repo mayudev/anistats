@@ -8,7 +8,14 @@
       <div class="button-wrapper desktop">
         <Button icon="cog" @click="toggleSettings">Settings</Button>
       </div>
-      <input class="username" :class="{ usernameError: error.length > 0, pulse: loading }" placeholder="Enter username" type="text" v-model="username" @keyup.enter="send" />
+      <input
+        class="username"
+        :class="{ usernameError: error.length > 0, pulse: loading }"
+        placeholder="Enter username"
+        type="text"
+        v-model="username"
+        @keyup.enter="send"
+      />
       <div class="button-wrapper desktop">
         <Button @click="send" icon="chevron-right">Continue</Button>
       </div>
@@ -30,22 +37,26 @@
       <Panel @special="toggleSpecial($event)"></Panel>
     </footer>
     <transition name="popup-backdrop">
-      <Special v-if="showSpecial" :view="specialView" @hide="showSpecial = false"></Special>
+      <Special
+        v-if="showSpecial"
+        :view="specialView"
+        @hide="showSpecial = false"
+      ></Special>
     </transition>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent } from "vue";
 
-import Logo from '@/components/Home/Logo.vue';
-import Button from '@/components/Button.vue';
-import Settings from '@/components/Home/Settings.vue';
-import Panel from '@/components/Home/Panel.vue';
-import Special from '@/views/Special.vue';
+import Logo from "@/components/Home/Logo.vue";
+import Button from "@/components/Button.vue";
+import Settings from "@/components/Home/Settings.vue";
+import Panel from "@/components/Home/Panel.vue";
+import Special from "@/views/Special.vue";
 
-import store from '@/store/store';
-import { fetchUserData } from '@/store/api';
+import store from "@/store/store";
+import { fetchUserData } from "@/store/api";
 
 export default defineComponent({
   components: { Logo, Button, Settings, Panel, Special },
@@ -57,16 +68,16 @@ export default defineComponent({
       settings: false,
 
       showSpecial: false,
-      specialView: '',
+      specialView: "",
 
       username: "",
       error: "",
-      state: store.state
-    }
+      state: store.state,
+    };
   },
 
   mounted(): void {
-    if(this.$route.query.error == "1") {
+    if (this.$route.query.error == "1") {
       this.showError("Something went wrong. Please try again");
     }
   },
@@ -74,31 +85,32 @@ export default defineComponent({
   methods: {
     // Resolve username/link and redirect to next component for processing.
     send(): void {
-      if(this.username.length < 2) {
-        return this.showError("Hey, I said enter your username.")
+      if (this.username.length < 2) {
+        return this.showError("Hey, I said enter your username.");
       }
 
-      if(this.username.startsWith("https://anilist.co")) { // The user entered a profile link.
+      if (this.username.startsWith("https://anilist.co")) {
+        // The user entered a profile link.
         try {
           let url = new URL(this.username);
-          if(url.pathname.startsWith("/user/")) {
+          if (url.pathname.startsWith("/user/")) {
             // If the link was correct, it should return the username. If it wasn't, the next component should return an error.
             let username = url.pathname.split("/")[2];
             this.process(username);
           } else {
-            throw 'Invalid URL';
+            throw "Invalid URL";
           }
-        }
-        catch (e: any)
-        {
+        } catch (e: any) {
           this.showError(e);
         }
-      } else { // The user entered something different (preferably the username)
+      } else {
+        // The user entered something different (preferably the username)
         // Saving user settings to localStorage (if user chose to)
-        if(this.state.saveSettings) {
+        if (this.state.saveSettings) {
           localStorage.setItem("updateHour", String(this.state.updateHour));
           localStorage.setItem("mediaType", this.state.mediaType);
-        } else { // clear settings in case they were saved but user opted out of it
+        } else {
+          // clear settings in case they were saved but user opted out of it
           localStorage.removeItem("updateHour");
           localStorage.removeItem("mediaType");
         }
@@ -110,18 +122,21 @@ export default defineComponent({
 
     process(username: string): void {
       // Checking if the user data is already loaded. If it is, it means that the user is revisitng the page so there's no need to fetch anything again
-      if(this.state.userData.username == username && this.state.activities.length > 0) {
-        this.$router.push('/'+username);
+      if (
+        this.state.userData.username == username &&
+        this.state.activities.length > 0
+      ) {
+        this.$router.push("/" + username);
       } else {
         fetchUserData(username)
-        .then(resp => {
-          store.destroy();
-          store.setUserdata(resp);
-          this.$router.push('/'+username);
-        })
-        .catch(() => {
-          this.showError("Invalid username (or profile is private)");
-        })
+          .then((resp) => {
+            store.destroy();
+            store.setUserdata(resp);
+            this.$router.push("/" + username);
+          })
+          .catch(() => {
+            this.showError("Invalid username (or profile is private)");
+          });
       }
     },
 
@@ -140,17 +155,15 @@ export default defineComponent({
     toggleSpecial(name: string): void {
       this.specialView = name;
       this.showSpecial = true;
-    }
-  }
-
-})
+    },
+  },
+});
 </script>
 
 <style lang="scss" scoped>
 .input {
   display: flex;
   margin: 10px 0;
-
 }
 .username {
   padding: 10px;
@@ -160,7 +173,7 @@ export default defineComponent({
 
   border-bottom: 3px solid var(--color-background-border);
 
-  transition: border-bottom .5s;
+  transition: border-bottom 0.5s;
 
   &::placeholder {
     color: var(--color-text-secondary);
@@ -175,15 +188,15 @@ export default defineComponent({
   justify-content: space-around;
   display: flex;
 }
- 
+
 .button-wrapper {
   flex-grow: 1;
   border-radius: var(--radius);
   color: var(--color-text-secondary);
   padding: 6px;
 
-  transition: background .2s;
-  
+  transition: background 0.2s;
+
   &:hover {
     background: var(--color-selected-background);
     color: var(--color-selected-text);
@@ -210,11 +223,13 @@ export default defineComponent({
   }
 }
 // TRANSITIONS
-.errorfade-enter-active, .errorfade-leave-active {
+.errorfade-enter-active,
+.errorfade-leave-active {
   transition: opacity 0.5s ease;
 }
 
-.errorfade-enter-from, .errorfade-leave-to {
+.errorfade-enter-from,
+.errorfade-leave-to {
   opacity: 0;
 }
 
@@ -222,11 +237,13 @@ export default defineComponent({
   animation: pulse 2s linear infinite;
 }
 
-.settings-enter-active, .settings-leave-active {
-  transition: all .2s ease-out;
+.settings-enter-active,
+.settings-leave-active {
+  transition: all 0.2s ease-out;
 }
 
-.settings-enter-from, .settings-leave-to {
+.settings-enter-from,
+.settings-leave-to {
   transform: translateY(-10px);
   opacity: 0;
 }

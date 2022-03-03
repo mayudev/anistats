@@ -29,4 +29,4 @@ export const activityQuery: string = `query ($userId: Int, $page: Int, $perPage:
         }
       }
     }
-  }`
+  }`;
