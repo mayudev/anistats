@@ -18,12 +18,14 @@ export default defineComponent({
     // Load saved settings to state
     const updateHour = localStorage.getItem("updateHour");
     const mediaType = localStorage.getItem("mediaType");
+    const dateFormat = localStorage.getItem("dateFormat");
 
-    if (updateHour && mediaType) {
+    if (updateHour && mediaType && dateFormat) {
       store.saveSettings(true);
       store.setSettings({
         updateHour: Number(updateHour),
         mediaType,
+        dateFormat,
       });
     }
 

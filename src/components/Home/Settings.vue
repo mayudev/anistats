@@ -17,8 +17,8 @@
     </div>
 
     <Switch name="save" :model-value="save" @update:model-value="toggleSave"
-      >Save those settings for later</Switch
-    >
+      >Save those settings for later
+    </Switch>
   </div>
 </template>
 
@@ -47,6 +47,11 @@ export default defineComponent({
           desc: "You may choose to count late night as previous day.",
           options: ["12am", "1am", "2am", "3am", "4am", "6am"],
         },
+        {
+          name: "Date format",
+          desc: "Default uses your system default. Universal looks like: 2022-03-03",
+          options: ["default", "universal"],
+        },
       ] as any[],
     };
   },
@@ -55,6 +60,7 @@ export default defineComponent({
     this.settings[0].default = this.state.mediaType;
     this.settings[1].default =
       this.state.updateHour == 0 ? "12am" : this.state.updateHour + "am";
+    this.settings[2].default = this.state.dateFormat;
 
     this.save = this.state.saveSettings;
   },
@@ -67,6 +73,8 @@ export default defineComponent({
       } else if (i == 1) {
         if (e == "12am") store.setSettings({ updateHour: 0 });
         else store.setSettings({ updateHour: Number(e.slice(0, -2)) });
+      } else if (i == 2) {
+        store.setSettings({ dateFormat: val });
       }
     },
 

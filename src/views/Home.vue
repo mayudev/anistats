@@ -109,10 +109,12 @@ export default defineComponent({
         if (this.state.saveSettings) {
           localStorage.setItem("updateHour", String(this.state.updateHour));
           localStorage.setItem("mediaType", this.state.mediaType);
+          localStorage.setItem("dateFormat", this.state.dateFormat);
         } else {
           // clear settings in case they were saved but user opted out of it
           localStorage.removeItem("updateHour");
           localStorage.removeItem("mediaType");
+          localStorage.removeItem("dateFormat");
         }
 
         this.loading = true;
