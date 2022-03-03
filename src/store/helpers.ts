@@ -1,30 +1,5 @@
 import { ActivityDate } from "@/interfaces/activity";
-import { weekdays } from "./store";
-
-const formatObj = new Intl.DateTimeFormat().formatToParts(new Date());
-
-const dateFormat = formatObj
-  .map((obj) => {
-    switch (obj.type) {
-      case "day":
-        return "DD";
-      case "month":
-        return "MM";
-      case "year":
-        return "YYYY";
-      default:
-        return obj.value;
-    }
-  })
-  .join("");
-
-export function prettyDate(date: ActivityDate): string {
-  if (date.time == 0) return "Unknown";
-  return dateFormat
-    .replace("DD", String(date.d))
-    .replace("MM", date.m >= 10 ? String(date.m) : "0" + String(date.m))
-    .replace("YYYY", String(date.y));
-}
+import store, { weekdays } from "./store";
 
 export function newActivityDate(timestamp: number): ActivityDate {
   const dateObject = new Date(timestamp);
@@ -51,7 +26,7 @@ export function findAddedDate(raws: any): string {
       weekday: weekdays[timestamp.getDay()],
       time: timestamp.getTime(),
     };
-    return plan ? prettyDate(activityDateObject) : "Unknown";
+    return plan ? store.prettyDate(activityDateObject) : "Unknown";
   }
 }
 
