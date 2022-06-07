@@ -3,7 +3,9 @@
   --c-white: #ffffff;
   --c-black: #272c38;
 
-  --c-blue: #34bbff;
+  --c-blue: #02a9ff;
+  --c-blue-2: #34bbff;
+
   --c-red: #b33737;
 
   --c-text-light-1: var(--vt-c-indigo);
