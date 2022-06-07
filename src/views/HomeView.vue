@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useCounterStore } from '../stores/counter'
-
-const hey = ref(0)
-const state = useCounterStore()
-
-function increment() {
-  hey.value++
-}
+import { RouterLink } from 'vue-router'
+import AppLogo from '../components/layout/AppLogo.vue'
+import SmallBadge from '../components/layout/SmallBadge.vue'
 </script>
 
 <template>
-  <main>
-    <p>{{ hey }} {{ state.counter }}</p>
-    <button @click="increment">increment</button>
-    <button @click="state.increment">increment state</button>
+  <main class="main">
+    <SmallBadge error>beta</SmallBadge>
+    <div>
+      <RouterLink to="/">
+        <AppLogo styled />
+      </RouterLink>
+    </div>
+    <span>home page</span>
   </main>
 </template>
+
+<style lang="scss" scoped></style>
