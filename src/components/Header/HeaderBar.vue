@@ -24,11 +24,13 @@ const switchTheme = () => {
       icon="circle-half-stroke"
       alt="Toggle theme"
     />
+    <HeaderIcon icon="circle-question" alt="Help"></HeaderIcon>
   </nav>
 </template>
 
 <style lang="scss" scoped>
 nav {
   display: flex;
+  align-items: center;
 }
 </style>

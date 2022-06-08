@@ -9,7 +9,7 @@ const props = defineProps<{
 
 <template>
   <button :title="alt" :aria-label="alt" class="icon-button">
-    <FontAwesomeIcon :width="16" :icon="props.icon"></FontAwesomeIcon>
+    <FontAwesomeIcon :width="18" :icon="props.icon"></FontAwesomeIcon>
   </button>
 </template>
 
@@ -21,8 +21,8 @@ const props = defineProps<{
   align-items: center;
   justify-content: center;
 
-  margin: 0 0.5rem;
   padding: 0.5rem;
+  margin-left: 0.5rem;
   border-radius: 50%;
 
   cursor: pointer;
