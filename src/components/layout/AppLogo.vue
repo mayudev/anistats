@@ -17,7 +17,7 @@ const props = defineProps<{
   user-select: none;
 }
 .accent {
-  color: var(--color-accent);
+  color: var(--color-logo);
 }
 
 .regular {

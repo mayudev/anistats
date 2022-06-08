@@ -3,8 +3,8 @@
   --c-white: #ffffff;
   --c-black: #272c38;
 
-  --c-blue: #02a9ff;
-  --c-blue-2: #34bbff;
+  --c-blue: #34bbff;
+  --c-blue-2: #3391c0;
 
   --c-red: #b33737;
 
@@ -21,6 +21,7 @@
   --color-text: var(--c-text-light-1);
   --color-accent: var(--c-blue);
   --color-error: var(--c-red);
+  --color-logo: var(--c-blue-2);
 }
 
 @media (prefers-color-scheme: dark) {
