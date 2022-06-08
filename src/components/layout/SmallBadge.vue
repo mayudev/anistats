@@ -18,10 +18,11 @@ const props = defineProps<{
   padding: 2px 8px;
   border-radius: 24px;
 
-  transition: color 200ms, background 200ms;
+  transition: color 0.2s, background 0.2s;
 }
 
 .error {
   background: var(--color-error);
+  color: var(--c-white);
 }
 </style>

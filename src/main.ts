@@ -5,7 +5,7 @@ import App from './App.vue'
 import router from './router'
 
 import '@fontsource/jost/variable.css'
-import { FontAwesomeIcon } from './util/library'
+import { FontAwesomeIcon } from './lib/library'
 
 const app = createApp(App)
 

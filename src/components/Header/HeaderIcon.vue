@@ -24,5 +24,13 @@ const props = defineProps<{
   margin: 0 0.5rem;
   padding: 0.5rem;
   border-radius: 50%;
+
+  cursor: pointer;
+  transition: background var(--theme-transition) ease-out, color 0.2s ease-out;
+
+  &:hover {
+    background: var(--color-background-secondary);
+    color: var(--color-accent);
+  }
 }
 </style>

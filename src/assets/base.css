@@ -1,41 +1,49 @@
 /* modified old AniList color palette */
 :root {
-  --c-white: #ffffff;
+  --c-white: #edf1f5;
+  --c-white-2: #edf1f5;
+
   --c-black: #272c38;
+  --c-black-2: #2d3340;
 
   --c-blue: #34bbff;
   --c-blue-2: #3391c0;
 
   --c-red: #b33737;
 
-  --c-text-light-1: var(--vt-c-indigo);
-  --c-text-light-2: rgba(60, 60, 60, 0.66);
+  --c-text-light-1: #222;
+  --c-text-light-2: #3c3c3ca8;
   --c-text-dark-1: #fff;
   --c-text-dark-2: #fff;
+
+  --theme-transition: 0.4s;
 }
 
-/* semantic color variables for this project */
+/* defaults (dark theme) */
 :root {
-  --color-background: var(--c-white);
+  --color-background: var(--c-black);
+  --color-background-secondary: var(--c-black-2);
 
-  --color-text: var(--c-text-light-1);
+  --color-text: var(--c-text-dark-2);
+
   --color-accent: var(--c-blue);
   --color-error: var(--c-red);
   --color-logo: var(--c-blue-2);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-background: var(--c-black);
+/* light theme overrides */
+body[data-theme='light'] {
+  --color-background: var(--c-white);
+  --color-background-secondary: var(--c-white-2);
 
-    --color-text: var(--c-text-dark-2);
-  }
+  --color-text: var(--c-text-light-1);
 }
 
 * {
   box-sizing: border-box;
 }
 
+/* general style */
 body {
   /* Colors */
   color: var(--color-text);
@@ -44,7 +52,8 @@ body {
   margin: 0;
 
   /* Smooth theme switching */
-  transition: color 0.5s, background-color 0.5s;
+  transition: color var(--theme-transition),
+    background-color var(--theme-transition);
 
   /* Font */
   line-height: 1.6;
@@ -59,7 +68,7 @@ a {
   color: var(--color-accent);
   text-decoration: none;
 
-  transition: opacity 200ms;
+  transition: opacity 200ms, color var(--theme-transition);
 }
 
 a:hover {

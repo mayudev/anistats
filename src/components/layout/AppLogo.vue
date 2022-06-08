@@ -22,5 +22,6 @@ const props = defineProps<{
 
 .regular {
   color: var(--color-text);
+  transition: color var(--theme-transition);
 }
 </style>
