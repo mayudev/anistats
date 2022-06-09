@@ -3,8 +3,9 @@
   --c-white: #edf1f5;
   --c-white-2: #edf1f5;
 
-  --c-black: #272c38;
-  --c-black-2: #2d3340;
+  --c-black: #22242b;
+  --c-black-2: #2d2f37;
+  --c-black-3: #353944;
 
   --c-blue: #34bbff;
   --c-blue-2: #3391c0;
@@ -23,6 +24,7 @@
 :root {
   --color-background: var(--c-black);
   --color-background-secondary: var(--c-black-2);
+  --color-background-border: var(--c-black-3);
 
   --color-text: var(--c-text-dark-2);
 
