@@ -4,6 +4,7 @@ import IconButton from '../buttons/IconButton.vue'
 
 defineProps<{
   isError?: boolean
+  isLoading?: boolean
 }>()
 
 const emit = defineEmits<{
@@ -17,9 +18,9 @@ const submit = () => {
   // Check username length
   if (username.value.length < 2) {
     emit('errored', 'Username too short')
+  } else {
+    emit('submit', username.value)
   }
-
-  emit('submit', username.value)
 }
 </script>
 
@@ -27,7 +28,7 @@ const submit = () => {
   <div class="container">
     <input
       class="username-input"
-      :class="{ error: isError }"
+      :class="{ error: isError, loading: isLoading }"
       placeholder="Enter username"
       type="text"
       v-model="username"
@@ -58,6 +59,18 @@ const submit = () => {
   text-align: center;
 }
 .error {
-  border-bottom: 3px solid var(--color-error);
+  border-color: var(--color-error);
+}
+.loading {
+  animation: loading 0.5s ease infinite alternate;
+}
+
+@keyframes loading {
+  from {
+    border-color: transparent;
+  }
+  to {
+    border-color: var(--color-accent);
+  }
 }
 </style>

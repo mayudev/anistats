@@ -22,11 +22,12 @@ const props = defineProps<{
   justify-content: center;
   flex-direction: column;
 
-  transition: background 0.2s, color 0.2s;
   padding: 0.25rem 3rem;
-  cursor: pointer;
-
   border-radius: 6px;
+
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  user-select: none;
 
   &:hover {
     background: var(--color-background-secondary);
