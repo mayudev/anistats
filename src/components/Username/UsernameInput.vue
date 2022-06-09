@@ -8,6 +8,7 @@ defineProps<{
 
 const emit = defineEmits<{
   (e: 'errored', value: string): void
+  (e: 'submit', value: string): void
 }>()
 
 const username = ref('')
@@ -17,6 +18,8 @@ const submit = () => {
   if (username.value.length < 2) {
     emit('errored', 'Username too short')
   }
+
+  emit('submit', username.value)
 }
 </script>
 
