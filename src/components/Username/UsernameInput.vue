@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import IconButton from '../buttons/IconButton.vue'
+import IconButton from '../layout/buttons/IconButton.vue'
 
 defineProps<{
   isError?: boolean
@@ -28,7 +28,8 @@ const submit = () => {
   <div class="container">
     <input
       class="username-input"
-      :class="{ error: isError, loading: isLoading }"
+      :class="{ error: isError }"
+      :disabled="isLoading"
       placeholder="Enter username"
       type="text"
       v-model="username"
@@ -52,7 +53,11 @@ const submit = () => {
   font-weight: 300;
 
   border-bottom: 3px solid var(--color-background-border);
-  transition: border-bottom 0.5s;
+  transition: border-bottom 0.5s, opacity 0.3s ease;
+
+  &:disabled {
+    opacity: 0.5;
+  }
 }
 .username-submit {
   all: unset;
@@ -60,17 +65,5 @@ const submit = () => {
 }
 .error {
   border-color: var(--color-error);
-}
-.loading {
-  animation: loading 0.5s ease infinite alternate;
-}
-
-@keyframes loading {
-  from {
-    border-color: transparent;
-  }
-  to {
-    border-color: var(--color-accent);
-  }
 }
 </style>

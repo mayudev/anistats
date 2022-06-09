@@ -1,13 +1,16 @@
 <script setup lang="ts">
 import HeaderBar from '../components/Header/HeaderBar.vue'
 import UsernameInput from '../components/Username/UsernameInput.vue'
+import LoadingSpinner from '../components/layout/LoadingSpinner.vue'
+import { useUserStore } from '../stores/user'
 import { RouterView } from 'vue-router'
 import { ref } from 'vue'
 
 const isError = ref(false)
 const isLoading = ref(false)
-
 const errorMessage = ref('')
+
+const user = useUserStore()
 
 /// showError shows an error and hides it after a timeout
 const showError = (message: string) => {
@@ -22,6 +25,9 @@ const showError = (message: string) => {
 
 /// submit is triggered when username/user profile URL is submitted
 const submit = (input: string) => {
+  // Do not continue if loading is in progress
+  if (isLoading.value) return
+
   // A profile URL was submitted
   if (input.startsWith('https://anilist.co')) {
     const url = new URL(input)
@@ -57,11 +63,23 @@ const process = (username: string) => {
       @errored="m => showError(m)"
       @submit="u => submit(u)"
     />
+
+    <div class="spinner">
+      <LoadingSpinner v-if="isLoading" primary :width="48" :border-width="4" />
+    </div>
   </main>
   <RouterView></RouterView>
 </template>
 
 <style lang="scss" scoped>
+.spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 1rem;
+}
+
 .error-enter-from,
 .error-leave-to {
   opacity: 0;

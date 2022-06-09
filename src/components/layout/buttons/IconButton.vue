@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import FontAwesomeIcon from '../FontAwesomeIcon.vue'
+import FontAwesomeIcon from '../../FontAwesomeIcon.vue'
 
 const props = defineProps<{
   icon: string
