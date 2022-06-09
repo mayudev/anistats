@@ -14,6 +14,7 @@ const user = useUserStore()
 
 /// showError shows an error and hides it after a timeout
 const showError = (message: string) => {
+  isLoading.value = false
   isError.value = true
   errorMessage.value = message
 
@@ -44,8 +45,22 @@ const submit = (input: string) => {
 }
 
 /// process initializes data fetching
-const process = (username: string) => {
+const process = async (username: string) => {
   isLoading.value = true
+
+  try {
+    await user.fetchUser(username)
+  } catch (error) {
+    const code = error as number
+
+    switch (code) {
+      case 404:
+        showError('User not found or is private')
+        break
+      default:
+        showError('Something went wrong')
+    }
+  }
 }
 </script>
 
