@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import HeaderBar from '../components/Header/HeaderBar.vue'
 import LoadingSpinner from '../components/layout/LoadingSpinner.vue'
+import UserHeader from '../components/User/UserHeader.vue'
 
 defineProps<{
   username: string
@@ -11,14 +12,15 @@ defineProps<{
   <div>
     <HeaderBar />
     <main class="user">
-      username: {{ username }} <LoadingSpinner :width="70" :border-width="10" />
+      <UserHeader :username="username" />
+      <LoadingSpinner :width="70" :border-width="10" />
     </main>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .user {
-  animation: appear 1s;
+  animation: appear 0.4s;
 }
 
 @keyframes appear {
