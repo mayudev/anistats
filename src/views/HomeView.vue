@@ -5,6 +5,7 @@ import LoadingSpinner from '../components/layout/LoadingSpinner.vue'
 import { useUserStore } from '../stores/user'
 import { RouterView } from 'vue-router'
 import { ref } from 'vue'
+import router from '../router'
 
 const isError = ref(false)
 const isLoading = ref(false)
@@ -50,6 +51,12 @@ const process = async (username: string) => {
 
   try {
     await user.fetchUser(username)
+
+    if (user.userData) {
+      router.push('/user/' + user.userData.name)
+    } else {
+      throw 600
+    }
   } catch (error) {
     const code = error as number
 
