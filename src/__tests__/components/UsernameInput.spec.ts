@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import UsernameInput from '../../Username/UsernameInput.vue'
+import UsernameInput from '../../components/Username/UsernameInput.vue'
 
 describe('UsernameInput', () => {
   it('renders properly and triggers an event on enter key', async () => {

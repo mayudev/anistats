@@ -86,8 +86,8 @@ const process = async (username: string) => {
       @submit="u => submit(u)"
     />
 
-    <div class="spinner">
-      <LoadingSpinner v-if="isLoading" primary :width="48" :border-width="4" />
+    <div class="spinner" v-if="isLoading">
+      <LoadingSpinner primary :width="48" :border-width="4" />
     </div>
   </main>
   <RouterView></RouterView>

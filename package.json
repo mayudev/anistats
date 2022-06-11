@@ -15,6 +15,7 @@
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/vue-fontawesome": "^3.0.0-5",
+    "msw": "^0.42.1",
     "pinia": "^2.0.14",
     "sass": "^1.52.2",
     "vue": "^3.2.36",
@@ -39,5 +40,8 @@
     "vite": "^2.9.9",
     "vitest": "^0.13.0",
     "vue-tsc": "^0.35.2"
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }
