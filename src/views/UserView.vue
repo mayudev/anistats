@@ -13,7 +13,7 @@ defineProps<{
     <HeaderBar />
     <main class="user">
       <UserHeader :username="username" />
-      <LoadingSpinner :width="70" :border-width="10" />
+      <LoadingSpinner :width="72" :border-width="8" />
     </main>
   </div>
 </template>
