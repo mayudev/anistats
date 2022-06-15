@@ -1,7 +1,7 @@
 import type { Response } from '../query/types'
 
 type Variables = {
-  [k: string]: string
+  [k: string]: string | number
 }
 
 const API_URL = 'https://graphql.anilist.co'

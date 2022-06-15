@@ -7,3 +7,11 @@ export interface Response<T, K extends string> {
     [key in K]: T
   }
 }
+
+export interface PageInfo {
+  total: number
+  currentPage: number
+  lastPage: number
+  hasNextPage: boolean
+  perPage: number
+}

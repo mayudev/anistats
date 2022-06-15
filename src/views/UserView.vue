@@ -1,19 +1,39 @@
 <script lang="ts" setup>
+import { onMounted, ref } from 'vue'
 import HeaderBar from '../components/Header/HeaderBar.vue'
 import LoadingSpinner from '../components/layout/LoadingSpinner.vue'
 import UserHeader from '../components/User/UserHeader.vue'
+import { useUserStore } from '../stores/user'
 
-defineProps<{
+const isLoading = ref(true)
+
+const user = useUserStore()
+
+const props = defineProps<{
   username: string
 }>()
+
+onMounted(async () => {
+  try {
+    if (user.userData?.name !== props.username) {
+      await user.fetchUser(props.username)
+    }
+
+    isLoading.value = false
+    user.fetchActivities(1)
+  } catch (e) {
+    // TODO proper error handling
+    alert('something went wrong')
+  }
+})
 </script>
 
 <template>
   <div>
     <HeaderBar />
     <main class="user">
-      <UserHeader :username="username" />
-      <LoadingSpinner :width="72" :border-width="8" />
+      <UserHeader />
+      <LoadingSpinner v-if="isLoading" :width="72" :border-width="8" />
     </main>
   </div>
 </template>

@@ -1,4 +1,5 @@
 import { graphql } from 'msw'
+import { mockActivities } from './activities'
 
 export const handlers = [
   graphql.query('UserData', (req, res, ctx) => {
@@ -15,5 +16,9 @@ export const handlers = [
         },
       })
     )
+  }),
+
+  graphql.query('UserActivities', (req, res, ctx) => {
+    return res(ctx.data(mockActivities))
   }),
 ]
