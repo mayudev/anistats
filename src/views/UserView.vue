@@ -16,11 +16,15 @@ const props = defineProps<{
 onMounted(async () => {
   try {
     if (user.userData?.name !== props.username) {
+      await user.$reset()
       await user.fetchUser(props.username)
     }
 
+    if (user.activities.length === 0) {
+      await user.fetchActivities()
+    }
+
     isLoading.value = false
-    user.fetchActivities(1)
   } catch (e) {
     // TODO proper error handling
     alert('something went wrong')

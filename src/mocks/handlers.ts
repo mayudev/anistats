@@ -19,6 +19,7 @@ export const handlers = [
   }),
 
   graphql.query('UserActivities', (req, res, ctx) => {
-    return res(ctx.data(mockActivities))
+    const { page } = req.variables
+    return res(ctx.data(mockActivities(page)))
   }),
 ]

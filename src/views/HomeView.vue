@@ -50,7 +50,10 @@ const process = async (username: string) => {
   isLoading.value = true
 
   try {
-    await user.fetchUser(username)
+    if (user.userData?.name !== username) {
+      await user.$reset()
+      await user.fetchUser(username)
+    }
 
     if (user.userData) {
       router.push('/user/' + user.userData.name)
