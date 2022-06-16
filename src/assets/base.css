@@ -14,9 +14,11 @@
   --c-red: #b33737;
 
   --c-pink: #fc9dd6;
+  --c-pink-2: #ce6ea9;
   --c-pink-bg: #fc9dd620;
 
   --c-orange: #e38f35;
+  --c-orange-2: #a46c31;
   --c-orange-bg: #e38f3520;
 
   --c-text-light-1: #222;
@@ -38,6 +40,10 @@
   --color-accent: var(--c-blue);
   --color-error: var(--c-red);
   --color-logo: var(--c-blue-2);
+
+  --color-blue: var(--c-blue);
+  --color-orange: var(--c-orange);
+  --color-pink: var(--c-pink);
 }
 
 /* light theme overrides */
@@ -47,6 +53,10 @@ body[data-theme='light'] {
 
   --color-text: var(--c-text-light-1);
   --color-accent: var(--c-blue-2);
+
+  --color-blue: var(--c-blue-2);
+  --color-orange: var(--c-orange-2);
+  --color-pink: var(--c-pink-2);
 }
 
 * {

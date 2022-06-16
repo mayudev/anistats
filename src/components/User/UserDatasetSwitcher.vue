@@ -51,17 +51,17 @@ button:focus {
 }
 
 .both {
-  color: var(--c-pink);
+  color: var(--color-pink);
   background: var(--c-pink-bg);
 }
 
 .anime {
-  color: var(--c-blue);
+  color: var(--color-blue);
   background: var(--c-blue-bg);
 }
 
 .manga {
-  color: var(--c-orange);
+  color: var(--color-orange);
   background: var(--c-orange-bg);
 }
 </style>
