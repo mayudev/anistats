@@ -1,7 +1,8 @@
 import { defineStore } from 'pinia'
 import { fetchActivities } from './api/activities'
 import { apiRequest } from './api/api'
-import { parseActivities } from './helpers/activities'
+import { parseActivities, parseActivitiesForOneDay } from './helpers/activities'
+import { flattenMedia } from './helpers/flat'
 import type { UserActivity } from './query/UserActivities'
 import { userDataQuery, type UserData } from './query/UserData'
 
@@ -27,6 +28,21 @@ export const useUserStore = defineStore('user', {
   getters: {
     days: state => {
       const days = parseActivities(state.activities)
+
+      const keys = Array.from(days.keys())
+      const lastDayKey = keys[keys.length - 1]
+
+      const lookahead = parseActivitiesForOneDay(
+        state.cachedActivities,
+        lastDayKey
+      )
+
+      if (lookahead.media.length > 0) {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        const lastDay = days.get(lastDayKey)!
+        lastDay.totalEpisodes += lookahead.totalEpisodes
+        lastDay.media = flattenMedia(lastDay.media.concat(lookahead.media))
+      }
 
       return days
     },
