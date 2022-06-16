@@ -1,17 +1,18 @@
 <script lang="ts" setup>
 import { useUserStore } from '../../stores/user'
-import UserHeaderIcon from './UserHeaderIcon.vue'
+import UserTabSwitcher from './UserTabSwitcher.vue'
+import UserDatasetSwitcher from './UserDatasetSwitcher.vue'
 
 const user = useUserStore()
 </script>
 
 <template>
   <nav class="header">
-    <RouterLink to="/" class="link">
-      <UserHeaderIcon icon="angle-left" alt="Back" />
-    </RouterLink>
     <img class="header-image" :src="user.userData?.avatar.medium" />
-    <span>{{ user.userData?.name }}</span>
+    <span class="header-username">{{ user.userData?.name }}</span>
+    <UserTabSwitcher />
+    <span style="flex: 1" />
+    <UserDatasetSwitcher />
   </nav>
 </template>
 
@@ -20,13 +21,13 @@ const user = useUserStore()
   display: flex;
   align-items: center;
 
-  background: var(--color-background-secondary);
   border-radius: 6px;
 
-  font-weight: 500;
-  font-size: 1.2rem;
-
   padding: 0.8rem;
+}
+
+.header-username {
+  font-size: 1.2rem;
 }
 
 .header-image {

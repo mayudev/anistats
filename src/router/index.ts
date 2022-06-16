@@ -2,6 +2,8 @@ import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 import HelpView from '../views/HelpView.vue'
 import HomeView from '../views/HomeView.vue'
 import UserView from '../views/UserView.vue'
+import OverviewTab from '../views/User/OverviewTab.vue'
+import ListTab from '../views/User/ListTab.vue'
 
 export const routes: RouteRecordRaw[] = [
   {
@@ -19,6 +21,18 @@ export const routes: RouteRecordRaw[] = [
     name: 'user',
     component: UserView,
     props: true,
+    children: [
+      {
+        path: '',
+        name: 'overview',
+        component: OverviewTab,
+      },
+      {
+        path: 'list',
+        name: 'list',
+        component: ListTab,
+      },
+    ],
   },
 ]
 

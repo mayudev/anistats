@@ -4,8 +4,11 @@ import { apiRequest } from './api/api'
 import type { UserActivity } from './query/UserActivities'
 import { userDataQuery, type UserData } from './query/UserData'
 
+type Dataset = 'both' | 'anime' | 'manga'
+
 interface Store {
   userData: UserData | null
+  dataset: Dataset
   currentPage: number
   activities: UserActivity[]
   cachedActivities: UserActivity[]
@@ -14,11 +17,16 @@ interface Store {
 export const useUserStore = defineStore('user', {
   state: (): Store => ({
     userData: null,
+    dataset: 'both',
+
     currentPage: 1,
     activities: [],
     cachedActivities: [],
   }),
   actions: {
+    switchDataset(dataset: Dataset) {
+      this.dataset = dataset
+    },
     async fetchUser(username: string) {
       const resp = await apiRequest<UserData, 'User'>(userDataQuery, {
         username,

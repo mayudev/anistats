@@ -1,7 +1,7 @@
 /* modified old AniList color palette */
 :root {
   --c-white: #edf1f5;
-  --c-white-2: #edf1f5;
+  --c-white-2: #e5ebf1;
 
   --c-black: #22242b;
   --c-black-2: #2d2f37;
@@ -9,8 +9,15 @@
 
   --c-blue: #34bbff;
   --c-blue-2: #3391c0;
+  --c-blue-bg: #34bbff20;
 
   --c-red: #b33737;
+
+  --c-pink: #fc9dd6;
+  --c-pink-bg: #fc9dd620;
+
+  --c-orange: #e38f35;
+  --c-orange-bg: #e38f3520;
 
   --c-text-light-1: #222;
   --c-text-light-2: #3c3c3ca8;
@@ -39,6 +46,7 @@ body[data-theme='light'] {
   --color-background-secondary: var(--c-white-2);
 
   --color-text: var(--c-text-light-1);
+  --color-accent: var(--c-blue-2);
 }
 
 * {
