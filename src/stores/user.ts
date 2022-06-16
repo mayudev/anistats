@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { fetchActivities } from './api/activities'
 import { apiRequest } from './api/api'
+import { parseActivities } from './helpers/activities'
 import type { UserActivity } from './query/UserActivities'
 import { userDataQuery, type UserData } from './query/UserData'
 
@@ -23,6 +24,13 @@ export const useUserStore = defineStore('user', {
     activities: [],
     cachedActivities: [],
   }),
+  getters: {
+    days: state => {
+      const days = parseActivities(state.activities)
+
+      return days
+    },
+  },
   actions: {
     switchDataset(dataset: Dataset) {
       this.dataset = dataset

@@ -3,7 +3,6 @@ import { onMounted, ref } from 'vue'
 import HeaderBar from '../components/Header/HeaderBar.vue'
 import LoadingSpinner from '../components/layout/LoadingSpinner.vue'
 import UserHeader from '../components/User/UserHeader.vue'
-import UserTabSwitcher from '../components/User/UserTabSwitcher.vue'
 import { useUserStore } from '../stores/user'
 undefined
 
@@ -40,7 +39,7 @@ onMounted(async () => {
     <main class="user">
       <UserHeader />
       <LoadingSpinner v-if="isLoading" :width="72" :border-width="8" />
-      <RouterView></RouterView>
+      <RouterView v-else></RouterView>
     </main>
   </div>
 </template>
