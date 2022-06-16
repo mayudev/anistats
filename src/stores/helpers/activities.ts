@@ -17,6 +17,8 @@ export function parseActivities(activities: UserActivity[]): Map<number, Day> {
   for (const activity of activities) {
     const { dayTimestamp, progress, mediaDiff } = parseActivity(activity)
 
+    if (!progress.diff) continue
+
     // Check if days Map already has key for the day
     if (days.has(dayTimestamp)) {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -99,6 +101,8 @@ export function parseActivitiesForOneDay(
     const { dayTimestamp, progress, mediaDiff } = parseActivity(activity)
 
     if (dayTimestamp !== activityDay) return day
+
+    if (!progress.diff) continue
 
     day.totalEpisodes += progress.diff || 0
     day.media.push(mediaDiff)

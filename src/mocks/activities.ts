@@ -1,4 +1,6 @@
-const pages = [
+import type { UserActivity } from '../stores/query/UserActivities'
+
+const pages: UserActivity[][] = [
   [
     {
       __typename: 'ListActivity',
