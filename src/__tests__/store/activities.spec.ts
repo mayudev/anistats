@@ -100,6 +100,66 @@ const dataset: UserActivity[] = [
   },
 ]
 
+const mangaDataset: UserActivity[] = [
+  {
+    __typename: 'ListActivity',
+    id: 23321213,
+    media: {
+      id: 5597,
+      type: 'ANIME',
+      title: {
+        romaji: 'Natsu no Arashi!',
+      },
+      coverImage: {
+        medium:
+          'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/5597.jpg',
+      },
+    },
+    type: 'ANIME_LIST',
+    createdAt: 1653345664,
+    status: 'watched episode',
+    progress: '1 - 4',
+  },
+  {
+    __typename: 'ListActivity',
+    id: 123,
+    media: {
+      id: 111233,
+      type: 'MANGA',
+      title: {
+        romaji: 'Yofukashi no Uta',
+      },
+      coverImage: {
+        medium:
+          'https://s4.anilist.co/file/anilistcdn/media/manga/cover/small/bx111233-QU3BW8uqCvcN.jpg',
+      },
+    },
+    type: 'MANGA_LIST',
+    createdAt: 1653345664,
+    status: 'read chapter',
+    progress: '1 - 2',
+  },
+  {
+    __typename: 'ListActivity',
+    id: 123456,
+    media: {
+      id: 111233,
+      type: 'MANGA',
+      title: {
+        romaji: 'Yofukashi no Uta',
+      },
+      coverImage: {
+        medium:
+          'https://s4.anilist.co/file/anilistcdn/media/manga/cover/small/bx111233-QU3BW8uqCvcN.jpg',
+      },
+    },
+    type: 'MANGA_LIST',
+    createdAt: 1643345664,
+    status: 'read chapter',
+    progress: '5 - 6',
+  },
+]
+
 describe('parseActivities', () => {
   it('parses activities correctly', () => {
     const parsed = parseActivities(dataset)
@@ -119,5 +179,17 @@ describe('parseActivities', () => {
     expect(day2.media[0].progress).toBe(3)
     expect(day2.media[0].title.romaji).toBe('Toradora!')
     expect(day2.media[1].progress).toBe(4)
+  })
+
+  it('counts episodes and chapters separately', () => {
+    const parsed = parseActivities(mangaDataset)
+
+    const keys = Array.from(parsed.keys())
+
+    const day1 = parsed.get(keys[0])!
+    const day2 = parsed.get(keys[1])!
+
+    expect(day1.totalEpisodes).toBe(4)
+    expect(day1.totalChapters).toBe(2)
   })
 })

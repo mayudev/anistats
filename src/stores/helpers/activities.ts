@@ -25,7 +25,11 @@ export function parseActivities(activities: UserActivity[]): Map<number, Day> {
       const day = days.get(dayTimestamp)!
 
       // Append new episode count
-      day.totalEpisodes += progress.diff || 0
+      if (activity.type === 'ANIME_LIST') {
+        day.totalEpisodes += progress.diff || 0
+      } else {
+        day.totalChapters += progress.diff || 0
+      }
       // TODO handle manga chapters
 
       // Check if a media entry already exists in the day
@@ -42,8 +46,8 @@ export function parseActivities(activities: UserActivity[]): Map<number, Day> {
       }
     } else {
       days.set(dayTimestamp, {
-        totalEpisodes: progress.diff || 0,
-        totalChapters: 0,
+        totalEpisodes: activity.type === 'ANIME_LIST' ? progress.diff || 0 : 0,
+        totalChapters: activity.type === 'MANGA_LIST' ? progress.diff || 0 : 0,
         media: [mediaDiff],
       })
     }
@@ -104,7 +108,12 @@ export function parseActivitiesForOneDay(
 
     if (!progress.diff) continue
 
-    day.totalEpisodes += progress.diff || 0
+    if (activity.type === 'ANIME_LIST') {
+      day.totalEpisodes += progress.diff || 0
+    } else {
+      day.totalChapters += progress.diff || 0
+    }
+
     day.media.push(mediaDiff)
     // TODO handle media already present
   }
