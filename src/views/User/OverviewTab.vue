@@ -1,20 +1,24 @@
 <script setup lang="ts">
 import { useUserStore } from '../../stores/user'
+import ActivityTimeline from '@/components/Overview/ActivityTimeline.vue'
 
 const user = useUserStore()
 </script>
 
 <template>
   <p>overview tab</p>
-  <div>
-    <div v-for="activity in user.days" :key="activity[0]">
-      {{ activity[1].totalEpisodes }} - {{ new Date(activity[0]) }}
-      <div v-for="media in activity[1].media" :key="media.id">
-        {{ media.title }} - {{ media.progress }}
-      </div>
+  <main>
+    <div>left</div>
+    <div>
+      <ActivityTimeline :days="user.days" />
     </div>
-  </div>
+  </main>
   <button @click="() => user.fetchActivities()">fetch</button>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+main {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+</style>

@@ -24,7 +24,7 @@
   --c-text-light-1: #222;
   --c-text-light-2: #3c3c3ca8;
   --c-text-dark-1: #fff;
-  --c-text-dark-2: #fff;
+  --c-text-dark-2: #cbd3e3;
 
   --theme-transition: 0.4s;
 }
@@ -35,7 +35,8 @@
   --color-background-secondary: var(--c-black-2);
   --color-background-border: var(--c-black-3);
 
-  --color-text: var(--c-text-dark-2);
+  --color-text: var(--c-text-dark-1);
+  --color-text-secondary: var(--c-text-dark-2);
 
   --color-accent: var(--c-blue);
   --color-error: var(--c-red);
@@ -52,6 +53,8 @@ body[data-theme='light'] {
   --color-background-secondary: var(--c-white-2);
 
   --color-text: var(--c-text-light-1);
+  --color-text-secondary: var(--c-text-light-2);
+
   --color-accent: var(--c-blue-2);
 
   --color-blue: var(--c-blue-2);
