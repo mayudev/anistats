@@ -8,6 +8,7 @@ import {
   faCircleHalfStroke,
   faCircleQuestion,
   faCode,
+  faTriangleExclamation,
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -16,7 +17,8 @@ library.add(
   faCircleQuestion,
   faAngleRight,
   faAngleLeft,
-  faArrowsDownToLine
+  faArrowsDownToLine,
+  faTriangleExclamation
 )
 
 export { FontAwesomeIcon }
