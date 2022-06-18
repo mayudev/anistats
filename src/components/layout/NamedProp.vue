@@ -17,8 +17,8 @@ defineProps<{
   display: flex;
   align-items: center;
 
-  &:nth-child(odd) {
-    margin-right: 1rem;
+  &:nth-child(even) {
+    margin-left: 1rem;
   }
 }
 

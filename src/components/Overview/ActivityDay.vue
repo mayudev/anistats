@@ -3,6 +3,7 @@ import type { Day } from '../../stores/helpers/activities'
 import ActivityMedia from '@/components/Overview/ActivityMedia.vue'
 import { weekdays, displayDate } from '@/lib/days'
 import NamedProp from '../layout/NamedProp.vue'
+import { useUserStore } from '../../stores/user'
 
 const props = defineProps<{
   timestamp: number
@@ -10,6 +11,7 @@ const props = defineProps<{
 }>()
 
 const date = new Date(props.timestamp)
+const user = useUserStore()
 </script>
 
 <template>
@@ -20,8 +22,16 @@ const date = new Date(props.timestamp)
         <div class="date">{{ displayDate(date) }}</div>
       </div>
       <span style="flex: 1" />
-      <NamedProp name="chapters" :value="day.totalChapters" />
-      <NamedProp name="episodes" :value="day.totalEpisodes" />
+      <NamedProp
+        v-if="user.dataset !== 'anime'"
+        name="chapters"
+        :value="day.totalChapters"
+      />
+      <NamedProp
+        v-if="user.dataset !== 'manga'"
+        name="episodes"
+        :value="day.totalEpisodes"
+      />
     </div>
     <ActivityMedia v-for="media in day.media" :key="media.id" :media="media" />
   </div>
