@@ -2,6 +2,7 @@
 import type { Day } from '../../stores/helpers/activities'
 import ActivityMedia from '@/components/Overview/ActivityMedia.vue'
 import { weekdays, displayDate } from '@/lib/days'
+import NamedProp from '../layout/NamedProp.vue'
 
 const props = defineProps<{
   timestamp: number
@@ -19,14 +20,8 @@ const date = new Date(props.timestamp)
         <div class="date">{{ displayDate(date) }}</div>
       </div>
       <span style="flex: 1" />
-      <div class="header-prop">
-        <div class="prop-value">{{ day.totalChapters }}</div>
-        <div class="prop-name">chapters</div>
-      </div>
-      <div class="header-prop">
-        <div class="prop-value">{{ day.totalEpisodes }}</div>
-        <div class="prop-name">episodes</div>
-      </div>
+      <NamedProp name="chapters" :value="day.totalChapters" />
+      <NamedProp name="episodes" :value="day.totalEpisodes" />
     </div>
     <ActivityMedia v-for="media in day.media" :key="media.id" :media="media" />
   </div>
