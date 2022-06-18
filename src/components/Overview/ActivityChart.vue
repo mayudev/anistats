@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
+import { computed, onMounted, onUnmounted, reactive, ref, watch } from 'vue'
 import type { Day } from '../../stores/helpers/activities'
 import * as d3 from 'd3'
 import { displayDate, weekdays } from '../../lib/days'
@@ -10,6 +10,7 @@ const props = defineProps<{
   name: string
 }>()
 const chart = ref<HTMLDivElement | null>(null)
+const container = ref<HTMLDivElement | null>(null)
 
 const dates = computed(() => {
   return Array.from(props.days.keys()).map(x => new Date(x))
@@ -105,11 +106,42 @@ const cleanup = () => {
     chart.value.removeChild(chart.value.lastChild)
   }
 }
+
+const state = reactive({
+  dragging: false,
+  startX: 0,
+  scrollLeft: 0,
+})
+
+const mouseDown = (e: MouseEvent) => {
+  state.dragging = true
+  state.startX = e.pageX - (container.value?.offsetLeft || 0)
+  state.scrollLeft = container.value?.scrollLeft || 0
+}
+
+const mouseUp = () => {
+  state.dragging = false
+}
+
+const mouseMove = (e: MouseEvent) => {
+  if (!state.dragging) return
+
+  const x = e.pageX - (container.value?.offsetLeft || 0)
+  const walk = (x - state.startX) * 1.5
+  if (container.value) container.value.scrollLeft = state.scrollLeft - walk
+}
 </script>
 
 <template>
-  <div class="chart">
-    <div :id="`area-${name}`" ref="chart"></div>
+  <div class="chart" ref="container">
+    <div
+      :id="`area-${name}`"
+      ref="chart"
+      @mousedown="mouseDown"
+      @mouseup="mouseUp"
+      @mousemove="mouseMove"
+      @mouseleave="mouseUp"
+    ></div>
     <div class="axis">
       <div class="label" v-for="(timestamp, i) in dates" :key="i">
         <span class="label-top">{{ displayDate(timestamp) }}</span>
