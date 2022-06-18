@@ -8,6 +8,7 @@ interface Title {
 
 interface Image {
   medium?: string
+  large?: string
 }
 
 export interface Media {
@@ -18,7 +19,7 @@ export interface Media {
 }
 
 export interface MediaFull extends Media {
-  bannerImage?: string
+  bannerImage: string | null
   episodes?: number
 }
 

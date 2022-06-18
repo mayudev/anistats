@@ -1,5 +1,5 @@
 import { graphql } from 'msw'
-import { mockActivities } from './activities'
+import { mockActivities, mockMediaActivities } from './activities'
 
 export const handlers = [
   graphql.query('UserData', (req, res, ctx) => {
@@ -21,5 +21,9 @@ export const handlers = [
   graphql.query('UserActivities', (req, res, ctx) => {
     const { page } = req.variables
     return res(ctx.data(mockActivities(page)))
+  }),
+
+  graphql.query('MediaActivities', (req, res, ctx) => {
+    return res(ctx.data(mockMediaActivities()))
   }),
 ]

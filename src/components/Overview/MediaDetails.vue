@@ -34,7 +34,10 @@ onMounted(async () => {
 
   state.planning = findPlanningDate(raw.data.Page.activities)
 
-  const days = parseActivities(raw.data.Page.activities.reverse(), 'both')
+  const days = parseActivities(
+    Array.from(raw.data.Page.activities).reverse(),
+    'both'
+  )
   state.activities = days
 })
 </script>

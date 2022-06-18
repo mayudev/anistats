@@ -1,3 +1,5 @@
+import type { MediaFull } from '../stores/query/Media'
+import type { PageInfo } from '../stores/query/types'
 import type { UserActivity } from '../stores/query/UserActivities'
 
 const pages: UserActivity[][] = [
@@ -967,6 +969,134 @@ const pages: UserActivity[][] = [
   ],
 ]
 
+const media: {
+  Media: MediaFull
+  Page: {
+    pageInfo: PageInfo
+    activities: UserActivity[]
+  }
+} = {
+  Media: {
+    id: 5597,
+    type: 'ANIME',
+    title: {
+      romaji: 'Natsu no Arashi!',
+    },
+    coverImage: {
+      large:
+        'https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/5597.jpg',
+    },
+    bannerImage: null,
+    episodes: 13,
+  },
+  Page: {
+    pageInfo: {
+      total: 5,
+      currentPage: 1,
+      lastPage: 1,
+      hasNextPage: false,
+      perPage: 50,
+    },
+    activities: [
+      {
+        __typename: 'ListActivity',
+        id: 406934425,
+        media: {
+          id: 5597,
+          type: 'ANIME',
+          title: {
+            romaji: 'Natsu no Arashi!',
+          },
+          coverImage: {
+            medium:
+              'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/5597.jpg',
+          },
+        },
+        type: 'ANIME_LIST',
+        createdAt: 1655312163,
+        status: 'completed',
+        progress: null,
+      },
+      {
+        __typename: 'ListActivity',
+        id: 406934421,
+        media: {
+          id: 5597,
+          type: 'ANIME',
+          title: {
+            romaji: 'Natsu no Arashi!',
+          },
+          coverImage: {
+            medium:
+              'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/5597.jpg',
+          },
+        },
+        type: 'ANIME_LIST',
+        createdAt: 1655312162,
+        status: 'watched episode',
+        progress: '5 - 12',
+      },
+      {
+        __typename: 'ListActivity',
+        id: 406614543,
+        media: {
+          id: 5597,
+          type: 'ANIME',
+          title: {
+            romaji: 'Natsu no Arashi!',
+          },
+          coverImage: {
+            medium:
+              'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/5597.jpg',
+          },
+        },
+        type: 'ANIME_LIST',
+        createdAt: 1655245805,
+        status: 'watched episode',
+        progress: '2 - 4',
+      },
+      {
+        __typename: 'ListActivity',
+        id: 406163471,
+        media: {
+          id: 5597,
+          type: 'ANIME',
+          title: {
+            romaji: 'Natsu no Arashi!',
+          },
+          coverImage: {
+            medium:
+              'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/5597.jpg',
+          },
+        },
+        type: 'ANIME_LIST',
+        createdAt: 1655157785,
+        status: 'watched episode',
+        progress: '1',
+      },
+      {
+        __typename: 'ListActivity',
+        id: 110552133,
+        media: {
+          id: 5597,
+          type: 'ANIME',
+          title: {
+            romaji: 'Natsu no Arashi!',
+          },
+          coverImage: {
+            medium:
+              'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/5597.jpg',
+          },
+        },
+        type: 'ANIME_LIST',
+        createdAt: 1598042961,
+        status: 'plans to watch',
+        progress: null,
+      },
+    ],
+  },
+}
+
 export function mockActivities(page: number) {
   return {
     Page: {
@@ -980,4 +1110,8 @@ export function mockActivities(page: number) {
       activities: pages[page - 1],
     },
   }
+}
+
+export function mockMediaActivities() {
+  return media
 }
