@@ -12,19 +12,17 @@ const user = useUserStore()
   <main>
     <div>
       <DataRange :timestamp="user.lastDayTimestamp" />
-      <div class="chart-container">
+      <div class="chart-container" v-if="user.dataset !== 'manga'">
         <div class="chart-header">Episodes watched</div>
         <ActivityChart
-          v-if="user.dataset !== 'manga'"
           name="anime"
           :days="user.days"
           property="totalEpisodes"
         />
       </div>
-      <div class="chart-container">
+      <div class="chart-container" v-if="user.dataset !== 'anime'">
         <div class="chart-header">Chapters read</div>
         <ActivityChart
-          v-if="user.dataset !== 'anime'"
           name="manga"
           :days="user.days"
           property="totalChapters"
