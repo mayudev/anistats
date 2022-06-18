@@ -1,5 +1,6 @@
+import { createTestingPinia } from '@pinia/testing'
 import { shallowMount } from '@vue/test-utils'
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vitest } from 'vitest'
 import ActivityDay from '../../components/Overview/ActivityDay.vue'
 import type { Day } from '../../stores/helpers/activities'
 
@@ -13,6 +14,13 @@ describe('ActivityDay', () => {
     }
 
     const wrapper = shallowMount(ActivityDay, {
+      global: {
+        plugins: [
+          createTestingPinia({
+            createSpy: vitest.fn,
+          }),
+        ],
+      },
       props: {
         timestamp,
         day,
