@@ -8,6 +8,7 @@ const props = defineProps<{
   days: Map<number, Day>
   property: 'totalEpisodes' | 'totalChapters'
   name: string
+  height?: number
 }>()
 const chart = ref<HTMLDivElement | null>(null)
 const container = ref<HTMLDivElement | null>(null)
@@ -30,7 +31,7 @@ watch(
 const render = () => {
   const columnWidth = 100
   const width = props.days.size * columnWidth
-  const height = 150
+  const height = props.height || 150
 
   const margin = {
     top: 50,

@@ -1,10 +1,18 @@
 <script lang="ts" setup>
+import { ref } from 'vue'
 import type { MediaDiff } from '../../stores/helpers/activities'
 import NamedProp from '../layout/NamedProp.vue'
+import MediaDetails from './MediaDetails.vue'
 
 const props = defineProps<{
   media: MediaDiff
 }>()
+
+const displayDetails = ref(false)
+
+const toggleDetails = () => {
+  displayDetails.value = !displayDetails.value
+}
 
 const propName =
   (props.media.type === 'ANIME' ? 'episode' : 'chapter') +
@@ -12,7 +20,7 @@ const propName =
 </script>
 
 <template>
-  <div class="item">
+  <div class="item" @click="() => toggleDetails()">
     <img
       :src="media.coverImage.medium"
       loading="lazy"
@@ -25,6 +33,9 @@ const propName =
     <span style="flex: 1" />
     <NamedProp :name="propName" :value="media.progress" />
   </div>
+  <Transition name="details">
+    <MediaDetails v-if="displayDetails" :media="media" />
+  </Transition>
 </template>
 
 <style lang="scss" scoped>
@@ -55,5 +66,16 @@ const propName =
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+// Transition
+.details-enter-from,
+.details-leave-to {
+  transform: scale(0.9);
+  opacity: 0;
+}
+.details-enter-active,
+.details-leave-active {
+  transition: 0.2s ease;
 }
 </style>

@@ -1,3 +1,5 @@
+import type { UserActivitiesResponse } from './UserActivities'
+
 type MediaType = 'ANIME' | 'MANGA'
 
 interface Title {
@@ -13,4 +15,16 @@ export interface Media {
   type: MediaType
   title: Title
   coverImage: Image
+}
+
+export interface MediaFull extends Media {
+  bannerImage?: string
+  episodes?: number
+}
+
+export interface ResponseWithMedia {
+  data: {
+    Page: UserActivitiesResponse
+    Media: MediaFull
+  }
 }
