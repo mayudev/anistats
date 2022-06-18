@@ -26,7 +26,7 @@ defineProps<{
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .error {
   text-align: center;
 }

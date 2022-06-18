@@ -10,6 +10,8 @@ import { fetchMediaActivities } from '../../stores/api/media'
 import ActivityChart from '../../components/Overview/ActivityChart.vue'
 import { findPlanningDate } from '../../stores/helpers/media'
 import { displayDate } from '../../lib/days'
+import FontAwesomeIcon from '@/components/FontAwesomeIcon.vue'
+import LoadingSpinner from '@/components/layout/LoadingSpinner.vue'
 
 const user = useUserStore()
 
@@ -52,9 +54,13 @@ onMounted(async () => {
       :height="100"
     />
   </div>
-  <div v-else-if="state.activities?.size === 0">No activity found</div>
-  <!-- TODO -->
-  <div v-else>Loading...</div>
+  <div class="error" v-else-if="state.activities?.size === 0">
+    <FontAwesomeIcon icon="triangle-exclamation" :width="24" />
+    <span class="error-text">No activity found.</span>
+  </div>
+  <div class="loading" v-else>
+    <LoadingSpinner :width="24" :border-width="2" />
+  </div>
 </template>
 
 <style lang="scss" scoped>
@@ -74,5 +80,15 @@ onMounted(async () => {
 .header-value {
   font-size: 0.86rem;
   color: var(--color-text-secondary);
+}
+
+.error,
+.loading {
+  margin: 10px;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
 }
 </style>
