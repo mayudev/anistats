@@ -2,6 +2,7 @@
 import { useUserStore } from '../../stores/user'
 import ActivityTimeline from '@/components/Overview/ActivityTimeline.vue'
 import DataRange from '@/components/Overview/DataRange.vue'
+import ActivityChart from '../../components/Overview/ActivityChart.vue'
 
 const user = useUserStore()
 </script>
@@ -11,6 +12,18 @@ const user = useUserStore()
   <main>
     <div>
       <DataRange :timestamp="user.lastDayTimestamp" />
+      <ActivityChart
+        v-if="user.dataset !== 'manga'"
+        name="anime"
+        :days="user.days"
+        property="totalEpisodes"
+      />
+      <ActivityChart
+        v-if="user.dataset !== 'anime'"
+        name="manga"
+        :days="user.days"
+        property="totalChapters"
+      />
     </div>
     <div>
       <ActivityTimeline :days="user.days" />
