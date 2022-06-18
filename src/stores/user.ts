@@ -12,6 +12,9 @@ interface Store {
   userData: UserData | null
   dataset: Dataset
   boundaryHour: number
+
+  busy: boolean
+
   currentPage: number
   activities: UserActivity[]
   cachedActivities: UserActivity[]
@@ -22,6 +25,8 @@ export const useUserStore = defineStore('user', {
     userData: null,
     dataset: 'both',
     boundaryHour: 3,
+
+    busy: false,
 
     currentPage: 1,
     activities: [],
@@ -75,6 +80,9 @@ export const useUserStore = defineStore('user', {
     async fetchActivities() {
       if (!this.userData) throw 'No user data'
 
+      if (this.busy) return
+      this.busy = true
+
       // Initial fetch
       if (this.currentPage === 1) {
         const initial = await fetchActivities(this.userData.id, 1)
@@ -96,6 +104,8 @@ export const useUserStore = defineStore('user', {
 
         this.currentPage++
       }
+
+      this.busy = false
     },
   },
 })
