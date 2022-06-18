@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useUserStore } from '../../stores/user'
 import ActivityTimeline from '@/components/Overview/ActivityTimeline.vue'
+import DataRange from '@/components/Overview/DataRange.vue'
 
 const user = useUserStore()
 </script>
@@ -8,12 +9,13 @@ const user = useUserStore()
 <template>
   <p>overview tab</p>
   <main>
-    <div>left</div>
+    <div>
+      <DataRange :timestamp="user.lastDayTimestamp" />
+    </div>
     <div>
       <ActivityTimeline :days="user.days" />
     </div>
   </main>
-  <button @click="() => user.fetchActivities()">fetch</button>
 </template>
 
 <style lang="scss" scoped>

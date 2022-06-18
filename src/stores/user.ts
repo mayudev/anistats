@@ -11,6 +11,7 @@ export type Dataset = 'both' | 'anime' | 'manga'
 interface Store {
   userData: UserData | null
   dataset: Dataset
+  boundaryHour: number
   currentPage: number
   activities: UserActivity[]
   cachedActivities: UserActivity[]
@@ -20,6 +21,7 @@ export const useUserStore = defineStore('user', {
   state: (): Store => ({
     userData: null,
     dataset: 'both',
+    boundaryHour: 3,
 
     currentPage: 1,
     activities: [],
@@ -46,6 +48,17 @@ export const useUserStore = defineStore('user', {
       }
 
       return days
+    },
+    lastDayTimestamp: state => {
+      const timestamp = new Date(
+        state.activities[state.activities.length - 1].createdAt * 1000
+      )
+
+      if (timestamp.getHours() < state.boundaryHour) {
+        timestamp.setDate(timestamp.getDate() - 1)
+      }
+
+      return timestamp
     },
   },
   actions: {

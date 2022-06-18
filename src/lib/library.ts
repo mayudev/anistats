@@ -4,6 +4,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   faAngleLeft,
   faAngleRight,
+  faArrowsDownToLine,
   faCircleHalfStroke,
   faCircleQuestion,
   faCode,
@@ -14,7 +15,8 @@ library.add(
   faCode,
   faCircleQuestion,
   faAngleRight,
-  faAngleLeft
+  faAngleLeft,
+  faArrowsDownToLine
 )
 
 export { FontAwesomeIcon }
