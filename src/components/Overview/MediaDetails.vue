@@ -38,6 +38,7 @@ onMounted(async () => {
     Array.from(raw.data.Page.activities).reverse(),
     'both'
   )
+
   state.activities = days
 })
 </script>
