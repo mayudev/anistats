@@ -1,5 +1,6 @@
 import type { Media } from '../query/Media'
 import type { UserActivity } from '../query/UserActivities'
+import type { Dataset } from '../user'
 
 export interface Day {
   media: MediaDiff[]
@@ -11,10 +12,16 @@ export interface MediaDiff extends Media {
   progress: number
 }
 
-export function parseActivities(activities: UserActivity[]): Map<number, Day> {
+export function parseActivities(
+  activities: UserActivity[],
+  format: Dataset
+): Map<number, Day> {
   const days: Map<number, Day> = new Map()
 
   for (const activity of activities) {
+    if (activity.type === 'MANGA_LIST' && format === 'anime') continue
+    if (activity.type === 'ANIME_LIST' && format === 'manga') continue
+
     const { dayTimestamp, progress, mediaDiff } = parseActivity(activity)
 
     if (!progress.diff) continue
@@ -93,7 +100,8 @@ export function parseActivity(activity: UserActivity): ParsedActivity {
 
 export function parseActivitiesForOneDay(
   activities: UserActivity[],
-  activityDay: number
+  activityDay: number,
+  format: Dataset
 ): Day {
   const day: Day = {
     media: [],
@@ -105,6 +113,9 @@ export function parseActivitiesForOneDay(
     const { dayTimestamp, progress, mediaDiff } = parseActivity(activity)
 
     if (dayTimestamp !== activityDay) return day
+
+    if (activity.type === 'MANGA_LIST' && format === 'anime') continue
+    if (activity.type === 'ANIME_LIST' && format === 'manga') continue
 
     if (!progress.diff) continue
 

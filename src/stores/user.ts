@@ -6,7 +6,7 @@ import { flattenMedia } from './helpers/flat'
 import type { UserActivity } from './query/UserActivities'
 import { userDataQuery, type UserData } from './query/UserData'
 
-type Dataset = 'both' | 'anime' | 'manga'
+export type Dataset = 'both' | 'anime' | 'manga'
 
 interface Store {
   userData: UserData | null
@@ -27,14 +27,15 @@ export const useUserStore = defineStore('user', {
   }),
   getters: {
     days: state => {
-      const days = parseActivities(state.activities)
+      const days = parseActivities(state.activities, state.dataset)
 
       const keys = Array.from(days.keys())
       const lastDayKey = keys[keys.length - 1]
 
       const lookahead = parseActivitiesForOneDay(
         state.cachedActivities,
-        lastDayKey
+        lastDayKey,
+        state.dataset
       )
 
       if (lookahead.media.length > 0) {
