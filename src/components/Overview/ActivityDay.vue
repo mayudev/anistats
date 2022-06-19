@@ -4,13 +4,21 @@ import ActivityMedia from '@/components/Overview/ActivityMedia.vue'
 import { weekdays, displayDate } from '@/lib/days'
 import NamedProp from '../layout/NamedProp.vue'
 import { useUserStore } from '../../stores/user'
+import { reactive, watch } from 'vue'
 
 const props = defineProps<{
   timestamp: number
   day: Day
 }>()
 
-const date = new Date(props.timestamp)
+const state = reactive({
+  date: new Date(props.timestamp),
+})
+
+watch(props, () => {
+  state.date = new Date(props.timestamp)
+})
+
 const user = useUserStore()
 </script>
 
@@ -18,8 +26,8 @@ const user = useUserStore()
   <div class="wrapper">
     <div class="header">
       <div class="header-date">
-        <div class="weekday">{{ weekdays[date.getDay()] }}</div>
-        <div class="date">{{ displayDate(date) }}</div>
+        <div class="weekday">{{ weekdays[state.date.getDay()] }}</div>
+        <div class="date">{{ displayDate(state.date) }}</div>
       </div>
       <span style="flex: 1" />
       <NamedProp

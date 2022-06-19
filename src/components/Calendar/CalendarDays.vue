@@ -13,6 +13,10 @@ const props = defineProps<{
   days: Map<number, Day>
 }>()
 
+const emit = defineEmits<{
+  (event: 'popup', timestamp: number): void
+}>()
+
 const state = reactive({
   begin: 0,
   beginTimestamp: 0,
@@ -55,21 +59,51 @@ const total = (index: number): number => {
   else if (user.dataset === 'manga') return day.totalChapters
   else return day.totalEpisodes + day.totalChapters
 }
+
+type ActivityDay = {
+  index: number
+  timestamp: number
+  total: number
+  disabled: boolean
+}
+
+const timestamps = computed(() => {
+  const timestamps: ActivityDay[] = []
+  const keys = Array.from(props.days.keys())
+
+  for (let i = 1; i <= state.count; i++) {
+    const timestamp = relativeTimestamp(i)
+    timestamps.push({
+      index: i,
+      timestamp,
+      total: total(i),
+      disabled: timestamp < keys[keys.length - 1] || timestamp > keys[0],
+    })
+  }
+
+  return timestamps
+})
+
+const handleClick = (day: ActivityDay) => {
+  emit('popup', day.timestamp)
+}
 </script>
 
 <template>
   <div class="days">
     <div
       class="day"
-      v-for="index in state.count"
-      :key="index"
-      :style="index === 1 ? { gridColumn: state.begin } : {}"
+      v-for="day in timestamps"
+      :key="day.index"
+      :class="{ 'day-disabled': day.disabled }"
+      :style="day.index === 1 ? { gridColumn: state.begin } : {}"
+      @click="() => handleClick(day)"
     >
       <div
         class="day-background"
-        :style="{ opacity: total(index) / state.max }"
+        :style="{ opacity: day.total / state.max }"
       ></div>
-      <span class="day-label"> {{ index }}</span>
+      <span class="day-label"> {{ day.index }}</span>
     </div>
   </div>
 </template>
@@ -84,6 +118,17 @@ const total = (index: number): number => {
 
   padding: 8px 12px 6px 12px;
   margin: 2px;
+  border-radius: 4px;
+
+  cursor: pointer;
+  user-select: none;
+
+  opacity: 0.9;
+  transition: transform 0.2s;
+  &:hover {
+    opacity: 1;
+    transform: scale(1.1);
+  }
 }
 
 .day-background {
@@ -94,10 +139,16 @@ const total = (index: number): number => {
   right: 0;
 
   background: var(--color-accent-2);
-  border-radius: 3px;
+  border-radius: 4px;
 }
 
 .day-label {
   z-index: 1;
+
+  font-weight: 500;
+}
+
+.day-disabled {
+  opacity: 0.5;
 }
 </style>

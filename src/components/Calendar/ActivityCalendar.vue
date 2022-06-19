@@ -5,12 +5,21 @@ import { useUserStore } from '../../stores/user'
 import CalendarDays from './CalendarDays.vue'
 import FontAwesomeIcon from '../FontAwesomeIcon.vue'
 import { months } from '../../lib/days'
+import ActivityDay from '../Overview/ActivityDay.vue'
 
 const user = useUserStore()
 
-const props = defineProps<{
+defineProps<{
   days: Map<number, Day>
 }>()
+
+const popup = reactive<{
+  timestamp: number
+  day: Day | null
+}>({
+  timestamp: 0,
+  day: null,
+})
 
 const state = reactive({
   month: 5,
@@ -38,6 +47,15 @@ const nextMonth = () => {
     state.year++
   } else {
     state.month++
+  }
+}
+
+const showPopup = (timestamp: number) => {
+  const day = user.days.get(timestamp)
+
+  if (day) {
+    popup.timestamp = timestamp
+    popup.day = day
   }
 }
 </script>
@@ -72,7 +90,15 @@ const nextMonth = () => {
       <div class="day">Fri</div>
       <div class="day">Sat</div>
     </div>
-    <CalendarDays :month="state.month" :year="state.year" :days="days" />
+    <CalendarDays
+      :month="state.month"
+      :year="state.year"
+      :days="days"
+      @popup="timestamp => showPopup(timestamp)"
+    />
+    <div v-if="popup.day && popup.timestamp">
+      <ActivityDay :day="popup.day" :timestamp="popup.timestamp" />
+    </div>
   </div>
 </template>
 
