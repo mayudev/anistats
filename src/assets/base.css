@@ -9,6 +9,7 @@
 
   --c-blue: #34bbff;
   --c-blue-2: #3391c0;
+  --c-blue-3: #23769f;
   --c-blue-bg: #34bbff20;
 
   --c-red: #b33737;
@@ -39,6 +40,8 @@
   --color-text-secondary: var(--c-text-dark-2);
 
   --color-accent: var(--c-blue);
+  --color-accent-2: var(--c-blue-3);
+
   --color-error: var(--c-red);
   --color-logo: var(--c-blue-2);
 
