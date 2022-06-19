@@ -3,9 +3,9 @@ import { onBeforeMount, reactive } from 'vue'
 import type { Day } from '../../stores/helpers/activities'
 import { useUserStore } from '../../stores/user'
 import CalendarDays from './CalendarDays.vue'
-import FontAwesomeIcon from '../FontAwesomeIcon.vue'
-import { months } from '../../lib/days'
+
 import ActivityDay from '../Overview/ActivityDay.vue'
+import CalendarHeader from './CalendarHeader.vue'
 
 const user = useUserStore()
 
@@ -62,25 +62,12 @@ const showPopup = (timestamp: number) => {
 
 <template>
   <div class="calendar">
-    <div class="header">
-      <div class="header-text">Calendar</div>
-      <span style="flex: 1" />
-      <div class="header-month">{{ months[state.month] }} {{ state.year }}</div>
-      <button
-        class="header-control"
-        @click="() => previousMonth()"
-        title="Previous month"
-      >
-        <FontAwesomeIcon icon="angle-left" :width="9" />
-      </button>
-      <button
-        class="header-control"
-        @click="() => nextMonth()"
-        title="Next month"
-      >
-        <FontAwesomeIcon icon="angle-right" :width="9" />
-      </button>
-    </div>
+    <CalendarHeader
+      :month="state.month"
+      :year="state.year"
+      @previous="() => previousMonth()"
+      @next="() => nextMonth()"
+    />
     <div class="days">
       <div class="day">Sun</div>
       <div class="day">Mon</div>
@@ -103,48 +90,6 @@ const showPopup = (timestamp: number) => {
 </template>
 
 <style lang="scss" scoped>
-.header {
-  background: var(--color-background-secondary);
-  border-radius: 6px;
-  padding: 0.5rem 1rem;
-  font-size: 1.2rem;
-
-  display: flex;
-  align-items: center;
-
-  transition: background var(--theme-transition);
-}
-
-.header-text {
-  font-weight: 500;
-}
-
-.header-control {
-  background: inherit;
-  color: inherit;
-  border: none;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 0.25rem 1rem;
-  transition: color 0.2s, background var(--theme-transition);
-  cursor: pointer;
-
-  &:first-of-type {
-    margin-left: 1rem;
-  }
-
-  &:hover {
-    color: var(--color-accent);
-  }
-}
-
-.header-month {
-  font-size: 1rem;
-}
-
 .days {
   display: grid;
   grid-template-columns: repeat(7, 1fr);

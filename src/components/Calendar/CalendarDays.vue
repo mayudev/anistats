@@ -27,7 +27,6 @@ const state = reactive({
 onMounted(() => render())
 
 watch(props, () => {
-  console.log(`rerender ${props.month}/${props.year}`)
   render()
 })
 
