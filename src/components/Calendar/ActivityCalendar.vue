@@ -85,6 +85,8 @@ const nextMonth = () => {
 
   display: flex;
   align-items: center;
+
+  transition: background var(--theme-transition);
 }
 
 .header-text {
@@ -101,7 +103,7 @@ const nextMonth = () => {
   justify-content: center;
 
   padding: 0.25rem 1rem;
-  transition: color 0.2s;
+  transition: color 0.2s, background var(--theme-transition);
   cursor: pointer;
 
   &:first-of-type {

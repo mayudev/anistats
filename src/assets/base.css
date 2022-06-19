@@ -2,6 +2,7 @@
 :root {
   --c-white: #edf1f5;
   --c-white-2: #e5ebf1;
+  --c-white-3: #d1d8df;
 
   --c-black: #22242b;
   --c-black-2: #2d2f37;
@@ -54,6 +55,7 @@
 body[data-theme='light'] {
   --color-background: var(--c-white);
   --color-background-secondary: var(--c-white-2);
+  --color-background-border: var(--c-white-3);
 
   --color-text: var(--c-text-light-1);
   --color-text-secondary: var(--c-text-light-2);

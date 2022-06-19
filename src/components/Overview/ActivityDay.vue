@@ -44,6 +44,8 @@ const user = useUserStore()
   border-radius: 6px;
   overflow: hidden;
   margin-bottom: 12.944px;
+
+  transition: background var(--theme-transition);
 }
 
 .header {
@@ -52,6 +54,8 @@ const user = useUserStore()
 
   background: var(--color-background-secondary);
   padding: 0.5rem 0.75rem;
+
+  transition: background var(--theme-transition);
 }
 
 .weekday {
