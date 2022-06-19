@@ -1089,7 +1089,7 @@ const media: {
           },
         },
         type: 'ANIME_LIST',
-        createdAt: 1598042961,
+        createdAt: 1234567890,
         status: 'plans to watch',
         progress: null,
       },

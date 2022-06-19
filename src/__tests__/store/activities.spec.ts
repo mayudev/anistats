@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { describe, expect, it } from 'vitest'
 import { parseActivities } from '../../stores/helpers/activities'
 import type { UserActivity } from '../../stores/query/UserActivities'
@@ -162,7 +163,7 @@ const mangaDataset: UserActivity[] = [
 
 describe('parseActivities', () => {
   it('parses activities correctly', () => {
-    const parsed = parseActivities(dataset)
+    const parsed = parseActivities(dataset, 'both')
 
     const keys = Array.from(parsed.keys())
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -182,12 +183,11 @@ describe('parseActivities', () => {
   })
 
   it('counts episodes and chapters separately', () => {
-    const parsed = parseActivities(mangaDataset)
+    const parsed = parseActivities(mangaDataset, 'both')
 
     const keys = Array.from(parsed.keys())
 
     const day1 = parsed.get(keys[0])!
-    const day2 = parsed.get(keys[1])!
 
     expect(day1.totalEpisodes).toBe(4)
     expect(day1.totalChapters).toBe(2)

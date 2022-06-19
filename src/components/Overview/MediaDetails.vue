@@ -1,14 +1,9 @@
 <script lang="ts" setup>
 import { onMounted, reactive } from 'vue'
-import {
-  parseActivities,
-  type Day,
-  type MediaDiff,
-} from '../../stores/helpers/activities'
+import type { Day, MediaDiff } from '../../stores/helpers/activities'
 import { useUserStore } from '../../stores/user'
-import { fetchMediaActivities } from '../../stores/api/media'
 import ActivityChart from '../../components/Overview/ActivityChart.vue'
-import { findPlanningDate } from '../../stores/helpers/media'
+import { findMediaActivities } from '../../stores/helpers/media'
 import { displayDate } from '../../lib/days'
 import FontAwesomeIcon from '@/components/FontAwesomeIcon.vue'
 import LoadingSpinner from '@/components/layout/LoadingSpinner.vue'
@@ -21,30 +16,28 @@ const props = defineProps<{
 
 const state = reactive<{
   loading: boolean
-  activities: Map<number, Day> | null
+  days: Map<number, Day> | null
   planning: number
 }>({
   loading: false,
-  activities: null,
+  days: null,
   planning: 0,
 })
 
 onMounted(async () => {
-  const raw = await fetchMediaActivities(user.userData!.id, props.media.id)
+  if (!user.userData) return
 
-  state.planning = findPlanningDate(raw.data.Page.activities)
-
-  const days = parseActivities(
-    Array.from(raw.data.Page.activities).reverse(),
-    'both'
+  const { days, plannedSince } = await findMediaActivities(
+    user.userData.id,
+    props.media.id
   )
-
-  state.activities = days
+  state.days = days
+  state.planning = plannedSince
 })
 </script>
 
 <template>
-  <div v-if="state.activities && state.activities.size > 0">
+  <div v-if="state.days && state.days.size > 0">
     <div class="header">
       <div class="header-title">Planned since</div>
       <div class="header-value">
@@ -53,12 +46,12 @@ onMounted(async () => {
     </div>
     <ActivityChart
       :name="`media-${media.id}`"
-      :days="state.activities"
+      :days="state.days"
       :property="media.type === 'ANIME' ? 'totalEpisodes' : 'totalChapters'"
       :height="100"
     />
   </div>
-  <div class="error" v-else-if="state.activities?.size === 0">
+  <div class="error" v-else-if="state.days?.size === 0">
     <FontAwesomeIcon icon="triangle-exclamation" :width="24" />
     <span class="error-text">No activity found.</span>
   </div>
