@@ -9,7 +9,6 @@ const user = useUserStore()
 </script>
 
 <template>
-  <p>overview tab</p>
   <main>
     <div>
       <DataRange :timestamp="user.lastDayTimestamp" />
