@@ -12,7 +12,12 @@ export async function getActivitiesFromDay(
   const end = date.setDate(date.getDate() + 1)
 
   const initial = await fetchActivitiesFrom(userId, begin / 1000, end / 1000)
+
+  if (initial.activities.length === 0) throw new NoActivitiesError()
+
   const days = parseActivities(initial.activities, dataset)
 
   return days
 }
+
+export class NoActivitiesError extends Error {}

@@ -2,7 +2,10 @@
 import { onBeforeMount, reactive } from 'vue'
 import type { Day } from '../../stores/helpers/activities'
 import { useUserStore } from '../../stores/user'
-import { getActivitiesFromDay } from '../../stores/helpers/calendar'
+import {
+  getActivitiesFromDay,
+  NoActivitiesError,
+} from '../../stores/helpers/calendar'
 
 import CalendarDays from './CalendarDays.vue'
 import ActivityDay from '../Overview/ActivityDay.vue'
@@ -64,14 +67,22 @@ const showPopup = async (timestamp: number) => {
   } else {
     if (timestamp > Date.now() || !user.userData) return
     else {
-      const act = await getActivitiesFromDay(
-        user.userData.id,
-        user.dataset,
-        timestamp
-      )
+      try {
+        const act = await getActivitiesFromDay(
+          user.userData.id,
+          user.dataset,
+          timestamp
+        )
 
-      popup.timestamp = timestamp
-      popup.day = Array.from(act.values())[0]
+        popup.timestamp = timestamp
+        popup.day = Array.from(act.values())[0]
+      } catch (e: unknown) {
+        if (e instanceof NoActivitiesError) {
+          console.log('no acitivites found') // TODO
+        } else {
+          console.error(e)
+        }
+      }
     }
   }
 }
