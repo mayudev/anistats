@@ -59,6 +59,16 @@ const submit = () => {
     opacity: 0.5;
   }
 }
+
+@media (max-width: 600px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .username-input {
+    margin-bottom: 1rem;
+  }
+}
 .username-submit {
   all: unset;
   text-align: center;
