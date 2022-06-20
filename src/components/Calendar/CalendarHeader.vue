@@ -86,6 +86,7 @@ const switchYear = (year: number) => {
   font-weight: 500;
 
   z-index: 2;
+  position: relative;
 }
 
 .header-text {
@@ -117,6 +118,7 @@ const switchYear = (year: number) => {
 .header-year {
   transition: color 0.2s;
   cursor: pointer;
+  user-select: none;
 
   &:hover {
     color: var(--color-accent);
