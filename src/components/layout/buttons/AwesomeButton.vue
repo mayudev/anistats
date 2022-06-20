@@ -3,12 +3,13 @@ import FontAwesomeIcon from '../../FontAwesomeIcon.vue'
 
 defineProps<{
   icon: string
+  size?: number
 }>()
 </script>
 
 <template>
   <button class="button" @click="$emit('click')">
-    <FontAwesomeIcon :icon="icon" :width="22" />
+    <FontAwesomeIcon :icon="icon" :width="size || 24" />
     <span class="button-text"><slot></slot></span>
   </button>
 </template>

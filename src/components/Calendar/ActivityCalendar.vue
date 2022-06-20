@@ -12,6 +12,9 @@ import ActivityDay from '../Overview/ActivityDay.vue'
 import CalendarHeader from './CalendarHeader.vue'
 import CalendarModal from './CalendarModal.vue'
 import ModalBackdrop from '../layout/ModalBackdrop.vue'
+import LoadingSpinner from '../layout/LoadingSpinner.vue'
+import ErrorMessage from '../layout/ErrorMessage.vue'
+import AwesomeButton from '../layout/buttons/AwesomeButton.vue'
 
 const user = useUserStore()
 
@@ -22,9 +25,13 @@ defineProps<{
 const popup = reactive<{
   timestamp: number
   day: Day | null
+  show: boolean
+  loading: boolean
 }>({
   timestamp: 0,
   day: null,
+  show: false,
+  loading: false,
 })
 
 const state = reactive({
@@ -63,6 +70,9 @@ const switchYear = (year: number) => {
 const showPopup = async (timestamp: number) => {
   const day = user.days.get(timestamp)
 
+  popup.show = true
+  popup.loading = true
+
   if (day) {
     popup.timestamp = timestamp
     popup.day = day
@@ -80,16 +90,19 @@ const showPopup = async (timestamp: number) => {
         popup.day = Array.from(act.values())[0]
       } catch (e: unknown) {
         if (e instanceof NoActivitiesError) {
-          console.log('no acitivites found') // TODO
+          console.log('noactivities')
         } else {
-          console.error(e)
+          popup.show = false
         }
       }
     }
   }
+
+  popup.loading = false
 }
 
 const closePopup = () => {
+  popup.show = false
   popup.day = null
   popup.timestamp = 0
 }
@@ -120,15 +133,25 @@ const closePopup = () => {
       @popup="timestamp => showPopup(timestamp)"
     />
     <Transition name="backdrop">
-      <ModalBackdrop v-if="popup.timestamp" @close="() => closePopup()" />
+      <ModalBackdrop v-if="popup.show" @close="() => closePopup()" />
     </Transition>
 
     <Transition name="modal">
-      <CalendarModal
-        v-if="popup.day && popup.timestamp"
-        @close="() => closePopup()"
-      >
-        <ActivityDay :day="popup.day" :timestamp="popup.timestamp" />
+      <CalendarModal v-if="popup.show" @close="() => closePopup()">
+        <div class="center" v-if="popup.loading">
+          <LoadingSpinner :width="24" :border-width="2" />
+        </div>
+        <ActivityDay
+          v-else-if="popup.day"
+          :day="popup.day"
+          :timestamp="popup.timestamp"
+        />
+        <div class="center" v-else>
+          <ErrorMessage message="No activities found." />
+          <AwesomeButton @click="() => closePopup()" icon="xmark" :size="12"
+            >Close</AwesomeButton
+          >
+        </div>
       </CalendarModal>
     </Transition>
   </div>
@@ -147,5 +170,11 @@ const closePopup = () => {
   font-weight: 500;
   border-bottom: 1px solid var(--color-background-border);
   padding: 0.75rem;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 </style>
