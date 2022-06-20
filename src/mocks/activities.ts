@@ -6,452 +6,102 @@ const pages: UserActivity[][] = [
   [
     {
       __typename: 'ListActivity',
-      id: 406934499,
+      id: 378253608,
       media: {
-        id: 6712,
+        id: 918,
         type: 'ANIME',
         title: {
-          romaji: 'Natsu no Arashi!: Akinai-chuu',
+          romaji: 'Gintama',
         },
         coverImage: {
           medium:
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx6712-Ij76UPxFEuDC.png',
+            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx918-hRbQHIkRUebX.jpg',
         },
       },
       type: 'ANIME_LIST',
-      createdAt: 1655312172,
-      status: 'plans to watch',
-      progress: null,
-    },
-    {
-      __typename: 'ListActivity',
-      id: 406934425,
-      media: {
-        id: 5597,
-        type: 'ANIME',
-        title: {
-          romaji: 'Natsu no Arashi!',
-        },
-        coverImage: {
-          medium:
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/5597.jpg',
-        },
-      },
-      type: 'ANIME_LIST',
-      createdAt: 1655312163,
-      status: 'completed',
-      progress: null,
-    },
-    {
-      __typename: 'ListActivity',
-      id: 406934421,
-      media: {
-        id: 5597,
-        type: 'ANIME',
-        title: {
-          romaji: 'Natsu no Arashi!',
-        },
-        coverImage: {
-          medium:
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/5597.jpg',
-        },
-      },
-      type: 'ANIME_LIST',
-      createdAt: 1655312162,
+      createdAt: 1649963483,
       status: 'watched episode',
-      progress: '5 - 12',
+      progress: '192 - 197',
     },
     {
       __typename: 'ListActivity',
-      id: 406614543,
+      id: 377996214,
       media: {
-        id: 5597,
-        type: 'ANIME',
+        id: 30933,
+        type: 'MANGA',
         title: {
-          romaji: 'Natsu no Arashi!',
+          romaji: 'Elfen Lied',
         },
         coverImage: {
           medium:
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/5597.jpg',
+            'https://s4.anilist.co/file/anilistcdn/media/manga/cover/small/933-KbrldlVsrfxl.jpg',
+        },
+      },
+      type: 'MANGA_LIST',
+      createdAt: 1649914974,
+      status: 'read chapter',
+      progress: '52 - 60',
+    },
+    {
+      __typename: 'ListActivity',
+      id: 377832475,
+      media: {
+        id: 918,
+        type: 'ANIME',
+        title: {
+          romaji: 'Gintama',
+        },
+        coverImage: {
+          medium:
+            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx918-hRbQHIkRUebX.jpg',
         },
       },
       type: 'ANIME_LIST',
-      createdAt: 1655245805,
+      createdAt: 1649886049,
       status: 'watched episode',
-      progress: '2 - 4',
+      progress: '190 - 191',
     },
     {
       __typename: 'ListActivity',
-      id: 406163471,
+      id: 377716898,
       media: {
-        id: 5597,
-        type: 'ANIME',
+        id: 30933,
+        type: 'MANGA',
         title: {
-          romaji: 'Natsu no Arashi!',
+          romaji: 'Elfen Lied',
         },
         coverImage: {
           medium:
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/5597.jpg',
+            'https://s4.anilist.co/file/anilistcdn/media/manga/cover/small/933-KbrldlVsrfxl.jpg',
         },
       },
-      type: 'ANIME_LIST',
-      createdAt: 1655157785,
-      status: 'watched episode',
-      progress: '1',
+      type: 'MANGA_LIST',
+      createdAt: 1649869112,
+      status: 'read chapter',
+      progress: '43 - 51',
     },
     {
       __typename: 'ListActivity',
-      id: 406087045,
+      id: 377170182,
       media: {
-        id: 6802,
-        type: 'ANIME',
+        id: 30933,
+        type: 'MANGA',
         title: {
-          romaji: 'So Ra No Wo To',
+          romaji: 'Elfen Lied',
         },
         coverImage: {
           medium:
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx6802-MmsfM8KAgZuR.jpg',
+            'https://s4.anilist.co/file/anilistcdn/media/manga/cover/small/933-KbrldlVsrfxl.jpg',
         },
       },
-      type: 'ANIME_LIST',
-      createdAt: 1655145866,
-      status: 'watched episode',
-      progress: '1',
-    },
-  ],
-  [
-    {
-      __typename: 'ListActivity',
-      id: 406086784,
-      media: {
-        id: 610,
-        type: 'ANIME',
-        title: {
-          romaji: 'Popotan',
-        },
-        coverImage: {
-          medium:
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx610-wWsIgl5dWqPs.png',
-        },
-      },
-      type: 'ANIME_LIST',
-      createdAt: 1655145841,
-      status: 'completed',
-      progress: null,
+      type: 'MANGA_LIST',
+      createdAt: 1649773029,
+      status: 'read chapter',
+      progress: '34 - 42',
     },
     {
       __typename: 'ListActivity',
-      id: 406086775,
-      media: {
-        id: 610,
-        type: 'ANIME',
-        title: {
-          romaji: 'Popotan',
-        },
-        coverImage: {
-          medium:
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx610-wWsIgl5dWqPs.png',
-        },
-      },
-      type: 'ANIME_LIST',
-      createdAt: 1655145840,
-      status: 'watched episode',
-      progress: '7 - 11',
-    },
-    {
-      __typename: 'ListActivity',
-      id: 405691949,
-      media: {
-        id: 610,
-        type: 'ANIME',
-        title: {
-          romaji: 'Popotan',
-        },
-        coverImage: {
-          medium:
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx610-wWsIgl5dWqPs.png',
-        },
-      },
-      type: 'ANIME_LIST',
-      createdAt: 1655071037,
-      status: 'watched episode',
-      progress: '4 - 6',
-    },
-    {
-      __typename: 'ListActivity',
-      id: 405056238,
-      media: {
-        id: 140960,
-        type: 'ANIME',
-        title: {
-          romaji: 'SPY×FAMILY',
-        },
-        coverImage: {
-          medium:
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx140960-Yl5M3AiLZAMq.png',
-        },
-      },
-      type: 'ANIME_LIST',
-      createdAt: 1654964452,
-      status: 'watched episode',
-      progress: '10',
-    },
-  ],
-  [
-    {
-      __typename: 'ListActivity',
-      id: 404989157,
-      media: {
-        id: 610,
-        type: 'ANIME',
-        title: {
-          romaji: 'Popotan',
-        },
-        coverImage: {
-          medium:
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx610-wWsIgl5dWqPs.png',
-        },
-      },
-      type: 'ANIME_LIST',
-      createdAt: 1654953035,
-      status: 'watched episode',
-      progress: '2 - 3',
-    },
-    {
-      __typename: 'ListActivity',
-      id: 404989131,
-      media: {
-        id: 133891,
-        type: 'ANIME',
-        title: {
-          romaji: 'Love Live! Nijigasaki Gakuen School Idol Doukoukai 2',
-        },
-        coverImage: {
-          medium:
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx133891-VzjX5rquZqd0.png',
-        },
-      },
-      type: 'ANIME_LIST',
-      createdAt: 1654953030,
-      status: 'watched episode',
-      progress: '11',
-    },
-    {
-      __typename: 'ListActivity',
-      id: 404747726,
-      media: {
-        id: 610,
-        type: 'ANIME',
-        title: {
-          romaji: 'Popotan',
-        },
-        coverImage: {
-          medium:
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx610-wWsIgl5dWqPs.png',
-        },
-      },
-      type: 'ANIME_LIST',
-      createdAt: 1654901193,
-      status: 'watched episode',
-      progress: '1',
-    },
-    {
-      __typename: 'ListActivity',
-      id: 404736540,
-      media: {
-        id: 2993,
-        type: 'ANIME',
-        title: {
-          romaji: 'Rosario to Vampire',
-        },
-        coverImage: {
-          medium:
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/2993.jpg',
-        },
-      },
-      type: 'ANIME_LIST',
-      createdAt: 1654899202,
-      status: 'plans to watch',
-      progress: null,
-    },
-    {
-      __typename: 'ListActivity',
-      id: 404736472,
-      media: {
-        id: 1760,
-        type: 'ANIME',
-        title: {
-          romaji: 'Golgo 13',
-        },
-        coverImage: {
-          medium:
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/b1760-PmH18u0MQNPB.jpg',
-        },
-      },
-      type: 'ANIME_LIST',
-      createdAt: 1654899188,
-      status: 'plans to watch',
-      progress: null,
-    },
-    {
-      __typename: 'ListActivity',
-      id: 404736438,
-      media: {
-        id: 101001,
-        type: 'ANIME',
-        title: {
-          romaji: 'Asobi Asobase',
-        },
-        coverImage: {
-          medium:
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx101001-UERCW0UGi0P7.jpg',
-        },
-      },
-      type: 'ANIME_LIST',
-      createdAt: 1654899179,
-      status: 'plans to watch',
-      progress: null,
-    },
-  ],
-  [
-    {
-      __typename: 'ListActivity',
-      id: 404568625,
-      media: {
-        id: 116605,
-        type: 'ANIME',
-        title: {
-          romaji: 'Date A Live IV',
-        },
-        coverImage: {
-          medium:
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx116605-uzDakXnaZ1OW.jpg',
-        },
-      },
-      type: 'ANIME_LIST',
-      createdAt: 1654870441,
-      status: 'watched episode',
-      progress: '10',
-    },
-    {
-      __typename: 'ListActivity',
-      id: 401859728,
-      media: {
-        id: 140960,
-        type: 'ANIME',
-        title: {
-          romaji: 'SPY×FAMILY',
-        },
-        coverImage: {
-          medium:
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx140960-Yl5M3AiLZAMq.png',
-        },
-      },
-      type: 'ANIME_LIST',
-      createdAt: 1654361197,
-      status: 'watched episode',
-      progress: '9',
-    },
-    {
-      __typename: 'ListActivity',
-      id: 401804378,
-      media: {
-        id: 133891,
-        type: 'ANIME',
-        title: {
-          romaji: 'Love Live! Nijigasaki Gakuen School Idol Doukoukai 2',
-        },
-        coverImage: {
-          medium:
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx133891-VzjX5rquZqd0.png',
-        },
-      },
-      type: 'ANIME_LIST',
-      createdAt: 1654351775,
-      status: 'watched episode',
-      progress: '10',
-    },
-    {
-      __typename: 'ListActivity',
-      id: 401383902,
-      media: {
-        id: 116605,
-        type: 'ANIME',
-        title: {
-          romaji: 'Date A Live IV',
-        },
-        coverImage: {
-          medium:
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx116605-uzDakXnaZ1OW.jpg',
-        },
-      },
-      type: 'ANIME_LIST',
-      createdAt: 1654266681,
-      status: 'watched episode',
-      progress: '9',
-    },
-  ],
-  [
-    {
-      __typename: 'ListActivity',
-      id: 398734831,
-      media: {
-        id: 140960,
-        type: 'ANIME',
-        title: {
-          romaji: 'SPY×FAMILY',
-        },
-        coverImage: {
-          medium:
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx140960-Yl5M3AiLZAMq.png',
-        },
-      },
-      type: 'ANIME_LIST',
-      createdAt: 1653755121,
-      status: 'watched episode',
-      progress: '8',
-    },
-    {
-      __typename: 'ListActivity',
-      id: 398734827,
-      media: {
-        id: 133891,
-        type: 'ANIME',
-        title: {
-          romaji: 'Love Live! Nijigasaki Gakuen School Idol Doukoukai 2',
-        },
-        coverImage: {
-          medium:
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx133891-VzjX5rquZqd0.png',
-        },
-      },
-      type: 'ANIME_LIST',
-      createdAt: 1653755120,
-      status: 'watched episode',
-      progress: '9',
-    },
-    {
-      __typename: 'ListActivity',
-      id: 398263182,
-      media: {
-        id: 116605,
-        type: 'ANIME',
-        title: {
-          romaji: 'Date A Live IV',
-        },
-        coverImage: {
-          medium:
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx116605-uzDakXnaZ1OW.jpg',
-        },
-      },
-      type: 'ANIME_LIST',
-      createdAt: 1653662496,
-      status: 'watched episode',
-      progress: '8',
-    },
-    {
-      __typename: 'ListActivity',
-      id: 396685929,
+      id: 376872452,
       media: {
         id: 111233,
         type: 'MANGA',
@@ -464,435 +114,110 @@ const pages: UserActivity[][] = [
         },
       },
       type: 'MANGA_LIST',
-      createdAt: 1653345664,
+      createdAt: 1649716132,
       status: 'read chapter',
-      progress: '109 - 115',
+      progress: '106',
     },
     {
       __typename: 'ListActivity',
-      id: 396635919,
+      id: 376749138,
       media: {
-        id: 21196,
+        id: 139303,
         type: 'ANIME',
         title: {
-          romaji: 'Koutetsujou no Kabaneri',
+          romaji: 'Black★★Rock Shooter: DAWN FALL',
         },
         coverImage: {
           medium:
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx21196-2PfPfIDrxKki.jpg',
+            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx139303-8IeaAGasu2Bc.jpg',
         },
       },
       type: 'ANIME_LIST',
-      createdAt: 1653337821,
-      status: 'plans to watch',
-      progress: null,
-    },
-    {
-      __typename: 'ListActivity',
-      id: 395949358,
-      media: {
-        id: 13267,
-        type: 'ANIME',
-        title: {
-          romaji: 'Shinryaku!! Ika Musume OVA',
-        },
-        coverImage: {
-          medium:
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/13267.jpg',
-        },
-      },
-      type: 'ANIME_LIST',
-      createdAt: 1653218905,
-      status: 'completed',
-      progress: null,
-    },
-    {
-      __typename: 'ListActivity',
-      id: 395949353,
-      media: {
-        id: 13267,
-        type: 'ANIME',
-        title: {
-          romaji: 'Shinryaku!! Ika Musume OVA',
-        },
-        coverImage: {
-          medium:
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/13267.jpg',
-        },
-      },
-      type: 'ANIME_LIST',
-      createdAt: 1653218904,
+      createdAt: 1649698908,
       status: 'watched episode',
       progress: '2',
     },
     {
       __typename: 'ListActivity',
-      id: 395701734,
+      id: 376324529,
       media: {
-        id: 13267,
-        type: 'ANIME',
+        id: 30933,
+        type: 'MANGA',
         title: {
-          romaji: 'Shinryaku!! Ika Musume OVA',
+          romaji: 'Elfen Lied',
         },
         coverImage: {
           medium:
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/13267.jpg',
+            'https://s4.anilist.co/file/anilistcdn/media/manga/cover/small/933-KbrldlVsrfxl.jpg',
         },
       },
-      type: 'ANIME_LIST',
-      createdAt: 1653170814,
-      status: 'watched episode',
-      progress: '1',
-    },
-  ],
-  [
-    {
-      __typename: 'ListActivity',
-      id: 395567198,
-      media: {
-        id: 140960,
-        type: 'ANIME',
-        title: {
-          romaji: 'SPY×FAMILY',
-        },
-        coverImage: {
-          medium:
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx140960-Yl5M3AiLZAMq.png',
-        },
-      },
-      type: 'ANIME_LIST',
-      createdAt: 1653151187,
-      status: 'watched episode',
-      progress: '7',
+      type: 'MANGA_LIST',
+      createdAt: 1649626203,
+      status: 'read chapter',
+      progress: '21 - 33',
     },
     {
       __typename: 'ListActivity',
-      id: 395543934,
+      id: 376088270,
       media: {
-        id: 133891,
+        id: 918,
         type: 'ANIME',
         title: {
-          romaji: 'Love Live! Nijigasaki Gakuen School Idol Doukoukai 2',
+          romaji: 'Gintama',
         },
         coverImage: {
           medium:
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx133891-VzjX5rquZqd0.png',
+            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx918-hRbQHIkRUebX.jpg',
         },
       },
       type: 'ANIME_LIST',
-      createdAt: 1653147536,
-      status: 'watched episode',
-      progress: '8',
-    },
-    {
-      __typename: 'ListActivity',
-      id: 395126203,
-      media: {
-        id: 137337,
-        type: 'ANIME',
-        title: {
-          romaji: 'Non Non Biyori: Nonstop - Bukatsu wo Ganbatta',
-        },
-        coverImage: {
-          medium:
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx137337-5iTk3YEYoZyS.png',
-        },
-      },
-      type: 'ANIME_LIST',
-      createdAt: 1653063248,
-      status: 'completed',
-      progress: null,
-    },
-    {
-      __typename: 'ListActivity',
-      id: 395126135,
-      media: {
-        id: 116605,
-        type: 'ANIME',
-        title: {
-          romaji: 'Date A Live IV',
-        },
-        coverImage: {
-          medium:
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx116605-uzDakXnaZ1OW.jpg',
-        },
-      },
-      type: 'ANIME_LIST',
-      createdAt: 1653063234,
-      status: 'watched episode',
-      progress: '7',
-    },
-    {
-      __typename: 'ListActivity',
-      id: 395049666,
-      media: {
-        id: 601,
-        type: 'ANIME',
-        title: {
-          romaji: 'Nekojiru-sou',
-        },
-        coverImage: {
-          medium:
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/b601-mNOmYLLYEPIT.jpg',
-        },
-      },
-      type: 'ANIME_LIST',
-      createdAt: 1653047338,
-      status: 'plans to watch',
-      progress: null,
-    },
-    {
-      __typename: 'ListActivity',
-      id: 395049277,
-      media: {
-        id: 2154,
-        type: 'ANIME',
-        title: {
-          romaji: 'Tekkon Kinkreet',
-        },
-        coverImage: {
-          medium:
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/nx2154-R7xZo22O9FjK.png',
-        },
-      },
-      type: 'ANIME_LIST',
-      createdAt: 1653047238,
-      status: 'plans to watch',
-      progress: null,
-    },
-  ],
-  [
-    {
-      __typename: 'ListActivity',
-      id: 395049140,
-      media: {
-        id: 875,
-        type: 'ANIME',
-        title: {
-          romaji: 'Mind Game',
-        },
-        coverImage: {
-          medium:
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx875-kvQVUKDPcAKl.png',
-        },
-      },
-      type: 'ANIME_LIST',
-      createdAt: 1653047209,
-      status: 'plans to watch',
-      progress: null,
-    },
-    {
-      __typename: 'ListActivity',
-      id: 395048262,
-      media: {
-        id: 371,
-        type: 'ANIME',
-        title: {
-          romaji: 'Cardcaptor Sakura Movie',
-        },
-        coverImage: {
-          medium:
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/nx371-sdrIzrI5qXl3.jpg',
-        },
-      },
-      type: 'ANIME_LIST',
-      createdAt: 1653046979,
-      status: 'plans to watch',
-      progress: null,
-    },
-    {
-      __typename: 'ListActivity',
-      id: 393428707,
-      media: {
-        id: 149118,
-        type: 'ANIME',
-        title: {
-          romaji: 'Enen no Shouboutai: San no Shou',
-        },
-        coverImage: {
-          medium:
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx149118-TvIeHTB1M6nT.jpg',
-        },
-      },
-      type: 'ANIME_LIST',
-      createdAt: 1652722929,
-      status: 'plans to watch',
-      progress: null,
-    },
-    {
-      __typename: 'ListActivity',
-      id: 392469039,
-      media: {
-        id: 140960,
-        type: 'ANIME',
-        title: {
-          romaji: 'SPY×FAMILY',
-        },
-        coverImage: {
-          medium:
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx140960-Yl5M3AiLZAMq.png',
-        },
-      },
-      type: 'ANIME_LIST',
-      createdAt: 1652549648,
-      status: 'watched episode',
-      progress: '6',
-    },
-    {
-      __typename: 'ListActivity',
-      id: 392397647,
-      media: {
-        id: 149028,
-        type: 'ANIME',
-        title: {
-          romaji: 'Watashi no Yuri wa Oshigoto desu!',
-        },
-        coverImage: {
-          medium:
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx149028-S1pML6EoM92Q.jpg',
-        },
-      },
-      type: 'ANIME_LIST',
-      createdAt: 1652538075,
-      status: 'plans to watch',
-      progress: null,
-    },
-    {
-      __typename: 'ListActivity',
-      id: 392395109,
-      media: {
-        id: 133891,
-        type: 'ANIME',
-        title: {
-          romaji: 'Love Live! Nijigasaki Gakuen School Idol Doukoukai 2',
-        },
-        coverImage: {
-          medium:
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx133891-VzjX5rquZqd0.png',
-        },
-      },
-      type: 'ANIME_LIST',
-      createdAt: 1652537624,
-      status: 'watched episode',
-      progress: '7',
-    },
-    {
-      __typename: 'ListActivity',
-      id: 391966287,
-      media: {
-        id: 116605,
-        type: 'ANIME',
-        title: {
-          romaji: 'Date A Live IV',
-        },
-        coverImage: {
-          medium:
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx116605-uzDakXnaZ1OW.jpg',
-        },
-      },
-      type: 'ANIME_LIST',
-      createdAt: 1652451858,
-      status: 'watched episode',
-      progress: '6',
-    },
-    {
-      __typename: 'ListActivity',
-      id: 391956617,
-      media: {
-        id: 148969,
-        type: 'ANIME',
-        title: {
-          romaji: 'Kubo-san wa Mob wo Yurusanai',
-        },
-        coverImage: {
-          medium:
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx148969-GbMxdZGzmRMT.jpg',
-        },
-      },
-      type: 'ANIME_LIST',
-      createdAt: 1652449943,
-      status: 'plans to watch',
-      progress: null,
-    },
-    {
-      __typename: 'ListActivity',
-      id: 390431382,
-      media: {
-        id: 1482,
-        type: 'ANIME',
-        title: {
-          romaji: 'D.Gray-man',
-        },
-        coverImage: {
-          medium:
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx1482-3IT5wm5AK9tF.jpg',
-        },
-      },
-      type: 'ANIME_LIST',
-      createdAt: 1652135453,
+      createdAt: 1649597149,
       status: 'paused watching',
       progress: null,
     },
     {
       __typename: 'ListActivity',
-      id: 390431317,
+      id: 376088174,
       media: {
-        id: 1482,
+        id: 918,
         type: 'ANIME',
         title: {
-          romaji: 'D.Gray-man',
+          romaji: 'Gintama',
         },
         coverImage: {
           medium:
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx1482-3IT5wm5AK9tF.jpg',
+            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx918-hRbQHIkRUebX.jpg',
         },
       },
       type: 'ANIME_LIST',
-      createdAt: 1652135437,
+      createdAt: 1649597139,
       status: 'watched episode',
-      progress: '18 - 25',
+      progress: '188 - 189',
     },
+  ],
+  [
     {
       __typename: 'ListActivity',
-      id: 389972087,
+      id: 375762035,
       media: {
-        id: 1482,
+        id: 918,
         type: 'ANIME',
         title: {
-          romaji: 'D.Gray-man',
+          romaji: 'Gintama',
         },
         coverImage: {
           medium:
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx1482-3IT5wm5AK9tF.jpg',
+            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx918-hRbQHIkRUebX.jpg',
         },
       },
       type: 'ANIME_LIST',
-      createdAt: 1652048971,
+      createdAt: 1649542676,
       status: 'watched episode',
-      progress: '14 - 17',
+      progress: '179 - 187',
     },
     {
       __typename: 'ListActivity',
-      id: 389424646,
-      media: {
-        id: 1482,
-        type: 'ANIME',
-        title: {
-          romaji: 'D.Gray-man',
-        },
-        coverImage: {
-          medium:
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx1482-3IT5wm5AK9tF.jpg',
-        },
-      },
-      type: 'ANIME_LIST',
-      createdAt: 1651957470,
-      status: 'watched episode',
-      progress: '8 - 13',
-    },
-    {
-      __typename: 'ListActivity',
-      id: 389312641,
+      id: 375609748,
       media: {
         id: 140960,
         type: 'ANIME',
@@ -905,32 +230,13 @@ const pages: UserActivity[][] = [
         },
       },
       type: 'ANIME_LIST',
-      createdAt: 1651941604,
+      createdAt: 1649523711,
       status: 'watched episode',
-      progress: '5',
+      progress: '1',
     },
     {
       __typename: 'ListActivity',
-      id: 389258124,
-      media: {
-        id: 67109,
-        type: 'MANGA',
-        title: {
-          romaji: 'Yokokuhan',
-        },
-        coverImage: {
-          medium:
-            'https://s4.anilist.co/file/anilistcdn/media/manga/cover/small/37109.jpg',
-        },
-      },
-      type: 'MANGA_LIST',
-      createdAt: 1651932633,
-      status: 'plans to read',
-      progress: null,
-    },
-    {
-      __typename: 'ListActivity',
-      id: 389257646,
+      id: 375554698,
       media: {
         id: 133891,
         type: 'ANIME',
@@ -943,28 +249,718 @@ const pages: UserActivity[][] = [
         },
       },
       type: 'ANIME_LIST',
-      createdAt: 1651932538,
+      createdAt: 1649516237,
       status: 'watched episode',
-      progress: '6',
+      progress: '2',
     },
     {
       __typename: 'ListActivity',
-      id: 388970175,
+      id: 375398921,
       media: {
-        id: 1482,
-        type: 'ANIME',
+        id: 30933,
+        type: 'MANGA',
         title: {
-          romaji: 'D.Gray-man',
+          romaji: 'Elfen Lied',
         },
         coverImage: {
           medium:
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx1482-3IT5wm5AK9tF.jpg',
+            'https://s4.anilist.co/file/anilistcdn/media/manga/cover/small/933-KbrldlVsrfxl.jpg',
+        },
+      },
+      type: 'MANGA_LIST',
+      createdAt: 1649485706,
+      status: 'read chapter',
+      progress: '8 - 20',
+    },
+    {
+      __typename: 'ListActivity',
+      id: 375243612,
+      media: {
+        id: 918,
+        type: 'ANIME',
+        title: {
+          romaji: 'Gintama',
+        },
+        coverImage: {
+          medium:
+            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx918-hRbQHIkRUebX.jpg',
         },
       },
       type: 'ANIME_LIST',
-      createdAt: 1651871827,
+      createdAt: 1649456128,
       status: 'watched episode',
-      progress: '5 - 7',
+      progress: '177 - 178',
+    },
+    {
+      __typename: 'ListActivity',
+      id: 375058993,
+      media: {
+        id: 116605,
+        type: 'ANIME',
+        title: {
+          romaji: 'Date A Live IV',
+        },
+        coverImage: {
+          medium:
+            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx116605-uzDakXnaZ1OW.jpg',
+        },
+      },
+      type: 'ANIME_LIST',
+      createdAt: 1649428099,
+      status: 'watched episode',
+      progress: '1',
+    },
+    {
+      __typename: 'ListActivity',
+      id: 374773407,
+      media: {
+        id: 30933,
+        type: 'MANGA',
+        title: {
+          romaji: 'Elfen Lied',
+        },
+        coverImage: {
+          medium:
+            'https://s4.anilist.co/file/anilistcdn/media/manga/cover/small/933-KbrldlVsrfxl.jpg',
+        },
+      },
+      type: 'MANGA_LIST',
+      createdAt: 1649368469,
+      status: 'read chapter',
+      progress: '3 - 7',
+    },
+    {
+      __typename: 'ListActivity',
+      id: 374580699,
+      media: {
+        id: 121034,
+        type: 'ANIME',
+        title: {
+          romaji: 'Date A Bullet: Nightmare or Queen',
+        },
+        coverImage: {
+          medium:
+            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx121034-tdLiWDs07tOi.jpg',
+        },
+      },
+      type: 'ANIME_LIST',
+      createdAt: 1649336880,
+      status: 'completed',
+      progress: null,
+    },
+    {
+      __typename: 'ListActivity',
+      id: 374303605,
+      media: {
+        id: 30933,
+        type: 'MANGA',
+        title: {
+          romaji: 'Elfen Lied',
+        },
+        coverImage: {
+          medium:
+            'https://s4.anilist.co/file/anilistcdn/media/manga/cover/small/933-KbrldlVsrfxl.jpg',
+        },
+      },
+      type: 'MANGA_LIST',
+      createdAt: 1649280136,
+      status: 'read chapter',
+      progress: '1 - 2',
+    },
+    {
+      __typename: 'ListActivity',
+      id: 374303463,
+      media: {
+        id: 111233,
+        type: 'MANGA',
+        title: {
+          romaji: 'Yofukashi no Uta',
+        },
+        coverImage: {
+          medium:
+            'https://s4.anilist.co/file/anilistcdn/media/manga/cover/small/bx111233-QU3BW8uqCvcN.jpg',
+        },
+      },
+      type: 'MANGA_LIST',
+      createdAt: 1649280117,
+      status: 'read chapter',
+      progress: '105',
+    },
+  ],
+  [
+    {
+      __typename: 'ListActivity',
+      id: 374303443,
+      media: {
+        id: 101177,
+        type: 'MANGA',
+        title: {
+          romaji: 'Tonikaku Kawaii',
+        },
+        coverImage: {
+          medium:
+            'https://s4.anilist.co/file/anilistcdn/media/manga/cover/small/nx101177-FjjD5UWB3C3t.png',
+        },
+      },
+      type: 'MANGA_LIST',
+      createdAt: 1649280112,
+      status: 'read chapter',
+      progress: '186',
+    },
+    {
+      __typename: 'ListActivity',
+      id: 374264765,
+      media: {
+        id: 111852,
+        type: 'ANIME',
+        title: {
+          romaji: 'Date A Bullet: Dead or Bullet',
+        },
+        coverImage: {
+          medium:
+            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx111852-W3cRNx9CO7sJ.jpg',
+        },
+      },
+      type: 'ANIME_LIST',
+      createdAt: 1649274771,
+      status: 'completed',
+      progress: null,
+    },
+    {
+      __typename: 'ListActivity',
+      id: 374151171,
+      media: {
+        id: 100722,
+        type: 'ANIME',
+        title: {
+          romaji: 'Date A Live III',
+        },
+        coverImage: {
+          medium:
+            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/nx100722-M5nXzDkuGOLC.png',
+        },
+      },
+      type: 'ANIME_LIST',
+      createdAt: 1649257372,
+      status: 'rewatched',
+      progress: '12',
+    },
+    {
+      __typename: 'ListActivity',
+      id: 374151165,
+      media: {
+        id: 100722,
+        type: 'ANIME',
+        title: {
+          romaji: 'Date A Live III',
+        },
+        coverImage: {
+          medium:
+            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/nx100722-M5nXzDkuGOLC.png',
+        },
+      },
+      type: 'ANIME_LIST',
+      createdAt: 1649257371,
+      status: 'rewatched episode',
+      progress: '9 - 11',
+    },
+    {
+      __typename: 'ListActivity',
+      id: 373983533,
+      media: {
+        id: 101583,
+        type: 'MANGA',
+        title: {
+          romaji: 'Sono Bisque Doll wa Koi wo Suru',
+        },
+        coverImage: {
+          medium:
+            'https://s4.anilist.co/file/anilistcdn/media/manga/cover/small/bx101583-LsEOUNrjOpez.jpg',
+        },
+      },
+      type: 'MANGA_LIST',
+      createdAt: 1649220956,
+      status: 'plans to read',
+      progress: null,
+    },
+    {
+      __typename: 'ListActivity',
+      id: 373799850,
+      media: {
+        id: 100722,
+        type: 'ANIME',
+        title: {
+          romaji: 'Date A Live III',
+        },
+        coverImage: {
+          medium:
+            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/nx100722-M5nXzDkuGOLC.png',
+        },
+      },
+      type: 'ANIME_LIST',
+      createdAt: 1649189308,
+      status: 'rewatched episode',
+      progress: '6 - 8',
+    },
+    {
+      __typename: 'ListActivity',
+      id: 373610691,
+      media: {
+        id: 139303,
+        type: 'ANIME',
+        title: {
+          romaji: 'Black★★Rock Shooter: DAWN FALL',
+        },
+        coverImage: {
+          medium:
+            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx139303-8IeaAGasu2Bc.jpg',
+        },
+      },
+      type: 'ANIME_LIST',
+      createdAt: 1649158160,
+      status: 'watched episode',
+      progress: '1',
+    },
+    {
+      __typename: 'ListActivity',
+      id: 373283012,
+      media: {
+        id: 101177,
+        type: 'MANGA',
+        title: {
+          romaji: 'Tonikaku Kawaii',
+        },
+        coverImage: {
+          medium:
+            'https://s4.anilist.co/file/anilistcdn/media/manga/cover/small/nx101177-FjjD5UWB3C3t.png',
+        },
+      },
+      type: 'MANGA_LIST',
+      createdAt: 1649096111,
+      status: 'read chapter',
+      progress: '181 - 185',
+    },
+    {
+      __typename: 'ListActivity',
+      id: 373250787,
+      media: {
+        id: 100722,
+        type: 'ANIME',
+        title: {
+          romaji: 'Date A Live III',
+        },
+        coverImage: {
+          medium:
+            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/nx100722-M5nXzDkuGOLC.png',
+        },
+      },
+      type: 'ANIME_LIST',
+      createdAt: 1649091316,
+      status: 'rewatched episode',
+      progress: '3 - 5',
+    },
+    {
+      __typename: 'ListActivity',
+      id: 372878518,
+      media: {
+        id: 101177,
+        type: 'MANGA',
+        title: {
+          romaji: 'Tonikaku Kawaii',
+        },
+        coverImage: {
+          medium:
+            'https://s4.anilist.co/file/anilistcdn/media/manga/cover/small/nx101177-FjjD5UWB3C3t.png',
+        },
+      },
+      type: 'MANGA_LIST',
+      createdAt: 1649024172,
+      status: 'read chapter',
+      progress: '173 - 180',
+    },
+  ],
+  [
+    {
+      __typename: 'ListActivity',
+      id: 372869700,
+      media: {
+        id: 100722,
+        type: 'ANIME',
+        title: {
+          romaji: 'Date A Live III',
+        },
+        coverImage: {
+          medium:
+            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/nx100722-M5nXzDkuGOLC.png',
+        },
+      },
+      type: 'ANIME_LIST',
+      createdAt: 1649023171,
+      status: 'rewatched episode',
+      progress: '1 - 2',
+    },
+    {
+      __typename: 'ListActivity',
+      id: 372664383,
+      media: {
+        id: 20741,
+        type: 'ANIME',
+        title: {
+          romaji: 'Date A Live Movie: Mayuri Judgement',
+        },
+        coverImage: {
+          medium:
+            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx20741-WdThAhseSo1y.jpg',
+        },
+      },
+      type: 'ANIME_LIST',
+      createdAt: 1648998747,
+      status: 'rewatched',
+      progress: '1',
+    },
+    {
+      __typename: 'ListActivity',
+      id: 372591332,
+      media: {
+        id: 918,
+        type: 'ANIME',
+        title: {
+          romaji: 'Gintama',
+        },
+        coverImage: {
+          medium:
+            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx918-hRbQHIkRUebX.jpg',
+        },
+      },
+      type: 'ANIME_LIST',
+      createdAt: 1648986810,
+      status: 'paused watching',
+      progress: null,
+    },
+    {
+      __typename: 'ListActivity',
+      id: 372591257,
+      media: {
+        id: 918,
+        type: 'ANIME',
+        title: {
+          romaji: 'Gintama',
+        },
+        coverImage: {
+          medium:
+            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx918-hRbQHIkRUebX.jpg',
+        },
+      },
+      type: 'ANIME_LIST',
+      createdAt: 1648986794,
+      status: 'watched episode',
+      progress: '175 - 176',
+    },
+    {
+      __typename: 'ListActivity',
+      id: 372353382,
+      media: {
+        id: 101177,
+        type: 'MANGA',
+        title: {
+          romaji: 'Tonikaku Kawaii',
+        },
+        coverImage: {
+          medium:
+            'https://s4.anilist.co/file/anilistcdn/media/manga/cover/small/nx101177-FjjD5UWB3C3t.png',
+        },
+      },
+      type: 'MANGA_LIST',
+      createdAt: 1648940030,
+      status: 'read chapter',
+      progress: '169 - 172',
+    },
+    {
+      __typename: 'ListActivity',
+      id: 372349775,
+      media: {
+        id: 113076,
+        type: 'MANGA',
+        title: {
+          romaji: 'Real mo Tama ni wa Uso wo Tsuku',
+        },
+        coverImage: {
+          medium:
+            'https://s4.anilist.co/file/anilistcdn/media/manga/cover/small/bx113076-vDHc7BiVw5p3.jpg',
+        },
+      },
+      type: 'MANGA_LIST',
+      createdAt: 1648939476,
+      status: 'read chapter',
+      progress: '108',
+    },
+    {
+      __typename: 'ListActivity',
+      id: 372349642,
+      media: {
+        id: 111233,
+        type: 'MANGA',
+        title: {
+          romaji: 'Yofukashi no Uta',
+        },
+        coverImage: {
+          medium:
+            'https://s4.anilist.co/file/anilistcdn/media/manga/cover/small/bx111233-QU3BW8uqCvcN.jpg',
+        },
+      },
+      type: 'MANGA_LIST',
+      createdAt: 1648939453,
+      status: 'read chapter',
+      progress: '103 - 104',
+    },
+    {
+      __typename: 'ListActivity',
+      id: 372286501,
+      media: {
+        id: 918,
+        type: 'ANIME',
+        title: {
+          romaji: 'Gintama',
+        },
+        coverImage: {
+          medium:
+            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx918-hRbQHIkRUebX.jpg',
+        },
+      },
+      type: 'ANIME_LIST',
+      createdAt: 1648929846,
+      status: 'watched episode',
+      progress: '167 - 174',
+    },
+    {
+      __typename: 'ListActivity',
+      id: 372195120,
+      media: {
+        id: 133891,
+        type: 'ANIME',
+        title: {
+          romaji: 'Love Live! Nijigasaki Gakuen School Idol Doukoukai 2',
+        },
+        coverImage: {
+          medium:
+            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx133891-VzjX5rquZqd0.png',
+        },
+      },
+      type: 'ANIME_LIST',
+      createdAt: 1648916106,
+      status: 'watched episode',
+      progress: '1',
+    },
+    {
+      __typename: 'ListActivity',
+      id: 371881194,
+      media: {
+        id: 101177,
+        type: 'MANGA',
+        title: {
+          romaji: 'Tonikaku Kawaii',
+        },
+        coverImage: {
+          medium:
+            'https://s4.anilist.co/file/anilistcdn/media/manga/cover/small/nx101177-FjjD5UWB3C3t.png',
+        },
+      },
+      type: 'MANGA_LIST',
+      createdAt: 1648853637,
+      status: 'read chapter',
+      progress: '160 - 168',
+    },
+  ],
+  [
+    {
+      __typename: 'ListActivity',
+      id: 371859354,
+      media: {
+        id: 918,
+        type: 'ANIME',
+        title: {
+          romaji: 'Gintama',
+        },
+        coverImage: {
+          medium:
+            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx918-hRbQHIkRUebX.jpg',
+        },
+      },
+      type: 'ANIME_LIST',
+      createdAt: 1648850201,
+      status: 'watched episode',
+      progress: '164 - 166',
+    },
+    {
+      __typename: 'ListActivity',
+      id: 371763023,
+      media: {
+        id: 20767,
+        type: 'ANIME',
+        title: {
+          romaji: 'Date A Live II: Kurumi Star Festival',
+        },
+        coverImage: {
+          medium:
+            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx20767-kvu80j0CZx7C.png',
+        },
+      },
+      type: 'ANIME_LIST',
+      createdAt: 1648834866,
+      status: 'rewatched',
+      progress: '1',
+    },
+    {
+      __typename: 'ListActivity',
+      id: 371762906,
+      media: {
+        id: 19163,
+        type: 'ANIME',
+        title: {
+          romaji: 'Date A Live II',
+        },
+        coverImage: {
+          medium:
+            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/nx19163-eHXj3mNRaOXt.jpg',
+        },
+      },
+      type: 'ANIME_LIST',
+      createdAt: 1648834842,
+      status: 'rewatched',
+      progress: '10',
+    },
+    {
+      __typename: 'ListActivity',
+      id: 371417418,
+      media: {
+        id: 19163,
+        type: 'ANIME',
+        title: {
+          romaji: 'Date A Live II',
+        },
+        coverImage: {
+          medium:
+            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/nx19163-eHXj3mNRaOXt.jpg',
+        },
+      },
+      type: 'ANIME_LIST',
+      createdAt: 1648763696,
+      status: 'rewatched episode',
+      progress: '6 - 9',
+    },
+    {
+      __typename: 'ListActivity',
+      id: 370973933,
+      media: {
+        id: 19163,
+        type: 'ANIME',
+        title: {
+          romaji: 'Date A Live II',
+        },
+        coverImage: {
+          medium:
+            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/nx19163-eHXj3mNRaOXt.jpg',
+        },
+      },
+      type: 'ANIME_LIST',
+      createdAt: 1648677804,
+      status: 'rewatched episode',
+      progress: '4 - 5',
+    },
+    {
+      __typename: 'ListActivity',
+      id: 370534034,
+      media: {
+        id: 19163,
+        type: 'ANIME',
+        title: {
+          romaji: 'Date A Live II',
+        },
+        coverImage: {
+          medium:
+            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/nx19163-eHXj3mNRaOXt.jpg',
+        },
+      },
+      type: 'ANIME_LIST',
+      createdAt: 1648590990,
+      status: 'rewatched episode',
+      progress: '1 - 3',
+    },
+    {
+      __typename: 'ListActivity',
+      id: 370457903,
+      media: {
+        id: 17641,
+        type: 'ANIME',
+        title: {
+          romaji: 'Date A Live: Date to Date',
+        },
+        coverImage: {
+          medium:
+            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx17641-q5VVIoHcFZAZ.jpg',
+        },
+      },
+      type: 'ANIME_LIST',
+      createdAt: 1648579942,
+      status: 'rewatched',
+      progress: '1',
+    },
+    {
+      __typename: 'ListActivity',
+      id: 370457737,
+      media: {
+        id: 15583,
+        type: 'ANIME',
+        title: {
+          romaji: 'Date A Live',
+        },
+        coverImage: {
+          medium:
+            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx15583-Sxd2J4RJdRhj.jpg',
+        },
+      },
+      type: 'ANIME_LIST',
+      createdAt: 1648579919,
+      status: 'rewatched',
+      progress: '12',
+    },
+    {
+      __typename: 'ListActivity',
+      id: 370457733,
+      media: {
+        id: 15583,
+        type: 'ANIME',
+        title: {
+          romaji: 'Date A Live',
+        },
+        coverImage: {
+          medium:
+            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx15583-Sxd2J4RJdRhj.jpg',
+        },
+      },
+      type: 'ANIME_LIST',
+      createdAt: 1648579918,
+      status: 'rewatched episode',
+      progress: '9 - 11',
+    },
+    {
+      __typename: 'ListActivity',
+      id: 369860821,
+      media: {
+        id: 15583,
+        type: 'ANIME',
+        title: {
+          romaji: 'Date A Live',
+        },
+        coverImage: {
+          medium:
+            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx15583-Sxd2J4RJdRhj.jpg',
+        },
+      },
+      type: 'ANIME_LIST',
+      createdAt: 1648472503,
+      status: 'rewatched episode',
+      progress: '6 - 8',
     },
   ],
 ]
