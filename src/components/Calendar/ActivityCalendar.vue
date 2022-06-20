@@ -2,8 +2,9 @@
 import { onBeforeMount, reactive } from 'vue'
 import type { Day } from '../../stores/helpers/activities'
 import { useUserStore } from '../../stores/user'
-import CalendarDays from './CalendarDays.vue'
+import { getActivitiesFromDay } from '../../stores/helpers/calendar'
 
+import CalendarDays from './CalendarDays.vue'
 import ActivityDay from '../Overview/ActivityDay.vue'
 import CalendarHeader from './CalendarHeader.vue'
 
@@ -54,12 +55,24 @@ const switchYear = (year: number) => {
   state.year = year
 }
 
-const showPopup = (timestamp: number) => {
+const showPopup = async (timestamp: number) => {
   const day = user.days.get(timestamp)
 
   if (day) {
     popup.timestamp = timestamp
     popup.day = day
+  } else {
+    if (timestamp > Date.now() || !user.userData) return
+    else {
+      const act = await getActivitiesFromDay(
+        user.userData.id,
+        user.dataset,
+        timestamp
+      )
+
+      popup.timestamp = timestamp
+      popup.day = Array.from(act.values())[0]
+    }
   }
 }
 </script>
