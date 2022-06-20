@@ -50,6 +50,10 @@ const nextMonth = () => {
   }
 }
 
+const switchYear = (year: number) => {
+  state.year = year
+}
+
 const showPopup = (timestamp: number) => {
   const day = user.days.get(timestamp)
 
@@ -67,6 +71,7 @@ const showPopup = (timestamp: number) => {
       :year="state.year"
       @previous="() => previousMonth()"
       @next="() => nextMonth()"
+      @switch="y => switchYear(y)"
     />
     <div class="days">
       <div class="day">Sun</div>
