@@ -110,7 +110,7 @@ a:hover {
 
 .backdrop-enter-active,
 .backdrop-leave-active {
-  transition: 0.1s ease;
+  transition: 0.2s ease;
 }
 
 .modal-enter-from,
