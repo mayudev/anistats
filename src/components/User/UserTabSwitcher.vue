@@ -3,10 +3,16 @@ import SwitcherTab from '@/components/layout/SwitcherTab.vue'
 </script>
 
 <template>
-  <div>
+  <div class="tabs">
     <SwitcherTab as="link" :to="{ name: 'overview' }">Overview</SwitcherTab>
     <SwitcherTab as="link" :to="{ name: 'list' }">List</SwitcherTab>
   </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@media not all and (min-width: 600px) {
+  .tabs {
+    margin: 1rem 0;
+  }
+}
+</style>

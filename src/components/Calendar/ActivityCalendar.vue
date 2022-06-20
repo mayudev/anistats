@@ -70,15 +70,16 @@ const switchYear = (year: number) => {
 const showPopup = async (timestamp: number) => {
   const day = user.days.get(timestamp)
 
-  popup.show = true
-  popup.loading = true
-
   if (day) {
+    popup.show = true
+
     popup.timestamp = timestamp
     popup.day = day
   } else {
     if (timestamp > Date.now() || !user.userData) return
     else {
+      popup.show = true
+      popup.loading = true
       try {
         const act = await getActivitiesFromDay(
           user.userData.id,
@@ -176,5 +177,7 @@ const closePopup = () => {
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  margin: 0.5rem;
 }
 </style>

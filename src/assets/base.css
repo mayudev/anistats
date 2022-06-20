@@ -29,6 +29,7 @@
   --c-text-dark-2: #cbd3e3;
 
   --theme-transition: 0.4s;
+  --breakpoint: 768px;
 }
 
 /* defaults (dark theme) */

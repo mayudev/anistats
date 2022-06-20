@@ -18,12 +18,15 @@ const user = useUserStore()
 
 <style lang="scss" scoped>
 .header {
-  display: flex;
-  align-items: center;
-
   border-radius: 6px;
-
   padding: 0.8rem;
+}
+
+@media (min-width: 600px) {
+  .header {
+    display: flex;
+    align-items: center;
+  }
 }
 
 .header-username {

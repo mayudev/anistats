@@ -10,7 +10,7 @@ const user = useUserStore()
 
 <template>
   <main>
-    <div>
+    <div class="left">
       <DataRange :timestamp="user.lastDayTimestamp" />
       <div class="chart-container">
         <ActivityCalendar :days="user.days" />
@@ -39,15 +39,19 @@ const user = useUserStore()
 </template>
 
 <style lang="scss" scoped>
-main {
-  display: grid;
-  grid-template-columns: 50% 50%;
+@media (min-width: 800px) {
+  main {
+    display: grid;
+    grid-template-columns: 50% 50%;
+  }
+  .left {
+    margin-right: 0.5rem;
+  }
 }
 
 .chart-container {
   box-shadow: 0 5 3px rgba(0, 0, 0, 0.25);
   margin-bottom: 12px;
-  margin-right: 0.5rem;
 }
 
 .chart-header {

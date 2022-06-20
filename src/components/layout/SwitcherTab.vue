@@ -19,8 +19,10 @@ const props = defineProps<{
   transition: opacity 200ms, color var(--theme-transition);
 }
 
-.tab:first-child {
-  margin-left: 1rem;
+@media (min-width: 600px) {
+  .tab:first-child {
+    margin-left: 1rem;
+  }
 }
 
 .router-link-exact-active {

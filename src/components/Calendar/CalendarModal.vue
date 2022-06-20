@@ -25,6 +25,17 @@ defineEmits<{
   z-index: 11;
 }
 
+@media (max-width: 768px) {
+  .modal {
+    position: fixed;
+    bottom: 0;
+    left: 10px;
+    right: 10px;
+
+    overflow-y: scroll;
+  }
+}
+
 .backdrop-enter-from,
 .backdrop-leave-to {
   opacity: 0;

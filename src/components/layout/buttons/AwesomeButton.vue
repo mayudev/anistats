@@ -23,6 +23,7 @@ defineProps<{
   background: var(--color-background-secondary);
 
   display: flex;
+  align-items: center;
 
   padding: 0.5rem;
   border-radius: 6px;
