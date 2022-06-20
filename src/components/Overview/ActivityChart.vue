@@ -46,7 +46,7 @@ const render = () => {
     .append('g')
     .attr('transform', `translate(0, ${margin.top})`)
 
-  const countArray = Array.from(props.days.values()).map(x => x.totalEpisodes)
+  const countArray = Array.from(props.days.values()).map(x => x[props.property])
 
   const keys = Array.from(props.days.keys())
 
