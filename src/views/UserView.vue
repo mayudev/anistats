@@ -51,12 +51,11 @@ onMounted(async () => {
 
 @keyframes appear {
   from {
+    transform: translateY(30px);
     opacity: 0;
-    transform: scale(0.8);
   }
   to {
     opacity: 1;
-    transform: scale(1);
   }
 }
 </style>
