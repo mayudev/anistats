@@ -10,6 +10,8 @@ import {
 import CalendarDays from './CalendarDays.vue'
 import ActivityDay from '../Overview/ActivityDay.vue'
 import CalendarHeader from './CalendarHeader.vue'
+import CalendarModal from './CalendarModal.vue'
+import ModalBackdrop from '../layout/ModalBackdrop.vue'
 
 const user = useUserStore()
 
@@ -86,6 +88,11 @@ const showPopup = async (timestamp: number) => {
     }
   }
 }
+
+const closePopup = () => {
+  popup.day = null
+  popup.timestamp = 0
+}
 </script>
 
 <template>
@@ -112,9 +119,18 @@ const showPopup = async (timestamp: number) => {
       :days="days"
       @popup="timestamp => showPopup(timestamp)"
     />
-    <div v-if="popup.day && popup.timestamp">
-      <ActivityDay :day="popup.day" :timestamp="popup.timestamp" />
-    </div>
+    <Transition name="backdrop">
+      <ModalBackdrop v-if="popup.timestamp" @close="() => closePopup()" />
+    </Transition>
+
+    <Transition name="modal">
+      <CalendarModal
+        v-if="popup.day && popup.timestamp"
+        @close="() => closePopup()"
+      >
+        <ActivityDay :day="popup.day" :timestamp="popup.timestamp" />
+      </CalendarModal>
+    </Transition>
   </div>
 </template>
 

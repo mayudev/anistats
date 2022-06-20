@@ -5,8 +5,8 @@ import { useUserStore } from '../../stores/user'
 import ActivityChart from '../../components/Overview/ActivityChart.vue'
 import { findMediaActivities } from '../../stores/helpers/media'
 import { displayDate } from '../../lib/days'
-import FontAwesomeIcon from '@/components/FontAwesomeIcon.vue'
 import LoadingSpinner from '@/components/layout/LoadingSpinner.vue'
+import ErrorMessage from '../layout/ErrorMessage.vue'
 
 const user = useUserStore()
 
@@ -52,8 +52,7 @@ onMounted(async () => {
     />
   </div>
   <div class="error" v-else-if="state.days?.size === 0">
-    <FontAwesomeIcon icon="triangle-exclamation" :width="24" />
-    <span class="error-text">No activity found.</span>
+    <ErrorMessage message="No activity found." :icon-size="24" />
   </div>
   <div class="loading" v-else>
     <LoadingSpinner :width="24" :border-width="2" />

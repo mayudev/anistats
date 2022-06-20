@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { Day } from '../../stores/helpers/activities'
 import ActivityDay from '@/components/Overview/ActivityDay.vue'
-import FontAwesomeIcon from '@/components/FontAwesomeIcon.vue'
+import ErrorMessage from '../layout/ErrorMessage.vue'
 
 defineProps<{
   days: Map<number, Day>
@@ -17,13 +17,11 @@ defineProps<{
       :day="day[1]"
     />
   </div>
-  <div class="error" v-else>
-    <FontAwesomeIcon icon="triangle-exclamation" :width="32" />
-    <span class="error-text">No data found!</span>
-    <span class="error-text"
-      >Try changing the filters above or loading more data.</span
-    >
-  </div>
+  <ErrorMessage
+    v-else
+    message="No data found!"
+    message2="Try changing the filters above or loading more data."
+  />
 </template>
 
 <style lang="scss">
