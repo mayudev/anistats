@@ -52,6 +52,7 @@ const close = () => {
       />
       <ClickableIcon
         class="button-wrapper"
+        v-if="closeable"
         @click="() => close()"
         icon="xmark"
       />
