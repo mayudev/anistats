@@ -16,8 +16,9 @@ defineProps<{
     <span style="flex: 1" />
     <span class="range-text">{{ displayDate(timestamp) }} - today</span>
     <AwesomeButton
+      v-if="!user.finished"
       @click="() => user.fetchActivities()"
-      icon="arrows-down-to-line"
+      icon="arrows-rotate"
       >Load more</AwesomeButton
     >
   </div>

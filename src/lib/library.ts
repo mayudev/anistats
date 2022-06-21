@@ -6,9 +6,7 @@ import {
   faAngleLeft,
   faAngleRight,
   faAngleUp,
-  faArrowsDownToLine,
-  faCaretDown,
-  faChevronCircleDown,
+  faArrowsRotate,
   faCircleHalfStroke,
   faCircleQuestion,
   faCode,
@@ -22,12 +20,10 @@ library.add(
   faCircleQuestion,
   faAngleRight,
   faAngleLeft,
-  faArrowsDownToLine,
   faTriangleExclamation,
-  faChevronCircleDown,
-  faCaretDown,
   faAngleDown,
   faAngleUp,
+  faArrowsRotate,
   faXmark
 )
 

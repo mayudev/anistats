@@ -14,6 +14,7 @@ interface Store {
   boundaryHour: number
 
   busy: boolean
+  finished: boolean
 
   currentPage: number
   activities: UserActivity[]
@@ -27,6 +28,7 @@ export const useUserStore = defineStore('user', {
     boundaryHour: 3,
 
     busy: false,
+    finished: false,
 
     currentPage: 1,
     activities: [],
@@ -95,14 +97,20 @@ export const useUserStore = defineStore('user', {
 
         this.currentPage += 2
       } else {
-        if (!this.cachedActivities) return
-
         this.activities = this.activities.concat(this.cachedActivities)
 
         const newActivities = await fetchActivities(
           this.userData.id,
           this.currentPage
         )
+
+        if (
+          !newActivities.activities ||
+          newActivities.activities.length === 0
+        ) {
+          this.finished = true
+          return
+        }
 
         this.cachedActivities = newActivities.activities
 

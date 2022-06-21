@@ -9,7 +9,7 @@ defineProps<{
 
 <template>
   <button class="button" @click="$emit('click')">
-    <FontAwesomeIcon :icon="icon" :width="size || 24" />
+    <FontAwesomeIcon :icon="icon" :width="size || 16" />
     <span class="button-text"><slot></slot></span>
   </button>
 </template>
