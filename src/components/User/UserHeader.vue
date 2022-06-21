@@ -10,9 +10,10 @@ const user = useUserStore()
   <nav class="header">
     <img class="header-image" :src="user.userData?.avatar.medium" />
     <span class="header-username">{{ user.userData?.name }}</span>
-    <UserTabSwitcher />
-    <span style="flex: 1" />
-    <UserDatasetSwitcher />
+    <div class="header-tabs">
+      <UserTabSwitcher />
+      <UserDatasetSwitcher />
+    </div>
   </nav>
 </template>
 
@@ -26,6 +27,13 @@ const user = useUserStore()
   .header {
     display: flex;
     align-items: center;
+  }
+
+  .header-tabs {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 }
 

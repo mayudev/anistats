@@ -57,7 +57,13 @@ const close = () => {
         icon="xmark"
       />
     </div>
-    <ActivityMedia v-for="media in day.media" :key="media.id" :media="media" />
+    <div class="media">
+      <ActivityMedia
+        v-for="media in day.media"
+        :key="media.id"
+        :media="media"
+      />
+    </div>
   </div>
 </template>
 
@@ -89,5 +95,12 @@ const close = () => {
 
 .date {
   font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .media {
+    max-height: 80vh;
+    overflow-y: scroll;
+  }
 }
 </style>

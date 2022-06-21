@@ -12,7 +12,7 @@ import AppFooter from './AppFooter.vue'
 
 <style lang="scss" scoped>
 .container {
-  padding-top: 20vh;
+  padding-top: 1rem;
   min-height: 100vh;
 
   max-width: min(960px, 95vw);
@@ -20,5 +20,11 @@ import AppFooter from './AppFooter.vue'
 
   display: flex;
   flex-direction: column;
+}
+
+@media (min-width: 800px) {
+  .container {
+    padding-top: 20vh;
+  }
 }
 </style>

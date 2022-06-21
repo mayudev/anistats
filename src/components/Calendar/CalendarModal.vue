@@ -31,8 +31,6 @@ defineEmits<{
     bottom: 0;
     left: 10px;
     right: 10px;
-
-    overflow-y: scroll;
   }
 }
 
