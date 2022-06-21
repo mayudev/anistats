@@ -146,6 +146,8 @@ const closePopup = () => {
           v-else-if="popup.day"
           :day="popup.day"
           :timestamp="popup.timestamp"
+          closeable
+          @close="() => closePopup()"
         />
         <div class="center" v-else>
           <ErrorMessage message="No activities found." />

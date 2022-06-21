@@ -5,10 +5,16 @@ import { weekdays, displayDate } from '@/lib/days'
 import NamedProp from '../layout/NamedProp.vue'
 import { useUserStore } from '../../stores/user'
 import { reactive, watch } from 'vue'
+import ClickableIcon from '../layout/buttons/ClickableIcon.vue'
 
 const props = defineProps<{
   timestamp: number
   day: Day
+  closeable?: boolean
+}>()
+
+const emit = defineEmits<{
+  (event: 'close'): void
 }>()
 
 const state = reactive({
@@ -20,6 +26,10 @@ watch(props, () => {
 })
 
 const user = useUserStore()
+
+const close = () => {
+  emit('close')
+}
 </script>
 
 <template>
@@ -39,6 +49,11 @@ const user = useUserStore()
         v-if="user.dataset !== 'manga'"
         name="episodes"
         :value="day.totalEpisodes"
+      />
+      <ClickableIcon
+        class="button-wrapper"
+        @click="() => close()"
+        icon="xmark"
       />
     </div>
     <ActivityMedia v-for="media in day.media" :key="media.id" :media="media" />
@@ -73,24 +88,5 @@ const user = useUserStore()
 
 .date {
   font-weight: 500;
-}
-
-.header-prop {
-  display: flex;
-  align-items: center;
-
-  &:nth-child(odd) {
-    margin-right: 1rem;
-  }
-}
-
-.prop-value {
-  font-size: 1.4rem;
-  margin-right: 0.35rem;
-}
-
-.prop-name {
-  font-size: 0.76rem;
-  color: var(--color-text-secondary);
 }
 </style>
