@@ -1,18 +1,31 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import type { MediaDiff } from '../../stores/helpers/activities'
 import NamedProp from '../layout/NamedProp.vue'
 import MediaDetails from './MediaDetails.vue'
 
 const props = defineProps<{
   media: MediaDiff
+  selected?: number
+}>()
+
+const emit = defineEmits<{
+  (event: 'select'): void
 }>()
 
 const displayDetails = ref(false)
 
 const toggleDetails = () => {
+  emit('select')
+
   displayDetails.value = !displayDetails.value
 }
+
+watch(props, newProps => {
+  if (newProps.selected !== 0 && newProps.selected !== props.media.id) {
+    displayDetails.value = false
+  }
+})
 
 const propName =
   (props.media.type === 'ANIME' ? 'episode' : 'chapter') +

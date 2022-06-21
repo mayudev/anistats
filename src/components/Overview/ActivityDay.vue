@@ -19,6 +19,7 @@ const emit = defineEmits<{
 
 const state = reactive({
   date: new Date(props.timestamp),
+  selected: 0,
 })
 
 watch(props, () => {
@@ -62,6 +63,8 @@ const close = () => {
         v-for="media in day.media"
         :key="media.id"
         :media="media"
+        @select="() => (state.selected = media.id)"
+        :selected="closeable ? state.selected : 0"
       />
     </div>
   </div>
