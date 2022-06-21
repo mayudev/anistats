@@ -38,7 +38,9 @@ onMounted(async () => {
     <HeaderBar />
     <main class="user">
       <UserHeader />
-      <LoadingSpinner v-if="isLoading" :width="72" :border-width="8" />
+      <div class="center" v-if="isLoading">
+        <LoadingSpinner :width="72" :border-width="8" />
+      </div>
       <RouterView v-else></RouterView>
     </main>
   </div>
@@ -47,6 +49,11 @@ onMounted(async () => {
 <style lang="scss" scoped>
 .user {
   animation: appear 0.4s;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
 }
 
 @keyframes appear {
