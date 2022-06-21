@@ -2,8 +2,12 @@
 import { useUserStore } from '../../stores/user'
 import UserTabSwitcher from './UserTabSwitcher.vue'
 import UserDatasetSwitcher from './UserDatasetSwitcher.vue'
+import ClickableIcon from '../layout/buttons/ClickableIcon.vue'
+import { ref } from 'vue'
 
 const user = useUserStore()
+
+const showSwitcher = ref(false)
 </script>
 
 <template>
@@ -11,8 +15,18 @@ const user = useUserStore()
     <img class="header-image" :src="user.userData?.avatar.medium" />
     <span class="header-username">{{ user.userData?.name }}</span>
     <div class="header-tabs">
-      <UserTabSwitcher />
-      <UserDatasetSwitcher />
+      <span class="header-row">
+        <UserTabSwitcher />
+        <ClickableIcon
+          class="expand"
+          :icon="showSwitcher ? 'angle-up' : 'angle-down'"
+          @click="() => (showSwitcher = !showSwitcher)"
+        />
+      </span>
+      <UserDatasetSwitcher
+        class="expandable"
+        :class="{ 'expandable-show': showSwitcher }"
+      />
     </div>
   </nav>
 </template>
@@ -21,6 +35,12 @@ const user = useUserStore()
 .header {
   border-radius: 6px;
   padding: 0.8rem;
+}
+
+.header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 @media (min-width: 600px) {
@@ -34,6 +54,20 @@ const user = useUserStore()
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
+
+  .expand {
+    display: none;
+  }
+}
+
+@media not all and (min-width: 600px) {
+  .expandable {
+    display: none;
+  }
+
+  .expandable-show {
+    display: block;
   }
 }
 
