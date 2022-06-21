@@ -39,17 +39,19 @@ export const useUserStore = defineStore('user', {
       const keys = Array.from(days.keys())
       const lastDayKey = keys[keys.length - 1]
 
-      const lookahead = parseActivitiesForOneDay(
-        state.cachedActivities,
-        lastDayKey,
-        state.dataset
-      )
+      if (state.cachedActivities) {
+        const lookahead = parseActivitiesForOneDay(
+          state.cachedActivities,
+          lastDayKey,
+          state.dataset
+        )
 
-      if (lookahead.media.length > 0) {
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        const lastDay = days.get(lastDayKey)!
-        lastDay.totalEpisodes += lookahead.totalEpisodes
-        lastDay.media = flattenMedia(lastDay.media.concat(lookahead.media))
+        if (lookahead.media.length > 0) {
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          const lastDay = days.get(lastDayKey)!
+          lastDay.totalEpisodes += lookahead.totalEpisodes
+          lastDay.media = flattenMedia(lastDay.media.concat(lookahead.media))
+        }
       }
 
       return days
@@ -93,6 +95,8 @@ export const useUserStore = defineStore('user', {
 
         this.currentPage += 2
       } else {
+        if (!this.cachedActivities) return
+
         this.activities = this.activities.concat(this.cachedActivities)
 
         const newActivities = await fetchActivities(
