@@ -2,9 +2,12 @@
 import { useListStore } from '../../stores/list'
 import type { MediaListEntry } from '../../stores/query/List'
 import ScrollObserver from './ScrollObserver.vue'
+import AwesomeButton from '../layout/buttons/AwesomeButton.vue'
 defineProps<{
   list: MediaListEntry[]
 }>()
+
+const listStore = useListStore()
 
 const { nextPage } = useListStore()
 
@@ -14,13 +17,27 @@ const intersect = () => {
 </script>
 
 <template>
-  <div class="observer">
+  <div>
     <li v-for="entry in list" :key="entry.id">
       {{ entry.media.title.romaji }}
     </li>
+
     <ScrollObserver @intersect="intersect" />
-    <button @click="intersect">load more</button>
+
+    <div class="center">
+      <AwesomeButton
+        icon="arrows-rotate"
+        @click="intersect"
+        v-if="listStore.hasNextPage"
+        >Show more</AwesomeButton
+      >
+    </div>
   </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.center {
+  display: flex;
+  justify-content: center;
+}
+</style>

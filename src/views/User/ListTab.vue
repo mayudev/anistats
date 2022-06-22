@@ -34,7 +34,7 @@ const ensureList = async () => {
     <SelectType />
   </div>
   <div v-else>
-    <ListHeader />
+    <!-- <ListHeader /> -->
     <button @click="() => list.switchStatusFilter('CURRENT')">current</button>
     <button @click="() => list.switchStatusFilter('PLANNING')">planning</button>
     <button @click="() => list.switchStatusFilter('COMPLETED')">
