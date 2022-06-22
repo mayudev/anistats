@@ -1,5 +1,7 @@
 import { graphql } from 'msw'
+import type { MediaType } from '../stores/query/Media'
 import { mockActivities, mockMediaActivities } from './activities'
+import { mockList } from './lists'
 
 export const handlers = [
   graphql.query('UserData', (req, res, ctx) => {
@@ -25,5 +27,11 @@ export const handlers = [
 
   graphql.query('MediaActivities', (req, res, ctx) => {
     return res(ctx.data(mockMediaActivities()))
+  }),
+
+  graphql.query('MediaList', (req, res, ctx) => {
+    const { type } = req.variables as { type: MediaType }
+
+    return res(ctx.data(mockList(type)))
   }),
 ]

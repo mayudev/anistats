@@ -58,7 +58,7 @@ type MediaListStatus =
 export interface MediaList {
   name: string
   isCustomList: boolean
-  status: MediaListStatus
+  status: MediaListStatus | null
   entries: MediaListEntry[]
 }
 
