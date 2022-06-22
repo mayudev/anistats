@@ -11,7 +11,6 @@ export async function fetchList(
     {
       userId,
       type,
-      chunk: 1,
     }
   )
 

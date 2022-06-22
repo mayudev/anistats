@@ -6,12 +6,14 @@ import { useUserStore } from '../stores/user'
 import { RouterView } from 'vue-router'
 import { ref } from 'vue'
 import router from '../router'
+import { useListStore } from '../stores/list'
 
 const isError = ref(false)
 const isLoading = ref(false)
 const errorMessage = ref('')
 
 const user = useUserStore()
+const list = useListStore()
 
 /// showError shows an error and hides it after a timeout
 const showError = (message: string) => {
@@ -52,6 +54,7 @@ const process = async (username: string) => {
   try {
     if (user.userData?.name !== username) {
       await user.$reset()
+      await list.$reset()
       await user.fetchUser(username)
     }
 

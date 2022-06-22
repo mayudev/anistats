@@ -47,7 +47,7 @@ export interface MediaListCollection {
   lists: MediaList[]
 }
 
-type MediaListStatus =
+export type MediaListStatus =
   | 'CURRENT'
   | 'PLANNING'
   | 'COMPLETED'

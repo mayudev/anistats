@@ -3,12 +3,13 @@ import { onMounted, ref } from 'vue'
 import HeaderBar from '../components/Header/HeaderBar.vue'
 import LoadingSpinner from '../components/layout/LoadingSpinner.vue'
 import UserHeader from '../components/User/UserHeader.vue'
+import { useListStore } from '../stores/list'
 import { useUserStore } from '../stores/user'
-undefined
 
 const isLoading = ref(true)
 
 const user = useUserStore()
+const list = useListStore()
 
 const props = defineProps<{
   username: string
@@ -18,6 +19,7 @@ onMounted(async () => {
   try {
     if (user.userData?.name !== props.username) {
       await user.$reset()
+      await list.$reset()
       await user.fetchUser(props.username)
     }
 
