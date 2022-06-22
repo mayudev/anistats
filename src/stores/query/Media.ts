@@ -1,6 +1,6 @@
 import type { UserActivitiesResponse } from './UserActivities'
 
-type MediaType = 'ANIME' | 'MANGA'
+export type MediaType = 'ANIME' | 'MANGA'
 
 interface Title {
   romaji: string
@@ -21,6 +21,27 @@ export interface Media {
 export interface MediaFull extends Media {
   bannerImage: string | null
   episodes?: number
+}
+
+export type MediaFormat =
+  | 'TV'
+  | 'TV_SHORT'
+  | 'MOVIE'
+  | 'SPECIAL'
+  | 'OVA'
+  | 'ONA'
+  | 'MUSIC'
+  | 'MANGA'
+  | 'NOVEL'
+  | 'ONE_SHOT'
+
+export interface MediaEntry extends Media {
+  bannerImage: string | null
+  episodes: number | null
+  chapters: number | null
+  averageScore: number | null
+  seasonYear: number | null
+  format: MediaFormat | null
 }
 
 export interface ResponseWithMedia {

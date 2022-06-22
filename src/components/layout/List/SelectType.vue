@@ -10,7 +10,7 @@ const pick = (type: Dataset) => {
 
 <template>
   <div class="select">
-    <div class="select-message">Select which list you want to see.</div>
+    <div class="select-message">Select which list you want to see:</div>
     <div class="select-buttons">
       <button class="button-anime" @click="() => pick('anime')">Anime</button>
       <button class="button-manga" @click="() => pick('manga')">Manga</button>

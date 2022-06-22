@@ -1,17 +1,18 @@
 <script lang="ts" setup>
 import { onMounted, reactive } from 'vue'
-import type { Day, MediaDiff } from '../../stores/helpers/activities'
+import type { Day } from '../../stores/helpers/activities'
 import { useUserStore } from '../../stores/user'
 import ActivityChart from '../../components/Overview/ActivityChart.vue'
 import { findMediaActivities } from '../../stores/helpers/media'
 import { displayDate } from '../../lib/days'
 import LoadingSpinner from '@/components/layout/LoadingSpinner.vue'
 import ErrorMessage from '../layout/ErrorMessage.vue'
+import type { Media } from '../../stores/query/Media'
 
 const user = useUserStore()
 
 const props = defineProps<{
-  media: MediaDiff
+  media: Media
 }>()
 
 const state = reactive<{

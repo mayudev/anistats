@@ -15,3 +15,9 @@ export interface PageInfo {
   hasNextPage: boolean
   perPage: number
 }
+
+export interface FuzzyDate {
+  year: number | null
+  month: number | null
+  day: number | null
+}
