@@ -12,8 +12,13 @@ interface Store {
   mangaList: MediaListEntry[]
 
   status: Status
-  filter: MediaListStatus
+  filter: MediaListStatus | 'ALL'
+
+  page: number
+  listLength: number
 }
+
+const pageSize = 5
 
 export const useListStore = defineStore('list', {
   state: (): Store => ({
@@ -22,6 +27,9 @@ export const useListStore = defineStore('list', {
 
     status: 'idle',
     filter: 'CURRENT',
+
+    page: 0,
+    listLength: 0,
   }),
   getters: {
     list: state => {
@@ -32,17 +40,28 @@ export const useListStore = defineStore('list', {
       else if (user.dataset === 'manga') list = state.mangaList
       else return []
 
-      return list
+      list = list
         .filter(entry => entry.status === state.filter)
         .sort((a, b) =>
           a.media.title.romaji.localeCompare(b.media.title.romaji)
         )
-        .slice(0, 20)
+
+      state.listLength = list.length
+
+      return list.slice(0, pageSize + state.page * pageSize)
     },
   },
   actions: {
     switchStatusFilter(filter: MediaListStatus) {
+      this.resetPage()
       this.filter = filter
+    },
+    resetPage() {
+      this.page = 0
+    },
+    nextPage() {
+      if (this.page > this.listLength / pageSize) return
+      this.page++
     },
     async fetchMediaList(type: MediaType) {
       const user = useUserStore()

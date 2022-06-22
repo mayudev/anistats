@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useUserStore, type Dataset } from '../../../stores/user'
+import { useUserStore, type Dataset } from '../../stores/user'
 
 const user = useUserStore()
 

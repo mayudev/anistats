@@ -1,9 +1,10 @@
 <script lang="ts" setup>
 import { useUserStore } from '../../stores/user'
-import SelectType from '../../components/layout/List/SelectType.vue'
+import SelectType from '../../components/List/SelectType.vue'
 import { useListStore } from '../../stores/list'
 import { onMounted } from 'vue'
 import LoadingSpinner from '../../components/layout/LoadingSpinner.vue'
+import ListContainer from '../../components/List/ListContainer.vue'
 
 const user = useUserStore()
 const list = useListStore()
@@ -17,6 +18,8 @@ user.$subscribe(() => {
 })
 
 const ensureList = async () => {
+  list.resetPage()
+
   if (user.dataset === 'anime') {
     if (list.animeList.length === 0) await list.fetchMediaList('ANIME')
   } else if (user.dataset === 'manga') {
@@ -39,9 +42,7 @@ const ensureList = async () => {
       <LoadingSpinner :width="24" :border-width="2" />
     </div>
     <div v-else>
-      <li v-for="entry in list.list" :key="entry.id">
-        {{ entry.media.title.romaji }}
-      </li>
+      <ListContainer :list="list.list" />
     </div>
   </div>
 </template>
