@@ -5,6 +5,7 @@ import { useListStore } from '../../stores/list'
 import { onMounted } from 'vue'
 import LoadingSpinner from '../../components/layout/LoadingSpinner.vue'
 import ListContainer from '../../components/List/ListContainer.vue'
+import ListHeader from '../../components/List/ListHeader.vue'
 
 const user = useUserStore()
 const list = useListStore()
@@ -33,6 +34,7 @@ const ensureList = async () => {
     <SelectType />
   </div>
   <div v-else>
+    <ListHeader />
     <button @click="() => list.switchStatusFilter('CURRENT')">current</button>
     <button @click="() => list.switchStatusFilter('PLANNING')">planning</button>
     <button @click="() => list.switchStatusFilter('COMPLETED')">

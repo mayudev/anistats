@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { fetchList } from './api/list'
 import { processLists } from './helpers/list'
-import type { MediaListEntry, MediaListStatus } from './query/List'
+import type { MediaListEntry, MediaListStatusFilter } from './query/List'
 import type { MediaType } from './query/Media'
 import { useUserStore } from './user'
 
@@ -12,10 +12,11 @@ interface Store {
   mangaList: MediaListEntry[]
 
   status: Status
-  filter: MediaListStatus | 'ALL'
+  filter: MediaListStatusFilter
+  query: string
 
   page: number
-  listLength: number
+  hasNextPage: boolean
 }
 
 const pageSize = 5
@@ -26,33 +27,45 @@ export const useListStore = defineStore('list', {
     mangaList: [],
 
     status: 'idle',
-    filter: 'CURRENT',
+    filter: 'ALL',
+    query: '',
 
     page: 0,
-    listLength: 0,
+    hasNextPage: false,
   }),
   getters: {
     list: state => {
       const user = useUserStore()
 
+      // Pick relevant list
       let list
       if (user.dataset === 'anime') list = state.animeList
       else if (user.dataset === 'manga') list = state.mangaList
       else return []
 
+      // Filter status
+      if (state.filter !== 'ALL') {
+        list = list.filter(entry => entry.status === state.filter)
+      }
+
+      // Filter by search query and sort
       list = list
-        .filter(entry => entry.status === state.filter)
+        .filter(
+          entry =>
+            entry.media.title.romaji.toLowerCase().indexOf(state.query) > -1
+        )
         .sort((a, b) =>
           a.media.title.romaji.localeCompare(b.media.title.romaji)
         )
 
-      state.listLength = list.length
+      const itemCount = pageSize + state.page * pageSize
+      state.hasNextPage = list.length > itemCount
 
-      return list.slice(0, pageSize + state.page * pageSize)
+      return list.slice(0, itemCount)
     },
   },
   actions: {
-    switchStatusFilter(filter: MediaListStatus) {
+    switchStatusFilter(filter: MediaListStatusFilter) {
       this.resetPage()
       this.filter = filter
     },
@@ -60,8 +73,11 @@ export const useListStore = defineStore('list', {
       this.page = 0
     },
     nextPage() {
-      if (this.page > this.listLength / pageSize) return
+      if (!this.hasNextPage) return
       this.page++
+    },
+    setSearchQuery(query: string) {
+      this.query = query.toLowerCase()
     },
     async fetchMediaList(type: MediaType) {
       const user = useUserStore()

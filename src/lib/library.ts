@@ -7,9 +7,16 @@ import {
   faAngleRight,
   faAngleUp,
   faArrowsRotate,
+  faAsterisk,
+  faCheck,
   faCircleHalfStroke,
   faCircleQuestion,
+  faClock,
   faCode,
+  faPause,
+  faPlay,
+  faRotateRight,
+  faStop,
   faTriangleExclamation,
   faXmark,
 } from '@fortawesome/free-solid-svg-icons'
@@ -24,7 +31,14 @@ library.add(
   faAngleDown,
   faAngleUp,
   faArrowsRotate,
-  faXmark
+  faXmark,
+  faCheck,
+  faPlay,
+  faAsterisk,
+  faClock,
+  faStop,
+  faPause,
+  faRotateRight
 )
 
 export { FontAwesomeIcon }

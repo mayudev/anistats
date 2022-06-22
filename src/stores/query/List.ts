@@ -55,6 +55,8 @@ export type MediaListStatus =
   | 'PAUSED'
   | 'REPEATING'
 
+export type MediaListStatusFilter = MediaListStatus | 'ALL'
+
 export interface MediaList {
   name: string
   isCustomList: boolean

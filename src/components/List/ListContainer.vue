@@ -9,7 +9,6 @@ defineProps<{
 const { nextPage } = useListStore()
 
 const intersect = () => {
-  console.log('intersected')
   nextPage()
 }
 </script>
