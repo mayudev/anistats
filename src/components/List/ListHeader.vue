@@ -1,11 +1,13 @@
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
 import { useListStore } from '../../stores/list'
-import ListStatusChooser from './ListStatusChooser.vue'
+import StatusChooserButton from './StatusChooser/StatusChooserButton.vue'
+import StatusChooser from './StatusChooser/StatusChooser.vue'
 
 const list = useListStore()
 
 const query = ref('')
+const showChooser = ref(false)
 
 watch(query, () => {
   list.setSearchQuery(query.value)
@@ -14,9 +16,12 @@ watch(query, () => {
 
 <template>
   <div class="header">
-    <ListStatusChooser />
+    <StatusChooserButton @click="showChooser = !showChooser" />
     <input class="search" type="text" placeholder="Search..." v-model="query" />
   </div>
+  <Transition name="picker">
+    <StatusChooser v-if="showChooser" @pick="list.switchStatusFilter" />
+  </Transition>
 </template>
 
 <style lang="scss" scoped>
@@ -24,7 +29,10 @@ watch(query, () => {
   display: flex;
   justify-content: center;
 
-  margin: 1rem;
+  margin: 0.5rem;
+
+  position: relative;
+  z-index: 2;
 }
 
 .search {
@@ -40,5 +48,17 @@ watch(query, () => {
   padding: 0.7rem 1rem;
   border-radius: 6px;
   font-size: 1.2rem;
+}
+
+// Transition
+.picker-enter-from,
+.picker-leave-to {
+  transform: scale(0.9);
+  opacity: 0;
+}
+
+.picker-enter-active,
+.picker-leave-active {
+  transition: 0.2s ease;
 }
 </style>

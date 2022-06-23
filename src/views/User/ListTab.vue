@@ -34,15 +34,12 @@ const ensureList = async () => {
     <SelectType />
   </div>
   <div v-else>
-    <!-- <ListHeader /> -->
-    <button @click="() => list.switchStatusFilter('CURRENT')">current</button>
-    <button @click="() => list.switchStatusFilter('PLANNING')">planning</button>
-    <button @click="() => list.switchStatusFilter('COMPLETED')">
-      completed
-    </button>
+    <ListHeader />
+
     <div class="center" v-if="list.status === 'busy'">
       <LoadingSpinner :width="24" :border-width="2" />
     </div>
+
     <div v-else>
       <ListContainer :list="list.list" />
     </div>
