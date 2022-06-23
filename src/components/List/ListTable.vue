@@ -1,10 +1,14 @@
 <script lang="ts" setup>
 import type { MediaListEntry, MediaListStatus } from '../../stores/query/List'
 import { displayDate, displayFuzzyDate } from '../../lib/days'
-import type { MediaFormat } from '../../stores/query/Media'
+import type { MediaEntry, MediaFormat } from '../../stores/query/Media'
 
 defineProps<{
   list: MediaListEntry[]
+}>()
+
+const emit = defineEmits<{
+  (event: 'pick', media: MediaEntry): void
 }>()
 
 const leave: MediaFormat[] = ['TV', 'ONA', 'OVA']
@@ -21,6 +25,10 @@ const displayFormat = (format: MediaFormat | null) => {
 const displayStatus = (status: MediaListStatus) => {
   return status[0].toUpperCase() + status.slice(1).toLowerCase()
 }
+
+const pickMedia = (media: MediaEntry) => {
+  emit('pick', media)
+}
 </script>
 
 <template>
@@ -33,7 +41,12 @@ const displayStatus = (status: MediaListStatus) => {
       <th class="table-header table-responsive-second">Status</th>
     </thead>
     <tbody>
-      <tr v-for="entry in list" :key="entry.id" class="table-row">
+      <tr
+        v-for="entry in list"
+        :key="entry.id"
+        class="table-row"
+        @click="pickMedia(entry.media)"
+      >
         <td class="table-data table-title">
           <img
             loading="lazy"

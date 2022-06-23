@@ -10,7 +10,7 @@ import {
 import CalendarDays from './CalendarDays.vue'
 import ActivityDay from '../Overview/ActivityDay.vue'
 import CalendarHeader from './CalendarHeader.vue'
-import CalendarModal from './CalendarModal.vue'
+import AppModal from '../layout/AppModal.vue'
 import ModalBackdrop from '../layout/ModalBackdrop.vue'
 import LoadingSpinner from '../layout/LoadingSpinner.vue'
 import ErrorMessage from '../layout/ErrorMessage.vue'
@@ -138,7 +138,7 @@ const closePopup = () => {
     </Transition>
 
     <Transition name="modal">
-      <CalendarModal v-if="popup.show" @close="() => closePopup()">
+      <AppModal v-if="popup.show" @close="() => closePopup()">
         <div class="center" v-if="popup.loading">
           <LoadingSpinner :width="24" :border-width="2" />
         </div>
@@ -155,7 +155,7 @@ const closePopup = () => {
             >Close</AwesomeButton
           >
         </div>
-      </CalendarModal>
+      </AppModal>
     </Transition>
   </div>
 </template>

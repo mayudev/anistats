@@ -32,6 +32,7 @@ onMounted(async () => {
     user.userData.id,
     props.media.id
   )
+
   state.days = days
   state.planning = plannedSince
 })

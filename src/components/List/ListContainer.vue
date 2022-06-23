@@ -4,22 +4,58 @@ import type { MediaListEntry } from '../../stores/query/List'
 import ScrollObserver from './ScrollObserver.vue'
 import AwesomeButton from '../layout/buttons/AwesomeButton.vue'
 import ListTable from './ListTable.vue'
+import type { MediaEntry } from '../../stores/query/Media'
+import { reactive } from 'vue'
+import ModalBackdrop from '../layout/ModalBackdrop.vue'
+import AppModal from '../layout/AppModal.vue'
+import ListDetails from './ListDetails.vue'
+
 defineProps<{
   list: MediaListEntry[]
 }>()
 
 const listStore = useListStore()
 
-const { nextPage } = useListStore()
-
 const intersect = () => {
-  nextPage()
+  listStore.nextPage()
+}
+
+const details = reactive<{
+  show: boolean
+  media: MediaEntry | null
+}>({
+  show: false,
+  media: null,
+})
+
+const pick = (media: MediaEntry) => {
+  details.show = false
+  console.log(media)
+
+  details.media = media
+  details.show = true
+}
+
+const closeModal = () => {
+  details.show = false
 }
 </script>
 
 <template>
   <div>
-    <ListTable :list="list" />
+    <Transition name="backdrop">
+      <ModalBackdrop v-if="details.show" @close="() => closeModal()" />
+    </Transition>
+
+    <Transition name="modal">
+      <ListDetails
+        v-if="details.show && details.media"
+        :media="details.media"
+        @close="() => closeModal()"
+      />
+    </Transition>
+
+    <ListTable :list="list" @pick="pick" />
 
     <div class="center" v-if="list.length === 0">No items.</div>
 

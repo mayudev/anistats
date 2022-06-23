@@ -1,11 +1,15 @@
 <script lang="ts" setup>
+defineProps<{
+  alwaysPopup?: boolean
+}>()
+
 defineEmits<{
   (event: 'close'): void
 }>()
 </script>
 
 <template>
-  <div class="modal">
+  <div class="modal" :class="{ 'modal-top': alwaysPopup }">
     <div class="modal-content">
       <slot></slot>
     </div>
@@ -18,6 +22,10 @@ defineEmits<{
   margin-top: 12px;
 
   z-index: 11;
+}
+
+.modal-top {
+  margin-top: 0;
 }
 
 .modal-content {
