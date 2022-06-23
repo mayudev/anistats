@@ -35,8 +35,6 @@ const icon = computed(() => {
 }
 
 .chooser-button {
-  display: block;
-
   font: inherit;
   outline: none;
   border: none;
@@ -48,6 +46,7 @@ const icon = computed(() => {
   color: inherit;
 
   display: flex;
+  align-items: center;
   padding: 0 1.4rem;
   height: 100%;
 
