@@ -7,7 +7,6 @@ import ListTable from './ListTable.vue'
 import type { MediaEntry } from '../../stores/query/Media'
 import { reactive } from 'vue'
 import ModalBackdrop from '../layout/ModalBackdrop.vue'
-import AppModal from '../layout/AppModal.vue'
 import ListDetails from './ListDetails.vue'
 
 defineProps<{
