@@ -159,11 +159,13 @@ const mouseMove = (e: MouseEvent) => {
   user-select: none;
 
   cursor: grab;
+  scrollbar-width: none;
 
   &:active {
     cursor: grabbing;
   }
-  *::-webkit-scrollbar {
+
+  &::-webkit-scrollbar {
     display: none;
   }
 }
