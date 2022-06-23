@@ -3,6 +3,7 @@ import { useListStore } from '../../stores/list'
 import type { MediaListEntry } from '../../stores/query/List'
 import ScrollObserver from './ScrollObserver.vue'
 import AwesomeButton from '../layout/buttons/AwesomeButton.vue'
+import ListTable from './ListTable.vue'
 defineProps<{
   list: MediaListEntry[]
 }>()
@@ -18,9 +19,7 @@ const intersect = () => {
 
 <template>
   <div>
-    <li v-for="entry in list" :key="entry.id">
-      {{ entry.media.title.romaji }}
-    </li>
+    <ListTable :list="list" />
 
     <ScrollObserver @intersect="intersect" />
 

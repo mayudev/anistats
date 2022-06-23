@@ -19,7 +19,7 @@ interface Store {
   hasNextPage: boolean
 }
 
-const pageSize = 5
+const pageSize = 50
 
 export const useListStore = defineStore('list', {
   state: (): Store => ({

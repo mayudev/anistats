@@ -1,3 +1,5 @@
+import type { FuzzyDate } from '../stores/query/types'
+
 export const weekdays = [
   'Sunday',
   'Monday',
@@ -28,8 +30,8 @@ export function displayDate(date: Date): string {
   const m = date.getMonth() + 1
   const y = date.getFullYear()
 
-  const dom = d >= 10 ? String(d) : '0' + String(d)
-  const month = m >= 10 ? String(m) : '0' + String(m)
+  const dom = String(d)
+  const month = String(m)
 
   return month + '/' + dom + '/' + y
 }
@@ -46,4 +48,10 @@ export function daysInMonth(month: number, year: number): number {
     default:
       return 31
   }
+}
+
+export function displayFuzzyDate(date: FuzzyDate): string {
+  if (!date.day) return 'Unknown'
+
+  return date.month + '/' + date.day + '/' + date.year
 }
