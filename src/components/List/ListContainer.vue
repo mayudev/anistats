@@ -21,6 +21,8 @@ const intersect = () => {
   <div>
     <ListTable :list="list" />
 
+    <div class="center" v-if="list.length === 0">No items.</div>
+
     <ScrollObserver @intersect="intersect" />
 
     <div class="center">
@@ -38,5 +40,7 @@ const intersect = () => {
 .center {
   display: flex;
   justify-content: center;
+
+  margin: 1rem 0;
 }
 </style>
