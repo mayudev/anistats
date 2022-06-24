@@ -36,6 +36,11 @@ onMounted(async () => {
   state.days = days
   state.planning = plannedSince
 })
+
+const formatDate = (timestamp: number) => {
+  if (timestamp === 0) return 'Unknown'
+  return displayDate(new Date(state.planning))
+}
 </script>
 
 <template>
@@ -43,7 +48,7 @@ onMounted(async () => {
     <div class="header">
       <div class="header-title">Planned since</div>
       <div class="header-value">
-        {{ displayDate(new Date(state.planning)) }}
+        {{ formatDate(state.planning) }}
       </div>
     </div>
     <ActivityChart
