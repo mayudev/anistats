@@ -3,10 +3,18 @@ defineProps<{
   count: number
   max: number
 }>()
+
+defineEmits<{
+  (event: 'clicked'): void
+}>()
 </script>
 
 <template>
-  <div class="month" :class="{ 'month-disabled': count === 0 }">
+  <div
+    class="month"
+    :class="{ 'month-disabled': count === 0 }"
+    @click="$emit('clicked')"
+  >
     <div class="month-background" :style="{ opacity: count / max }"></div>
     <span class="month-label">{{ count }}</span>
   </div>

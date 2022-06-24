@@ -6,6 +6,9 @@ import { useUserStore } from '../../stores/user'
 import type { HistoryMonth } from '../../stores/query/history'
 import LoadingSpinner from '../../components/layout/LoadingSpinner.vue'
 import HistoryEntry from '../../components/History/HistoryEntry.vue'
+import type { MediaListEntry } from '../../stores/query/List'
+import ListContainer from '../../components/List/ListContainer.vue'
+import { months } from '../../lib/days'
 
 const user = useUserStore()
 const list = useListStore()
@@ -15,13 +18,25 @@ const state = reactive<{
   error: boolean
   years: Map<number, HistoryMonth[]> | null
   range: number[]
+  unknown: number
   max: number
 }>({
   busy: false,
   error: false,
   years: null,
   range: [],
+  unknown: 0,
   max: 0,
+})
+
+const details = reactive<{
+  show: boolean
+  title: string
+  entries: MediaListEntry[]
+}>({
+  show: false,
+  title: '',
+  entries: [],
 })
 
 onMounted(() => {
@@ -34,6 +49,7 @@ user.$subscribe(() => {
 
 const ensureList = async () => {
   state.busy = true
+  details.show = false
 
   if (user.dataset !== 'manga') {
     // 'anime' or 'both'
@@ -65,8 +81,10 @@ const parseData = () => {
     range.push(i)
   }
 
-  state.max = history.maxCount
   state.range = range
+
+  state.unknown = history.unknownCount
+  state.max = history.maxCount
   state.years = history.years
   state.busy = false
 }
@@ -75,6 +93,26 @@ const getMonth = (m: number, y: number) => {
   const month = state.years?.get(y)?.find(x => x.month === m)
   if (!month) return 0
   else return month.count
+}
+
+const handleClick = (month: number, year: number) => {
+  const target = state.years?.get(year)?.find(m => m.month === month)
+  if (!target) console.log('oof')
+
+  const entries = list.rawList.filter(
+    entry =>
+      entry.status === 'COMPLETED' &&
+      entry.completedAt.month === month &&
+      entry.completedAt.year === year
+  )
+
+  if (entries.length > 0) {
+    details.entries = entries.sort((a, b) =>
+      a.media.title.romaji.localeCompare(b.media.title.romaji)
+    )
+    details.title = months[month - 1] + ' ' + year
+    details.show = true
+  }
 }
 </script>
 
@@ -109,7 +147,15 @@ const getMonth = (m: number, y: number) => {
         :key="month"
         :count="getMonth(month, year)"
         :max="state.max"
+        @clicked="() => handleClick(month, year)"
       />
+    </div>
+    <div class="center" v-if="state.unknown > 0">
+      There are {{ state.unknown }} entries with unknown completed date.
+    </div>
+    <div v-if="details.show && details.entries">
+      <div class="details-title">{{ details.title }}</div>
+      <ListContainer :list="details.entries" />
     </div>
   </div>
 </template>
@@ -118,6 +164,8 @@ const getMonth = (m: number, y: number) => {
 .center {
   display: flex;
   justify-content: center;
+
+  margin: 1rem;
 }
 
 .row {
@@ -141,5 +189,12 @@ const getMonth = (m: number, y: number) => {
 
   position: relative;
   border: 1px solid transparent;
+}
+
+.details-title {
+  margin: 1rem;
+  text-align: center;
+
+  font-weight: 500;
 }
 </style>
