@@ -34,6 +34,13 @@ export const useListStore = defineStore('list', {
     hasNextPage: false,
   }),
   getters: {
+    rawList: state => {
+      const user = useUserStore()
+
+      if (user.dataset === 'anime') return state.animeList
+      else if (user.dataset === 'manga') return state.mangaList
+      else return state.animeList.concat(state.mangaList)
+    },
     list: state => {
       const user = useUserStore()
 
