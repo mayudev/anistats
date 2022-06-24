@@ -43,7 +43,7 @@ const showSwitcher = ref(false)
   justify-content: space-between;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 650px) {
   .header {
     display: flex;
     align-items: center;
@@ -61,7 +61,7 @@ const showSwitcher = ref(false)
   }
 }
 
-@media not all and (min-width: 600px) {
+@media not all and (min-width: 650px) {
   .expandable {
     display: none;
   }

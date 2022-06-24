@@ -11,7 +11,7 @@ import SwitcherTab from '@/components/layout/SwitcherTab.vue'
 </template>
 
 <style lang="scss" scoped>
-@media not all and (min-width: 600px) {
+@media not all and (min-width: 650px) {
   .tabs {
     margin: 1rem 0;
   }
