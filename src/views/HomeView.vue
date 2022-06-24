@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import HeaderBar from '../components/Header/HeaderBar.vue'
-import UsernameInput from '../components/Username/UsernameInput.vue'
+import UsernameInput from '../components/Home/UsernameInput.vue'
 import LoadingSpinner from '../components/layout/LoadingSpinner.vue'
 import { useUserStore } from '../stores/user'
-import { RouterView } from 'vue-router'
 import { ref } from 'vue'
 import router from '../router'
 import { useListStore } from '../stores/list'
+import HomeLanding from '../components/Home/HomeLanding.vue'
 
 const isError = ref(false)
 const isLoading = ref(false)
@@ -95,8 +95,9 @@ const process = async (username: string) => {
     <div class="spinner" v-if="isLoading">
       <LoadingSpinner primary :width="48" :border-width="4" />
     </div>
+
+    <HomeLanding />
   </main>
-  <RouterView></RouterView>
 </template>
 
 <style lang="scss" scoped>

@@ -34,7 +34,8 @@ import HeaderBar from '../components/Header/HeaderBar.vue'
       </p>
       <h4>About anistats</h4>
       <p>
-        anistats is licensed under the GNU Affero General Public License v3.0.
+        anistats v3 is licensed under the GNU Affero General Public License
+        v3.0.
         <a
           target="_blank"
           rel="noreferrer"
