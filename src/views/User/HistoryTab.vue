@@ -124,31 +124,33 @@ const handleClick = (month: number, year: number) => {
   <div v-else-if="state.error">An error occurred.</div>
 
   <div v-else>
-    <div class="header row">
-      <div class="month"></div>
-      <div class="month">Jan</div>
-      <div class="month">Feb</div>
-      <div class="month">Mar</div>
-      <div class="month">Apr</div>
-      <div class="month">May</div>
-      <div class="month">Jun</div>
-      <div class="month">Jul</div>
-      <div class="month">Aug</div>
-      <div class="month">Sep</div>
-      <div class="month">Oct</div>
-      <div class="month">Nov</div>
-      <div class="month">Dec</div>
-    </div>
-    <div class="year row" v-for="year in state.range" :key="year">
-      <div class="month">{{ year }}</div>
-      <HistoryEntry
-        class="month"
-        v-for="month in 12"
-        :key="month"
-        :count="getMonth(month, year)"
-        :max="state.max"
-        @clicked="() => handleClick(month, year)"
-      />
+    <div class="calendar">
+      <div class="header row">
+        <div class="month"></div>
+        <div class="month">Jan</div>
+        <div class="month">Feb</div>
+        <div class="month">Mar</div>
+        <div class="month">Apr</div>
+        <div class="month">May</div>
+        <div class="month">Jun</div>
+        <div class="month">Jul</div>
+        <div class="month">Aug</div>
+        <div class="month">Sep</div>
+        <div class="month">Oct</div>
+        <div class="month">Nov</div>
+        <div class="month">Dec</div>
+      </div>
+      <div class="year row" v-for="year in state.range" :key="year">
+        <div class="month">{{ year }}</div>
+        <HistoryEntry
+          class="month"
+          v-for="month in 12"
+          :key="month"
+          :count="getMonth(month, year)"
+          :max="state.max"
+          @clicked="() => handleClick(month, year)"
+        />
+      </div>
     </div>
     <div class="center" v-if="state.unknown > 0">
       There are {{ state.unknown }} entries with unknown completed date.
@@ -173,6 +175,8 @@ const handleClick = (month: number, year: number) => {
 .row {
   display: grid;
   grid-template-columns: repeat(13, 1fr);
+
+  min-width: 650px;
 }
 
 .header .month {
@@ -191,6 +195,9 @@ const handleClick = (month: number, year: number) => {
 
   position: relative;
   border: 1px solid transparent;
+}
+.calendar {
+  overflow-x: scroll;
 }
 
 .details-title {
