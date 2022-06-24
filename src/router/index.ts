@@ -4,6 +4,7 @@ import HomeView from '../views/HomeView.vue'
 import UserView from '../views/UserView.vue'
 import OverviewTab from '../views/User/OverviewTab.vue'
 import ListTab from '../views/User/ListTab.vue'
+import HistoryTab from '../views/User/HistoryTab.vue'
 
 export const routes: RouteRecordRaw[] = [
   {
@@ -31,6 +32,11 @@ export const routes: RouteRecordRaw[] = [
         path: 'list',
         name: 'list',
         component: ListTab,
+      },
+      {
+        path: 'history',
+        name: 'history',
+        component: HistoryTab,
       },
     ],
   },

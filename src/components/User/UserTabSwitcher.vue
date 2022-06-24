@@ -6,6 +6,7 @@ import SwitcherTab from '@/components/layout/SwitcherTab.vue'
   <div class="tabs">
     <SwitcherTab as="link" :to="{ name: 'overview' }">Overview</SwitcherTab>
     <SwitcherTab as="link" :to="{ name: 'list' }">List</SwitcherTab>
+    <SwitcherTab as="link" :to="{ name: 'history' }">History</SwitcherTab>
   </div>
 </template>
 
