@@ -197,7 +197,7 @@ const handleClick = (month: number, year: number) => {
   border: 1px solid transparent;
 }
 .calendar {
-  overflow-x: scroll;
+  overflow-x: auto;
 }
 
 .details-title {
