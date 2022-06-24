@@ -62,6 +62,8 @@ defineEmits<{
 
   border-radius: 6px;
   overflow: hidden;
+
+  background: var(--color-background);
 }
 
 .header {
@@ -70,6 +72,8 @@ defineEmits<{
 
   background-size: cover;
   background-position: center;
+
+  color: white;
 }
 
 .header-top {
