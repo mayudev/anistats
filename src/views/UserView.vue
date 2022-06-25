@@ -5,8 +5,11 @@ import LoadingSpinner from '../components/layout/LoadingSpinner.vue'
 import UserHeader from '../components/User/UserHeader.vue'
 import { useListStore } from '../stores/list'
 import { useUserStore } from '../stores/user'
+import ErrorMessage from '../components/layout/ErrorMessage.vue'
+import { NoActivitiesError } from '../stores/query/types'
 
 const isLoading = ref(true)
+const errorMessage = ref('')
 
 const user = useUserStore()
 const list = useListStore()
@@ -29,8 +32,15 @@ onMounted(async () => {
 
     isLoading.value = false
   } catch (e) {
-    // TODO proper error handling
-    alert('something went wrong')
+    if (e instanceof NoActivitiesError) {
+      errorMessage.value = 'This user has no activities.'
+    } else if (e === 404) {
+      errorMessage.value = 'User not found or is private.'
+    } else {
+      errorMessage.value = 'An unknown error occurred. Please try again.'
+    }
+
+    isLoading.value = false
   }
 })
 </script>
@@ -38,12 +48,13 @@ onMounted(async () => {
 <template>
   <div>
     <HeaderBar />
-    <main class="user">
+    <div class="center" v-if="isLoading">
+      <LoadingSpinner primary :width="48" :border-width="4" />
+    </div>
+    <ErrorMessage v-else-if="errorMessage" :message="errorMessage" />
+    <main class="user" v-else>
       <UserHeader />
-      <div class="center" v-if="isLoading">
-        <LoadingSpinner :width="72" :border-width="8" />
-      </div>
-      <RouterView v-else></RouterView>
+      <RouterView></RouterView>
     </main>
   </div>
 </template>
@@ -56,6 +67,8 @@ onMounted(async () => {
 .center {
   display: flex;
   justify-content: center;
+
+  margin: 1rem;
 }
 
 @keyframes appear {

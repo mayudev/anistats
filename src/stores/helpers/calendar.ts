@@ -1,4 +1,5 @@
 import { fetchActivitiesFrom } from '../api/activities'
+import { NoActivitiesError } from '../query/types'
 import type { Dataset } from '../user'
 import { parseActivities } from './activities'
 
@@ -19,5 +20,3 @@ export async function getActivitiesFromDay(
 
   return days
 }
-
-export class NoActivitiesError extends Error {}

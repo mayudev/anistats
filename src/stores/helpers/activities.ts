@@ -37,7 +37,6 @@ export function parseActivities(
       } else {
         day.totalChapters += progress.diff || 0
       }
-      // TODO handle manga chapters
 
       // Check if a media entry already exists in the day
       const existingMedia = day.media.find(

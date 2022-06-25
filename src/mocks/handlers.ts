@@ -7,6 +7,8 @@ export const handlers = [
   graphql.query('UserData', (req, res, ctx) => {
     const { username } = req.variables
 
+    // return res(ctx.errors([{ message: 'Mock error' }]))
+
     return res(
       ctx.data({
         User: {

@@ -3,6 +3,7 @@ import { fetchActivities } from './api/activities'
 import { apiRequest } from './api/api'
 import { parseActivities, parseActivitiesForOneDay } from './helpers/activities'
 import { flattenMedia } from './helpers/flat'
+import { NoActivitiesError } from './query/types'
 import type { UserActivity } from './query/UserActivities'
 import { userDataQuery, type UserData } from './query/UserData'
 
@@ -90,6 +91,11 @@ export const useUserStore = defineStore('user', {
       // Initial fetch
       if (this.currentPage === 1) {
         const initial = await fetchActivities(this.userData.id, 1)
+
+        if (initial.activities.length === 0) {
+          throw new NoActivitiesError()
+        }
+
         this.activities = initial.activities
 
         const cached = await fetchActivities(this.userData.id, 2)

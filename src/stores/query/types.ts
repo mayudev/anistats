@@ -21,3 +21,5 @@ export interface FuzzyDate {
   month: number | null
   day: number | null
 }
+
+export class NoActivitiesError extends Error {}

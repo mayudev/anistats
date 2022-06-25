@@ -2,10 +2,7 @@
 import { onBeforeMount, reactive } from 'vue'
 import type { Day } from '../../stores/helpers/activities'
 import { useUserStore } from '../../stores/user'
-import {
-  getActivitiesFromDay,
-  NoActivitiesError,
-} from '../../stores/helpers/calendar'
+import { getActivitiesFromDay } from '../../stores/helpers/calendar'
 
 import CalendarDays from './CalendarDays.vue'
 import ActivityDay from '../Overview/ActivityDay.vue'
@@ -15,6 +12,7 @@ import ModalBackdrop from '../layout/ModalBackdrop.vue'
 import LoadingSpinner from '../layout/LoadingSpinner.vue'
 import ErrorMessage from '../layout/ErrorMessage.vue'
 import AwesomeButton from '../layout/buttons/AwesomeButton.vue'
+import { NoActivitiesError } from '../../stores/query/types'
 
 const user = useUserStore()
 
