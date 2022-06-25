@@ -28,6 +28,6 @@ describe('ActivityDay', () => {
     })
 
     expect(wrapper.find('.weekday').text()).toBe('Saturday')
-    expect(wrapper.find('.date').text()).toBe('06/18/2022')
+    expect(wrapper.find('.date').text()).toBe('6/18/2022')
   })
 })
