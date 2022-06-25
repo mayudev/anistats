@@ -18,6 +18,7 @@
       profile. This means your profile <strong>has to be public</strong> for it
       to work.
     </p>
+    <p>anistats is not affiliated with AniList.</p>
   </article>
 </template>
 
