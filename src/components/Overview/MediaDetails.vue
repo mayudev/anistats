@@ -52,7 +52,7 @@ const formatDate = (timestamp: number) => {
       </div>
     </div>
     <ActivityChart
-      :name="`media-${media.id}`"
+      :name="`media-${media.id}-${new Date().getTime()}`"
       :days="state.days"
       :property="media.type === 'ANIME' ? 'totalEpisodes' : 'totalChapters'"
       :height="100"
