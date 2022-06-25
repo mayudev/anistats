@@ -101,6 +101,12 @@ const process = async (username: string) => {
 </template>
 
 <style lang="scss" scoped>
+@media not all and (min-width: 800px) {
+  .main {
+    padding-top: 30vh;
+  }
+}
+
 .spinner {
   display: flex;
   align-items: center;
