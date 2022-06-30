@@ -32,7 +32,7 @@ const user = useUserStore()
         />
       </div>
     </div>
-    <div>
+    <div class="right">
       <ActivityTimeline :days="user.days" />
     </div>
   </main>
@@ -46,6 +46,10 @@ const user = useUserStore()
   }
   .left {
     margin-right: 0.5rem;
+  }
+
+  .right {
+    margin-left: 0.5rem;
   }
 }
 
