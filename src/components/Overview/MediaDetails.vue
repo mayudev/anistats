@@ -73,15 +73,10 @@ const formatDate = (timestamp: number) => {
   justify-content: space-between;
 
   padding: 0.5rem;
-}
-
-.header-title {
-  font-size: 0.95rem;
-  font-weight: 500;
+  font-size: 0.86rem;
 }
 
 .header-value {
-  font-size: 0.86rem;
   color: var(--color-text-secondary);
 }
 
