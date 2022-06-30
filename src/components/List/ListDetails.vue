@@ -59,6 +59,12 @@ defineEmits<{
   z-index: 11;
 }
 
+@media (max-width: 640px) {
+  .modal {
+    align-items: flex-end;
+  }
+}
+
 .content {
   z-index: 10;
   width: min(95vw, 640px);
