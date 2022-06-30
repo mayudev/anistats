@@ -62,6 +62,7 @@ defineEmits<{
 @media (max-width: 640px) {
   .modal {
     align-items: flex-end;
+    margin-bottom: 10px;
   }
 }
 
