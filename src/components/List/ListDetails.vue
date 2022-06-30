@@ -21,6 +21,8 @@ defineEmits<{
         :style="{ backgroundImage: `url(${media.bannerImage})` }"
       >
         <div class="header-top">
+          <img class="header-image" :src="media.coverImage.medium" />
+
           <a
             class="header-title"
             target="_blank"
@@ -28,6 +30,7 @@ defineEmits<{
             :href="`https://anilist.co/${media.type.toLowerCase()}/${media.id}`"
             >{{ media.title.romaji }}</a
           >
+          <span style="flex: 1" />
           <span class="header-icon">
             <ClickableIcon icon="xmark" @click="$emit('close')" />
           </span>
@@ -68,35 +71,65 @@ defineEmits<{
 
 .header {
   width: 100%;
-  height: 190px;
+  height: 140px;
 
   background-size: cover;
   background-position: center;
 
   color: white;
+
+  box-shadow: 1px 1px 31px black inset;
+}
+
+.header-image {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  border-radius: 6px;
+  object-fit: cover;
+
+  width: auto;
+  height: 110px;
 }
 
 .header-top {
-  background: rgba(0, 0, 0, 0.7);
-
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  align-items: flex-start;
 
   padding: 1rem;
 }
 
 .header-icon {
-  align-self: flex-start;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+
+  height: 32px;
+  width: 32px;
+
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 4px;
 }
 
 .header-title {
+  background: rgba(0, 0, 0, 0.7);
+  margin: 0 0.5rem;
+
+  padding: 0.5rem;
+  border-radius: 6px;
+
   position: relative;
   z-index: 12;
 
-  font-size: 1.2rem;
+  font-size: 1rem;
+  font-weight: 500;
 
   color: inherit;
+}
+
+.header-title,
+.header-icon,
+.header-image {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 @keyframes appear {
