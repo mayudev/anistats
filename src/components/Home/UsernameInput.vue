@@ -16,7 +16,9 @@ const username = ref('')
 
 const submit = () => {
   // Check username length
-  if (username.value.length < 2) {
+  if (username.value.length === 0) {
+    emit('errored', 'Please enter your username.')
+  } else if (username.value.length < 2) {
     emit('errored', 'Username too short')
   } else {
     emit('submit', username.value)
