@@ -2,8 +2,6 @@ name: Build and Deploy
 on:
   push:
     branches: [v3]
-  pull_request:
-    branches: [v3]
 
 jobs:
   build-and-deploy:
@@ -14,7 +12,8 @@ jobs:
       - name: Install and build
         run: |
           npm ci
-          npm run build
+          npx vite build --base=/anistats/
+          cp dist/index.html dist/404.html
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
