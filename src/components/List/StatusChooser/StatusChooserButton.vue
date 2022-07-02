@@ -57,4 +57,8 @@ const icon = computed(() => {
     color: var(--color-accent);
   }
 }
+
+.trans .chooser-button {
+  transition: var(--theme-transition);
+}
 </style>

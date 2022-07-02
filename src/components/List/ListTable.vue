@@ -94,6 +94,12 @@ table {
   }
 }
 
+.trans .table-row,
+.table-header,
+.table-data {
+  transition: var(--theme-transition);
+}
+
 .table-header,
 .table-data {
   border-bottom: 1px solid var(--color-background-secondary);

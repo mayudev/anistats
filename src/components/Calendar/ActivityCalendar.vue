@@ -173,6 +173,10 @@ const closePopup = () => {
   padding: 0.75rem;
 }
 
+.trans .day {
+  transition: border-bottom var(--theme-transition);
+}
+
 .center {
   display: flex;
   flex-direction: column;

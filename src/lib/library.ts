@@ -38,7 +38,8 @@ library.add(
   faClock,
   faStop,
   faPause,
-  faRotateRight
+  faRotateRight,
+  faCode
 )
 
 export { FontAwesomeIcon }

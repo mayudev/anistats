@@ -19,7 +19,7 @@ watch(query, () => {
     <StatusChooserButton @click="showChooser = !showChooser" />
     <input class="search" type="text" placeholder="Search..." v-model="query" />
   </div>
-  <Transition name="picker">
+  <Transition name="status">
     <StatusChooser v-if="showChooser" @pick="list.switchStatusFilter" />
   </Transition>
 </template>
@@ -50,15 +50,7 @@ watch(query, () => {
   font-size: 1.2rem;
 }
 
-// Transition
-.picker-enter-from,
-.picker-leave-to {
-  transform: scale(0.9);
-  opacity: 0;
-}
-
-.picker-enter-active,
-.picker-leave-active {
-  transition: 0.2s ease;
+.trans .search {
+  transition: var(--theme-transition);
 }
 </style>

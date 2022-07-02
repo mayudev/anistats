@@ -155,7 +155,7 @@ const handleClick = (month: number, year: number) => {
     <div class="center" v-if="state.unknown > 0">
       There are {{ state.unknown }} entries with unknown completed date.
     </div>
-    <Transition name="details">
+    <Transition name="history">
       <div v-if="details.show && details.entries">
         <div class="details-title">{{ details.title }}</div>
         <ListContainer :list="details.entries" />
@@ -185,6 +185,10 @@ const handleClick = (month: number, year: number) => {
   border-bottom: 1px solid var(--color-background-border);
 }
 
+.trans .month {
+  transition: var(--theme-transition);
+}
+
 .month {
   padding: 0.5rem;
   margin: 0.125rem;
@@ -205,16 +209,5 @@ const handleClick = (month: number, year: number) => {
   text-align: center;
 
   font-weight: 500;
-}
-
-.details-enter-from,
-.details-leave-to {
-  transform: translateY(30px);
-  opacity: 0;
-}
-
-.details-enter-active,
-.details-leave-active {
-  transition: 0.2s ease;
 }
 </style>

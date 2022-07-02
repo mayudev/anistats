@@ -41,13 +41,4 @@ defineEmits<{
     right: 10px;
   }
 }
-
-.backdrop-enter-from,
-.backdrop-leave-to {
-  opacity: 0;
-}
-.backdrop-enter-active,
-.backdrop-leave-active {
-  transition: 0.2s ease;
-}
 </style>

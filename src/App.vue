@@ -8,10 +8,15 @@ applyTheme(getTheme())
 
 <template>
   <AppLayout>
-    <RouterView />
+    <RouterView v-slot="{ Component }">
+      <Transition name="fade" mode="out-in">
+        <component :is="Component" />
+      </Transition>
+    </RouterView>
   </AppLayout>
 </template>
 
 <style>
 @import '@/assets/base.css';
+@import '@/assets/transitions.css';
 </style>

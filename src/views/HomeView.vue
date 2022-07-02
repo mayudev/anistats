@@ -114,15 +114,4 @@ const process = async (username: string) => {
 
   margin: 1rem;
 }
-
-.error-enter-from,
-.error-leave-to {
-  opacity: 0;
-  margin-top: -26px;
-}
-
-.error-enter-active,
-.error-leave-active {
-  transition: 0.5s ease;
-}
 </style>

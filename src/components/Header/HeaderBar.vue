@@ -41,6 +41,11 @@ const switchHelp = () => {
       icon="circle-question"
       alt="Help"
     ></HeaderIcon>
+    <HeaderIcon
+      icon="code"
+      alt="Source code"
+      href="https://github.com/mayudev/anistats"
+    ></HeaderIcon>
   </nav>
   <div>
     <RouterLink to="/">

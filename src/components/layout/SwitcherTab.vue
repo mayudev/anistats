@@ -19,6 +19,10 @@ const props = defineProps<{
   transition: opacity 200ms, color var(--theme-transition);
 }
 
+.trans .tab {
+  transition: var(--theme-transition);
+}
+
 @media (min-width: 650px) {
   .tab:first-child {
     margin-left: 1rem;
