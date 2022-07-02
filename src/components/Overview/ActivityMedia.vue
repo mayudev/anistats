@@ -80,15 +80,4 @@ const propName =
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
-// Transition
-.details-enter-from,
-.details-leave-to {
-  transform: scale(0.9);
-  opacity: 0;
-}
-.details-enter-active,
-.details-leave-active {
-  transition: 0.2s ease;
-}
 </style>

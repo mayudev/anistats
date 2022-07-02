@@ -150,16 +150,4 @@ const switchYear = (year: number) => {
   background: var(--color-background-secondary);
   color: var(--color-accent);
 }
-
-// Transition
-.picker-enter-from,
-.picker-leave-to {
-  margin-top: -50px;
-  opacity: 0;
-}
-
-.picker-enter-active,
-.picker-leave-active {
-  transition: 0.2s ease;
-}
 </style>

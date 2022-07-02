@@ -18,15 +18,5 @@ applyTheme(getTheme())
 
 <style>
 @import '@/assets/base.css';
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: transform 0.3s ease, opacity 0.2s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  transform: translateY(-20px);
-  opacity: 0;
-}
+@import '@/assets/transitions.css';
 </style>

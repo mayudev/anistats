@@ -70,14 +70,4 @@ onMounted(async () => {
 
   margin: 1rem;
 }
-
-@keyframes appear {
-  from {
-    transform: translateY(30px);
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
 </style>

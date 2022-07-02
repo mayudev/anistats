@@ -1,0 +1,85 @@
+@media not prefers-reduced-motion {
+  @keyframes appear {
+    from {
+      transform: translateY(30px);
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: transform 0.3s ease, opacity 0.2s ease;
+  }
+
+  .fade-enter-from,
+  .fade-leave-to {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+
+  .backdrop-enter-from,
+  .backdrop-leave-to {
+    opacity: 0;
+  }
+
+  .backdrop-enter-active,
+  .backdrop-leave-active {
+    transition: 0.2s ease;
+  }
+
+  .modal-enter-from,
+  .modal-leave-to {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  .modal-enter-active,
+  .modal-leave-active {
+    transition: 0.2s ease;
+  }
+
+  .picker-enter-from,
+  .picker-leave-to {
+    margin-top: -50px;
+    opacity: 0;
+  }
+
+  .picker-enter-active,
+  .picker-leave-active {
+    transition: 0.2s ease;
+  }
+
+  .details-enter-from,
+  .details-leave-to {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  .details-enter-active,
+  .details-leave-active {
+    transition: 0.2s ease;
+  }
+
+  .error-enter-from,
+  .error-leave-to {
+    opacity: 0;
+    margin-top: -26px;
+  }
+
+  .error-enter-active,
+  .error-leave-active {
+    transition: 0.5s ease;
+  }
+
+  .history-enter-from,
+  .history-leave-to {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+
+  .history-enter-active,
+  .history-leave-active {
+    transition: 0.2s ease;
+  }
+}

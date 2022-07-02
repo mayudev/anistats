@@ -49,16 +49,4 @@ watch(query, () => {
   border-radius: 6px;
   font-size: 1.2rem;
 }
-
-// Transition
-.picker-enter-from,
-.picker-leave-to {
-  transform: scale(0.9);
-  opacity: 0;
-}
-
-.picker-enter-active,
-.picker-leave-active {
-  transition: 0.2s ease;
-}
 </style>
