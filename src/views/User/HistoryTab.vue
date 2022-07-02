@@ -185,6 +185,10 @@ const handleClick = (month: number, year: number) => {
   border-bottom: 1px solid var(--color-background-border);
 }
 
+.trans .month {
+  transition: var(--theme-transition);
+}
+
 .month {
   padding: 0.5rem;
   margin: 0.125rem;

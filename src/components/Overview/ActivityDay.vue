@@ -91,6 +91,11 @@ const close = () => {
   transition: background var(--theme-transition);
 }
 
+.weekday,
+.date {
+  transition: var(--theme-transition);
+}
+
 .weekday {
   font-size: 0.86rem;
   color: var(--color-text-secondary);

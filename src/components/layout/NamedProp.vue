@@ -31,4 +31,8 @@ defineProps<{
   font-size: 0.76rem;
   color: var(--color-text-secondary);
 }
+
+.trans .prop-name {
+  transition: var(--theme-transition);
+}
 </style>

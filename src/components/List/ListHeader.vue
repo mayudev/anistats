@@ -49,4 +49,8 @@ watch(query, () => {
   border-radius: 6px;
   font-size: 1.2rem;
 }
+
+.trans .search {
+  transition: var(--theme-transition);
+}
 </style>

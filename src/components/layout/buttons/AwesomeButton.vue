@@ -41,4 +41,8 @@ defineProps<{
 .button-text {
   margin-left: 0.5rem;
 }
+
+.trans .button {
+  transition: var(--theme-transition);
+}
 </style>

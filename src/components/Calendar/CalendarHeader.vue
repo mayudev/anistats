@@ -146,6 +146,10 @@ const switchYear = (year: number) => {
   }
 }
 
+.trans .picker-year {
+  transition: var(--theme-transition);
+}
+
 .picker-active {
   background: var(--color-background-secondary);
   color: var(--color-accent);

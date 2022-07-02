@@ -21,6 +21,14 @@ export function saveTheme(theme: AppTheme) {
 }
 
 export function applyTheme(theme: AppTheme) {
+  const trans = 'trans'
+
+  document.body.classList.add(trans)
   document.body.setAttribute(attributeName, theme)
+
+  setTimeout(() => {
+    document.body.classList.remove(trans)
+  }, 400)
+
   saveTheme(theme)
 }
