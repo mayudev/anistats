@@ -14,7 +14,8 @@ jobs:
       - name: Install and build
         run: |
           npm ci
-          npm run build
+          cp dist/index.html dist/404.html
+          npx vite build --base=/anistats/
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
