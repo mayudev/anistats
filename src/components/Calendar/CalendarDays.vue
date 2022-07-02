@@ -64,11 +64,14 @@ type ActivityDay = {
   timestamp: number
   total: number
   disabled: boolean
+  future: boolean
 }
 
 const timestamps = computed(() => {
   const timestamps: ActivityDay[] = []
   const keys = Array.from(props.days.keys())
+
+  const now = new Date().setHours(24, 0, 0, 0)
 
   for (let i = 1; i <= state.count; i++) {
     const timestamp = relativeTimestamp(i)
@@ -77,6 +80,7 @@ const timestamps = computed(() => {
       timestamp,
       total: total(i),
       disabled: timestamp < keys[keys.length - 1] || timestamp > keys[0],
+      future: timestamp > now,
     })
   }
 
@@ -94,7 +98,7 @@ const handleClick = (day: ActivityDay) => {
       class="day"
       v-for="day in timestamps"
       :key="day.index"
-      :class="{ 'day-disabled': day.disabled }"
+      :class="{ 'day-disabled': day.disabled, 'day-future': day.future }"
       :style="day.index === 1 ? { gridColumn: state.begin } : {}"
       @click="() => handleClick(day)"
     >
@@ -124,7 +128,8 @@ const handleClick = (day: ActivityDay) => {
 
   opacity: 0.9;
   transition: transform 0.2s;
-  &:hover {
+
+  &:not(.day-future):hover {
     opacity: 1;
     transform: scale(1.1);
   }
@@ -149,5 +154,11 @@ const handleClick = (day: ActivityDay) => {
 
 .day-disabled {
   opacity: 0.5;
+}
+
+.day-future {
+  opacity: 0.2;
+
+  cursor: default;
 }
 </style>
