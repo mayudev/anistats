@@ -4,13 +4,22 @@ import FontAwesomeIcon from '../FontAwesomeIcon.vue'
 const props = defineProps<{
   icon: string
   alt: string
+  href?: string
 }>()
 </script>
 
 <template>
-  <button :title="alt" :aria-label="alt" class="icon-button">
+  <component
+    :is="href ? 'a' : 'button'"
+    :title="alt"
+    :aria-label="alt"
+    :href="href"
+    target="_blank"
+    rel="noreferrer"
+    class="icon-button"
+  >
     <FontAwesomeIcon :width="18" :icon="props.icon"></FontAwesomeIcon>
-  </button>
+  </component>
 </template>
 
 <style lang="scss" scoped>
@@ -24,6 +33,8 @@ const props = defineProps<{
   padding: 0.5rem;
   margin-left: 0.5rem;
   border-radius: 50%;
+
+  height: 18px;
 
   cursor: pointer;
   transition: background var(--theme-transition) ease-out, color 0.2s ease-out;
