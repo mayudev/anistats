@@ -8,10 +8,25 @@ applyTheme(getTheme())
 
 <template>
   <AppLayout>
-    <RouterView />
+    <RouterView v-slot="{ Component }">
+      <Transition name="fade" mode="out-in">
+        <component :is="Component" />
+      </Transition>
+    </RouterView>
   </AppLayout>
 </template>
 
 <style>
 @import '@/assets/base.css';
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: transform 0.3s ease, opacity 0.2s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  transform: translateY(-20px);
+  opacity: 0;
+}
 </style>
