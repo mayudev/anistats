@@ -51,6 +51,17 @@
     transition: 0.2s ease;
   }
 
+  .status-enter-from,
+  .status-leave-to {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+
+  .status-enter-active,
+  .status-leave-active {
+    transition: 0.2s ease;
+  }
+
   .details-enter-from,
   .details-leave-to {
     transform: scale(0.9);

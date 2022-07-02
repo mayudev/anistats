@@ -19,7 +19,7 @@ watch(query, () => {
     <StatusChooserButton @click="showChooser = !showChooser" />
     <input class="search" type="text" placeholder="Search..." v-model="query" />
   </div>
-  <Transition name="picker">
+  <Transition name="status">
     <StatusChooser v-if="showChooser" @pick="list.switchStatusFilter" />
   </Transition>
 </template>
