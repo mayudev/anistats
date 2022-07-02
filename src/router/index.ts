@@ -6,6 +6,8 @@ import OverviewTab from '../views/User/OverviewTab.vue'
 import ListTab from '../views/User/ListTab.vue'
 import HistoryTab from '../views/User/HistoryTab.vue'
 
+const NotFoundView = () => import('../views/NotFoundView.vue')
+
 export const routes: RouteRecordRaw[] = [
   {
     path: '/',
@@ -39,6 +41,10 @@ export const routes: RouteRecordRaw[] = [
         component: HistoryTab,
       },
     ],
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    component: NotFoundView,
   },
 ]
 
