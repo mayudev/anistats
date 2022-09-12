@@ -72,7 +72,6 @@ const close = () => {
 
 <style lang="scss" scoped>
 .wrapper {
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
   background: var(--color-background);
   border-radius: 6px;
   overflow: hidden;
@@ -87,6 +86,8 @@ const close = () => {
 
   background: var(--color-background-secondary);
   padding: 0.5rem 0.75rem;
+  margin-bottom: 0.5rem;
+  border-left: 1px solid var(--color-blue);
 
   transition: background var(--theme-transition);
 }

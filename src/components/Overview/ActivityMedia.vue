@@ -56,6 +56,7 @@ const propName =
   display: flex;
   align-items: center;
   padding: 10px 12px;
+  border-radius: 6px;
 
   transition: 0.2s;
   cursor: pointer;

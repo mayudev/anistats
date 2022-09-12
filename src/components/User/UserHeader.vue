@@ -34,7 +34,25 @@ const showSwitcher = ref(false)
 <style lang="scss" scoped>
 .header {
   border-radius: 6px;
-  padding: 0.8rem;
+  padding: 0.5rem 0.25rem;
+}
+
+@media (min-width: 800px) {
+  .header {
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+
+    background: var(--color-background);
+    border: 1px solid var(--color-background-border);
+
+    z-index: 3;
+    position: sticky;
+    top: 1rem;
+  }
+}
+
+.trans .header {
+  transition: var(--theme-transition);
 }
 
 .header-row {
