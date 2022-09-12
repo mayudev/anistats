@@ -34,7 +34,7 @@ const close = () => {
 </script>
 
 <template>
-  <div class="wrapper">
+  <div class="wrapper" :class="{ 'wrapper-animated': !props.closeable }">
     <div class="header">
       <div class="header-date">
         <div class="weekday">{{ weekdays[state.date.getDay()] }}</div>
@@ -80,6 +80,14 @@ const close = () => {
   transition: background var(--theme-transition);
 }
 
+.wrapper-animated {
+  animation: day-appear 0.5s ease;
+
+  .header {
+    border-left: 1px solid var(--color-blue);
+  }
+}
+
 .header {
   display: flex;
   align-items: center;
@@ -87,7 +95,6 @@ const close = () => {
   background: var(--color-background-secondary);
   padding: 0.5rem 0.75rem;
   margin-bottom: 0.5rem;
-  border-left: 1px solid var(--color-blue);
 
   transition: background var(--theme-transition);
 }
