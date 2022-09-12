@@ -8,6 +8,7 @@ import type { MediaEntry } from '../../stores/query/Media'
 import { reactive } from 'vue'
 import ModalBackdrop from '../layout/ModalBackdrop.vue'
 import ListDetails from './ListDetails.vue'
+import LoadMoreButton from '../layout/buttons/LoadMoreButton.vue'
 
 defineProps<{
   list: MediaListEntry[]
@@ -61,12 +62,10 @@ const closeModal = () => {
     <ScrollObserver @intersect="intersect" />
 
     <div class="center">
-      <AwesomeButton
-        icon="arrows-rotate"
+      <LoadMoreButton
         @click="intersect"
         v-if="listStore.hasNextPage"
-        >Show more</AwesomeButton
-      >
+      ></LoadMoreButton>
     </div>
   </div>
 </template>

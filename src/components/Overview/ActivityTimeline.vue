@@ -2,8 +2,8 @@
 import type { Day } from '../../stores/helpers/activities'
 import ActivityDay from '@/components/Overview/ActivityDay.vue'
 import ErrorMessage from '../layout/ErrorMessage.vue'
-import AwesomeButton from '../layout/buttons/AwesomeButton.vue'
 import { useUserStore } from '../../stores/user'
+import LoadMoreButton from '../layout/buttons/LoadMoreButton.vue'
 
 defineProps<{
   days: Map<number, Day>
@@ -21,13 +21,10 @@ const user = useUserStore()
       :day="day[1]"
     />
     <div class="button">
-      <AwesomeButton
+      <LoadMoreButton
         @click="() => user.fetchActivities()"
         v-if="!user.finished"
-        icon="arrows-rotate"
-        :size="16"
-        >Load more</AwesomeButton
-      >
+      ></LoadMoreButton>
     </div>
   </div>
   <ErrorMessage
