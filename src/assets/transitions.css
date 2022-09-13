@@ -31,6 +31,25 @@
     opacity: 0;
   }
 
+  .tab-slide-left-enter-active,
+  .tab-slide-left-leave-active,
+  .tab-slide-right-enter-active,
+  .tab-slide-right-leave-active {
+    transition: transform 0.3s ease, opacity 0.2s ease;
+  }
+
+  .tab-slide-left-enter-from,
+  .tab-slide-right-leave-to {
+    transform: translateX(50px);
+    opacity: 0;
+  }
+
+  .tab-slide-left-leave-to,
+  .tab-slide-right-enter-from {
+    transform: translateX(-50px);
+    opacity: 0;
+  }
+
   .backdrop-enter-from,
   .backdrop-leave-to {
     opacity: 0;

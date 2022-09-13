@@ -54,7 +54,13 @@ onMounted(async () => {
     <ErrorMessage v-else-if="errorMessage" :message="errorMessage" />
     <main class="user" v-else>
       <UserHeader />
-      <RouterView></RouterView>
+      <div class="user-content">
+        <RouterView v-slot="{ Component, route }">
+          <Transition :name="route.meta.transitionName" mode="out-in">
+            <component :is="Component" />
+          </Transition>
+        </RouterView>
+      </div>
     </main>
   </div>
 </template>
@@ -62,6 +68,10 @@ onMounted(async () => {
 <style lang="scss" scoped>
 .user {
   animation: appear 0.4s;
+}
+
+.user-content {
+  overflow-x: hidden;
 }
 
 .center {
