@@ -34,7 +34,7 @@ const showSwitcher = ref(false)
 <style lang="scss" scoped>
 .header {
   border-radius: 6px;
-  padding: 0.5rem 0.25rem;
+  padding: 0.5rem;
 }
 
 @media (min-width: 800px) {
