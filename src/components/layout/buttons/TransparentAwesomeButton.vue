@@ -1,11 +1,15 @@
 <script lang="ts" setup>
 import FontAwesomeIcon from '../../FontAwesomeIcon.vue'
+
+defineProps<{
+  icon: string
+}>()
 </script>
 
 <template>
   <button class="button" @click="$emit('click')">
-    <FontAwesomeIcon icon="arrows-rotate" :width="16" />
-    <span class="button-text">Load more</span>
+    <FontAwesomeIcon :icon="icon" :width="16" />
+    <span class="button-text"><slot></slot></span>
   </button>
 </template>
 
@@ -15,7 +19,7 @@ import FontAwesomeIcon from '../../FontAwesomeIcon.vue'
   border: none;
   font: inherit;
   color: inherit;
-  background: var(--color-background);
+  background: transparent;
 
   display: flex;
   align-items: center;

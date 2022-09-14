@@ -11,8 +11,8 @@ import AppModal from '../layout/AppModal.vue'
 import ModalBackdrop from '../layout/ModalBackdrop.vue'
 import LoadingSpinner from '../layout/LoadingSpinner.vue'
 import ErrorMessage from '../layout/ErrorMessage.vue'
-import AwesomeButton from '../layout/buttons/AwesomeButton.vue'
 import { NoActivitiesError } from '../../stores/query/types'
+import TransparentAwesomeButton from '../layout/buttons/TransparentAwesomeButton.vue'
 
 const user = useUserStore()
 
@@ -149,9 +149,9 @@ const closePopup = () => {
         />
         <div class="center" v-else>
           <ErrorMessage message="No activities found." />
-          <AwesomeButton @click="() => closePopup()" icon="xmark" :size="12"
-            >Close</AwesomeButton
-          >
+          <TransparentAwesomeButton @click="() => closePopup()" icon="xmark"
+            >Close
+          </TransparentAwesomeButton>
         </div>
       </AppModal>
     </Transition>
@@ -182,6 +182,6 @@ const closePopup = () => {
   flex-direction: column;
   align-items: center;
 
-  margin: 0.5rem;
+  margin: 1rem;
 }
 </style>
