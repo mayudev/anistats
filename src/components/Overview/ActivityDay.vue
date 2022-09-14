@@ -43,12 +43,12 @@ const close = () => {
       <span style="flex: 1" />
       <NamedProp
         v-if="user.dataset !== 'anime'"
-        name="chapters"
+        :name="day.totalChapters === 1 ? 'chapter' : 'chapters'"
         :value="day.totalChapters"
       />
       <NamedProp
         v-if="user.dataset !== 'manga'"
-        name="episodes"
+        :name="day.totalEpisodes === 1 ? 'episode' : 'episodes'"
         :value="day.totalEpisodes"
       />
       <ClickableIcon
