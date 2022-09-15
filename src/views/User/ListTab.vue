@@ -6,6 +6,8 @@ import { onMounted } from 'vue'
 import LoadingSpinner from '../../components/layout/LoadingSpinner.vue'
 import ListContainer from '../../components/List/ListContainer.vue'
 import ListHeader from '../../components/List/ListHeader.vue'
+import TransparentAwesomeButton from '../../components/layout/buttons/TransparentAwesomeButton.vue'
+import ScrollObserver from '../../components/List/ScrollObserver.vue'
 
 const user = useUserStore()
 const list = useListStore()
@@ -17,6 +19,10 @@ onMounted(() => {
 user.$subscribe(() => {
   ensureList()
 })
+
+const intersect = () => {
+  list.nextPage()
+}
 
 const ensureList = async () => {
   list.resetPage()
@@ -42,6 +48,18 @@ const ensureList = async () => {
 
     <div v-else>
       <ListContainer :list="list.list" />
+
+      <ScrollObserver @intersect="intersect" />
+
+      <div class="center">
+        <TransparentAwesomeButton
+          icon="arrows-rotate"
+          @click="intersect"
+          v-if="list.hasNextPage"
+        >
+          Load more
+        </TransparentAwesomeButton>
+      </div>
     </div>
   </div>
 </template>
@@ -50,5 +68,7 @@ const ensureList = async () => {
 .center {
   display: flex;
   justify-content: center;
+
+  margin: 1rem 0;
 }
 </style>
