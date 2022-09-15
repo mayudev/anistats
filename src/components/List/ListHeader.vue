@@ -1,13 +1,11 @@
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
 import { useListStore } from '../../stores/list'
-import StatusChooserButton from './StatusChooser/StatusChooserButton.vue'
 import StatusChooser from './StatusChooser/StatusChooser.vue'
 
 const list = useListStore()
 
 const query = ref('')
-const showChooser = ref(false)
 
 watch(query, () => {
   list.setSearchQuery(query.value)
@@ -16,12 +14,9 @@ watch(query, () => {
 
 <template>
   <div class="header">
-    <StatusChooserButton @click="showChooser = !showChooser" />
     <input class="search" type="text" placeholder="Search..." v-model="query" />
   </div>
-  <Transition name="status">
-    <StatusChooser v-if="showChooser" @pick="list.switchStatusFilter" />
-  </Transition>
+  <StatusChooser @pick="list.switchStatusFilter" />
 </template>
 
 <style lang="scss" scoped>
@@ -38,12 +33,14 @@ watch(query, () => {
 .search {
   outline: none;
   border: none;
-  color: inherit;
   font: inherit;
 
-  width: min(100%, 400px);
-  background: var(--color-background-secondary);
-  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.25);
+  display: block;
+  width: 100%;
+
+  background: var(--color-background);
+  color: var(--color-text);
+  border: 1px solid var(--color-background-border);
 
   padding: 0.7rem 1rem;
   border-radius: 6px;

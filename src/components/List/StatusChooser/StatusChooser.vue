@@ -3,7 +3,6 @@ import { mappedFilters, getIconName } from '../../../stores/helpers/list'
 import { useListStore } from '../../../stores/list'
 import type { MediaListStatusFilter } from '../../../stores/query/List'
 import { useUserStore } from '../../../stores/user'
-import FontAwesomeIcon from '../../FontAwesomeIcon.vue'
 
 const user = useUserStore()
 const list = useListStore()
@@ -11,17 +10,6 @@ const list = useListStore()
 defineEmits<{
   (event: 'pick', filter: MediaListStatusFilter): void
 }>()
-
-const fixSize = (filter: MediaListStatusFilter) => {
-  if (filter === 'PAUSED') return 13
-  else if (
-    filter === 'PLANNING' ||
-    filter === 'REPEATING' ||
-    filter === 'COMPLETED'
-  )
-    return 18
-  else return 16
-}
 </script>
 
 <template>
@@ -33,7 +21,6 @@ const fixSize = (filter: MediaListStatusFilter) => {
       :class="{ 'status-selected': list.filter === key }"
       @click="$emit('pick', key)"
     >
-      <FontAwesomeIcon :icon="getIconName(key)" :width="fixSize(key)" />
       <span class="status-text">
         {{
           typeof value === 'string'
@@ -50,19 +37,19 @@ const fixSize = (filter: MediaListStatusFilter) => {
 <style lang="scss" scoped>
 .chooser {
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+  overflow-x: scroll;
+  margin: 0.5rem;
 }
 
 .status {
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
 
   align-items: center;
 
-  padding: 0.5rem 1rem 0.3rem 1rem;
+  padding: 0.5rem 1rem;
   border-radius: 6px;
+  font-weight: 400;
 
   transition: background 0.2s, color 0.2s;
   cursor: pointer;
@@ -74,12 +61,12 @@ const fixSize = (filter: MediaListStatusFilter) => {
   }
 }
 
-.status-text {
-  padding-top: 0.2rem;
+.trans .status-selected {
+  transition: var(--theme-transition);
 }
 
 .status-selected {
-  font-weight: 500;
+  background: var(--color-background-secondary);
   color: var(--color-accent);
 }
 </style>
