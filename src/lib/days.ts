@@ -51,7 +51,7 @@ export function daysInMonth(month: number, year: number): number {
 }
 
 export function displayFuzzyDate(date: FuzzyDate): string {
-  if (!date.day) return 'Unknown'
+  if (!date.day || !date.month || date.month <= 0) return 'Unknown'
 
-  return date.month + '/' + date.day + '/' + date.year
+  return months[date.month - 1].slice(0, 3) + ' ' + date.day + ', ' + date.year
 }
