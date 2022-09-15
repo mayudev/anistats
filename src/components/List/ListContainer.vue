@@ -61,7 +61,11 @@ const closeModal = () => {
     <ScrollObserver @intersect="intersect" />
 
     <div class="center">
-      <TransparentAwesomeButton icon="arrows-rotate" @click="intersect">
+      <TransparentAwesomeButton
+        icon="arrows-rotate"
+        @click="intersect"
+        v-if="listStore.hasNextPage"
+      >
         Load more
       </TransparentAwesomeButton>
     </div>
