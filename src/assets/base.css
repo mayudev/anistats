@@ -15,8 +15,8 @@
 
   --c-red: #b74545;
 
-  --c-pink: #fc9dd6;
-  --c-pink-2: #ce6ea9;
+  --c-pink: pink;
+  --c-pink-2: #b37b85;
   --c-pink-bg: #fc9dd620;
 
   --c-orange: #e38f35;
@@ -25,7 +25,7 @@
 
   --c-text-light-1: #222;
   --c-text-light-2: #3c3c3ca8;
-  --c-text-dark-1: #fff;
+  --c-text-dark-1: #e3e3e3;
   --c-text-dark-2: #cbd3e3;
 
   --theme-transition: 0.4s;

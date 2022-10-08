@@ -35,7 +35,7 @@ const close = () => {
 
 <template>
   <div class="wrapper" :class="{ 'wrapper-animated': !props.closeable }">
-    <div class="header">
+    <div class="header" :class="{ 'header-margin': !props.closeable }">
       <div class="header-date">
         <div class="weekday">{{ weekdays[state.date.getDay()] }}</div>
         <div class="date">{{ displayDate(state.date) }}</div>
@@ -43,12 +43,12 @@ const close = () => {
       <span style="flex: 1" />
       <NamedProp
         v-if="user.dataset !== 'anime'"
-        name="chapters"
+        :name="day.totalChapters === 1 ? 'chapter' : 'chapters'"
         :value="day.totalChapters"
       />
       <NamedProp
         v-if="user.dataset !== 'manga'"
-        name="episodes"
+        :name="day.totalEpisodes === 1 ? 'episode' : 'episodes'"
         :value="day.totalEpisodes"
       />
       <ClickableIcon
@@ -94,9 +94,12 @@ const close = () => {
 
   background: var(--color-background-secondary);
   padding: 0.5rem 0.75rem;
-  margin-bottom: 0.5rem;
 
   transition: background var(--theme-transition);
+}
+
+.header-margin {
+  margin-bottom: 0.5rem;
 }
 
 .weekday,

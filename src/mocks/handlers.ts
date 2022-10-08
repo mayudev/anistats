@@ -15,7 +15,7 @@ export const handlers = [
           id: 123,
           name: username,
           avatar: {
-            medium: '',
+            medium: '/favicon.png',
           },
         },
       })

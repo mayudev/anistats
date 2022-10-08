@@ -27,13 +27,13 @@ export const months = [
 
 export function displayDate(date: Date): string {
   const d = date.getDate()
-  const m = date.getMonth() + 1
+  const m = months[date.getMonth()].slice(0, 3)
   const y = date.getFullYear()
 
   const dom = String(d)
   const month = String(m)
 
-  return month + '/' + dom + '/' + y
+  return month + ' ' + dom + ', ' + y
 }
 
 export function daysInMonth(month: number, year: number): number {
@@ -51,7 +51,7 @@ export function daysInMonth(month: number, year: number): number {
 }
 
 export function displayFuzzyDate(date: FuzzyDate): string {
-  if (!date.day) return 'Unknown'
+  if (!date.day || !date.month || date.month <= 0) return 'Unknown'
 
-  return date.month + '/' + date.day + '/' + date.year
+  return months[date.month - 1].slice(0, 3) + ' ' + date.day + ', ' + date.year
 }

@@ -2,23 +2,15 @@
 import { useListStore } from '../../stores/list'
 import type { MediaListEntry } from '../../stores/query/List'
 import ScrollObserver from './ScrollObserver.vue'
-import AwesomeButton from '../layout/buttons/AwesomeButton.vue'
 import ListTable from './ListTable.vue'
 import type { MediaEntry } from '../../stores/query/Media'
 import { reactive } from 'vue'
 import ModalBackdrop from '../layout/ModalBackdrop.vue'
 import ListDetails from './ListDetails.vue'
-import LoadMoreButton from '../layout/buttons/LoadMoreButton.vue'
 
 defineProps<{
   list: MediaListEntry[]
 }>()
-
-const listStore = useListStore()
-
-const intersect = () => {
-  listStore.nextPage()
-}
 
 const details = reactive<{
   show: boolean
@@ -58,23 +50,5 @@ const closeModal = () => {
     <ListTable :list="list" @pick="pick" />
 
     <div class="center" v-if="list.length === 0">No items.</div>
-
-    <ScrollObserver @intersect="intersect" />
-
-    <div class="center">
-      <LoadMoreButton
-        @click="intersect"
-        v-if="listStore.hasNextPage"
-      ></LoadMoreButton>
-    </div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.center {
-  display: flex;
-  justify-content: center;
-
-  margin: 1rem 0;
-}
-</style>

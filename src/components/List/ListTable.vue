@@ -144,7 +144,7 @@ table {
 
 .table-data:not(.table-title),
 .table-header {
-  min-width: 100px;
+  min-width: 110px;
 }
 
 @media (max-width: 700px) {

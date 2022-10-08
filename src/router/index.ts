@@ -53,4 +53,22 @@ const router = createRouter({
   routes,
 })
 
+router.afterEach((to, from) => {
+  switch (to.name) {
+    case 'overview':
+      to.meta.transitionName = 'tab-slide-right'
+      break
+    case 'list':
+      if (from.name === 'overview') {
+        to.meta.transitionName = 'tab-slide-left'
+      } else {
+        to.meta.transitionName = 'tab-slide-right'
+      }
+      break
+    case 'history':
+      to.meta.transitionName = 'tab-slide-left'
+      break
+  }
+})
+
 export default router

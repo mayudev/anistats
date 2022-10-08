@@ -30,8 +30,9 @@ footer {
 
   padding: 0.5rem;
   margin: 1rem 0;
+  font-weight: 300;
 
-  text-shadow: 1px 1px 9px pink;
+  color: var(--color-pink);
 }
 .link-transparent {
   color: var(--color-text);

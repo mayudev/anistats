@@ -88,6 +88,7 @@ const timestamps = computed(() => {
 })
 
 const handleClick = (day: ActivityDay) => {
+  if (!day.disabled && day.total === 0) return
   emit('popup', day.timestamp)
 }
 </script>
@@ -98,7 +99,11 @@ const handleClick = (day: ActivityDay) => {
       class="day"
       v-for="day in timestamps"
       :key="day.index"
-      :class="{ 'day-disabled': day.disabled, 'day-future': day.future }"
+      :class="{
+        'day-disabled': day.disabled,
+        'day-future': day.future,
+        'day-empty': day.total === 0 && !day.disabled && !day.future,
+      }"
       :style="day.index === 1 ? { gridColumn: state.begin } : {}"
       @click="() => handleClick(day)"
     >
@@ -129,7 +134,7 @@ const handleClick = (day: ActivityDay) => {
   opacity: 0.9;
   transition: transform 0.2s;
 
-  &:not(.day-future):hover {
+  &:not(.day-future, .day-empty):hover {
     opacity: 1;
     transform: scale(1.1);
   }
@@ -159,6 +164,10 @@ const handleClick = (day: ActivityDay) => {
 .day-future {
   opacity: 0.2;
 
+  cursor: default;
+}
+
+.day-empty {
   cursor: default;
 }
 </style>

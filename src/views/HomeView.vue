@@ -7,6 +7,7 @@ import { ref } from 'vue'
 import router from '../router'
 import { useListStore } from '../stores/list'
 import HomeLanding from '../components/Home/HomeLanding.vue'
+import { worker } from '../mocks/browser'
 
 const isError = ref(false)
 const isLoading = ref(false)
@@ -14,6 +15,16 @@ const errorMessage = ref('')
 
 const user = useUserStore()
 const list = useListStore()
+
+// Development
+// eslint-disable-next-line no-undef
+const isDev = process.env.NODE_ENV === 'development'
+
+const toggleMocking = () => {
+  // eslint-disable-next-line no-undef
+  worker.stop()
+  alert('Mocking has been disabled')
+}
 
 /// showError shows an error and hides it after a timeout
 const showError = (message: string) => {
@@ -37,18 +48,18 @@ const submit = (input: string) => {
     const url = new URL(input)
     if (url.pathname.startsWith('/user/')) {
       const username = url.pathname.split('/')[2]
-      process(username)
+      fetchData(username)
     } else {
       showError('Invalid URL')
     }
   } else {
     // A username was submitted
-    process(input)
+    fetchData(input)
   }
 }
 
 /// process initializes data fetching
-const process = async (username: string) => {
+const fetchData = async (username: string) => {
   isLoading.value = true
 
   try {
@@ -84,6 +95,8 @@ const process = async (username: string) => {
     <Transition name="error">
       <div v-if="isError">{{ errorMessage }}</div>
     </Transition>
+
+    <button v-if="isDev" @click="toggleMocking">Disable mocking</button>
 
     <UsernameInput
       :is-error="isError"
