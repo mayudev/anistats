@@ -10,7 +10,7 @@ const currentYear = new Date().getFullYear()
         class="link-transparent"
         target="_blank"
         rel="noreferrer"
-        href="https://mayu.gay"
+        href="https://mayu.cafe"
         >mayudev</a
       >
       {{ currentYear }}
