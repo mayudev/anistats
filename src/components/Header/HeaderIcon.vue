@@ -31,13 +31,15 @@ const props = defineProps<{
   justify-content: center;
 
   padding: 0.5rem;
-  margin-left: 0.5rem;
+  margin-right: 0.5rem;
   border-radius: 50%;
 
   height: 18px;
 
   cursor: pointer;
-  transition: background var(--theme-transition) ease-out, color 0.2s ease-out;
+  transition:
+    background var(--theme-transition) ease-out,
+    color 0.2s ease-out;
 
   &:hover {
     background: var(--color-background-secondary);

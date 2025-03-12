@@ -105,6 +105,10 @@ const fetchData = async (username: string) => {
       @submit="u => submit(u)"
     />
 
+    <div class="suggestion">
+      Just looking around? Try <RouterLink to="/user/demo">demo</RouterLink>
+    </div>
+
     <div class="spinner" v-if="isLoading">
       <LoadingSpinner primary :width="48" :border-width="4" />
     </div>
@@ -126,5 +130,9 @@ const fetchData = async (username: string) => {
   justify-content: center;
 
   margin: 1rem;
+}
+
+.suggestion {
+  margin: 1rem 0;
 }
 </style>

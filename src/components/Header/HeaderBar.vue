@@ -3,7 +3,6 @@ import { RouterLink } from 'vue-router'
 import AppLogo from '../../components/layout/AppLogo.vue'
 import { applyTheme, getTheme, saveTheme } from '../../lib/theme'
 import router from '../../router'
-import SmallBadge from '../layout/SmallBadge.vue'
 import HeaderIcon from './HeaderIcon.vue'
 
 const switchTheme = () => {
