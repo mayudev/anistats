@@ -4,9 +4,18 @@ import { server } from '../mocks/server'
 
 vi.mock('@fortawesome/fontawesome-svg-core', () => {
   return {
+    library: {
+      add: vi.fn(() => void 0),
+    },
     findIconDefinition: vi.fn(() => ({
       icon: [1, 2, 3, 'a', 'b'],
     })),
+  }
+})
+
+vi.mock('../mocks/browser.ts', () => {
+  return {
+    setupWorker: vi.fn(() => void 0),
   }
 })
 

@@ -56,7 +56,10 @@ onMounted(async () => {
       <UserHeader />
       <div class="user-content">
         <RouterView v-slot="{ Component, route }">
-          <Transition :name="route.meta.transitionName" mode="out-in">
+          <Transition
+            :name="route.meta.transitionName as string | undefined"
+            mode="out-in"
+          >
             <component :is="Component" />
           </Transition>
         </RouterView>

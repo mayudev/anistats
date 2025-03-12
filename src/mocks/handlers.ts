@@ -1,16 +1,16 @@
-import { graphql } from 'msw'
+import { graphql, HttpResponse } from 'msw'
 import type { MediaType } from '../stores/query/Media'
 import { mockActivities, mockMediaActivities } from './activities'
 import { mockList } from './lists'
 
 export const handlers = [
-  graphql.query('UserData', (req, res, ctx) => {
-    const { username } = req.variables
+  graphql.query('UserData', ({ variables }) => {
+    const { username } = variables
 
     // return res(ctx.errors([{ message: 'Mock error' }]))
 
-    return res(
-      ctx.data({
+    return HttpResponse.json({
+      data: {
         User: {
           id: 123,
           name: username,
@@ -18,22 +18,22 @@ export const handlers = [
             medium: '/favicon.png',
           },
         },
-      })
-    )
+      },
+    })
   }),
 
-  graphql.query('UserActivities', (req, res, ctx) => {
-    const { page } = req.variables
-    return res(ctx.data(mockActivities(page)))
+  graphql.query('UserActivities', ({ variables }) => {
+    const { page } = variables
+    return HttpResponse.json({ data: mockActivities(page) })
   }),
 
-  graphql.query('MediaActivities', (req, res, ctx) => {
-    return res(ctx.data(mockMediaActivities()))
+  graphql.query('MediaActivities', ({ variables }) => {
+    return HttpResponse.json({ data: mockMediaActivities() })
   }),
 
-  graphql.query('MediaList', (req, res, ctx) => {
-    const { type } = req.variables as { type: MediaType }
+  graphql.query('MediaList', ({ variables }) => {
+    const { type } = variables as { type: MediaType }
 
-    return res(ctx.data(mockList(type)))
+    return HttpResponse.json({ data: mockList(type) })
   }),
 ]
