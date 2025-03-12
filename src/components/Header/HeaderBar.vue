@@ -30,7 +30,6 @@ const switchHelp = () => {
 
 <template>
   <nav>
-    <SmallBadge error>beta</SmallBadge>
     <HeaderIcon
       @click="() => switchTheme()"
       icon="circle-half-stroke"
