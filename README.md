@@ -1,22 +1,23 @@
 # anistats
 
 ![License](https://img.shields.io/github/license/mayudev/anistats)
-![build](https://img.shields.io/github/workflow/status/mayudev/anistats/Build%20and%20Deploy)
 
-extended statistics for [AniList](https://anilist.co)
+Extended statistics for a popular anime and manga progress tracking website, [AniList](https://anilist.co)
+
+[Try it yourself](https://mayudev.github.io/anistats)
 
 ## Stack
 
-Vue, Vite, TypeScript
+This app is written using Vue with TypeScript, powered by Vite. The API uses GraphQL.
+
+## Screenshots
+
+![Calendar](./docs/screenshots/calendar.png)
+![Details](./docs/screenshots/detail.png)
+![Entry list](./docs/screenshots/search.png)
 
 ### Development
 
-`npm run dev`
-
-### Build for production
-
-`npm run build`
-
-### Test
-
-`npm run test:unit`
+- Development: `npm run dev`
+- Build for production: `npm run build`
+- Run tests: `npm run test:unit`
